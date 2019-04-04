@@ -4,7 +4,6 @@ HASH: '#' ->skip;
 COMMENT_BODY: ( [\u0020-\u00FF] | TAB )* NEWLINE ->skip;
 COMMENT: HASH COMMENT_BODY ->skip;
 MULTILINE_COMMENT: HASH OPEN_BRACK (COMMENT_BODY+ | ( [\u0020-\u00FF] | TAB )*) CLOSE_BRACK HASH ->skip;
-
 NEWLINE: '\r\n' ->skip;
 WS: ' ' -> skip;
 INDENT: WS WS WS WS;
