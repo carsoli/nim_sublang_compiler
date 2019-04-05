@@ -5,12 +5,14 @@ options {language='Python3';}
 HASH: '#' -> skip;
 NEWLINE: '\\r\\n' ->skip;
 // a comment can be followed by another as part of its body
-COMMENT_BODY: ( [\u0020-\u00FF] | TAB )* NEWLINE -> skip;
-COMMENT: HASH COMMENT_BODY -> skip;
+fragment COMMENT_BODY: ( [\u0020-\u00FF] | TAB )*;
+COMMENT: HASH COMMENT_BODY;
 
 MULTILINE_COMMENT: HASH OPEN_BRACK (COMMENT_BODY+ | ( [\u0020-\u00FF] | TAB )*) CLOSE_BRACK HASH -> skip;
-DOCUMENTATION_COMMENT: HASH MULTILINE_COMMENT HASH -> skip;
-WS: ' ' -> skip;
+// DOCUMENTATION_COMMENT: HASH MULTILINE_COMMENT HASH -> skip;
+DOCUMENTATION_COMMENT: HASH (MULTILINE_COMMENT HASH | COMMENT_BODY);
+
+WS: ' '-> skip;
 INDENT: WS WS WS WS;
 
 COMMA: ',';
@@ -123,28 +125,28 @@ DEFER: 'defer';
 DISCARD: 'discard';
 DISTINCT: 'distinct';
 
-DIGIT: [0-9] -> skip;
+fragment DIGIT: [0-9];
 //TODO: ADD A SPECIAL CHARACTER TO TEST THIS
-LETTER: ( [A-Za-z] | [\u0080-\u00FF] ) -> skip;
-IDENTIFIER: LETTER+ ( '_'(LETTER | DIGIT) )*;
+fragment LETTER: ( [A-Za-z] | [\u0080-\u00FF] );
+IDENTIFIER: LETTER ( ('_')? (LETTER | DIGIT) )*;
 
-OCTDIGIT: [0-7] -> skip;
-BINDIGIT: [0-1] -> skip;
-HEXDIGIT: ( DIGIT | [a-f] ) -> skip;
+fragment OCTDIGIT: [0-7];
+fragment BINDIGIT: [0-1];
+fragment HEXDIGIT: ( DIGIT | [a-f] | [A-F] );
 
-HEX_LIT: '0' ('x' | 'X' ) HEXDIGIT ( ('_')? HEXDIGIT )* -> skip;
-BIN_LIT: '0' ('b' | 'B') BINDIGIT ( ('_')? BINDIGIT )* -> skip;
-OCT_LIT: '0' 'o' OCTDIGIT ( ('_')? OCTDIGIT )* -> skip;
-DEC_LIT: DIGIT ( ('_')? DIGIT )* -> skip; 
+fragment HEX_LIT: '0' ('x' | 'X' ) HEXDIGIT ( ('_')? HEXDIGIT )*;
+fragment BIN_LIT: '0' ('b' | 'B') BINDIGIT ( ('_')? BINDIGIT )*;
+fragment OCT_LIT: '0' 'o' OCTDIGIT ( ('_')? OCTDIGIT )*;
+fragment DEC_LIT: DIGIT ( ('_')? DIGIT )*; 
 
 INT_LIT: HEX_LIT | DEC_LIT | OCT_LIT | BIN_LIT;
-INT_SUFFIX: '\'' ('i' | 'I') -> skip; 
+fragment INT_SUFFIX: '\'' ('i' | 'I'); 
 INT8_LIT: INT_LIT INT_SUFFIX '8';
 INT16_LIT: INT_LIT INT_SUFFIX '16';
 INT32_LIT: INT_LIT INT_SUFFIX '32';
 INT64_LIT: INT_LIT INT_SUFFIX '64';
 
-UINT_SUFFIX: '\'' ('u' | 'U') -> skip;
+fragment UINT_SUFFIX: '\'' ('u' | 'U');
 UINT_LIT: INT_LIT UINT_SUFFIX;
 UINT8_LIT: UINT_LIT '8';
 UINT16_LIT: UINT_LIT '16';
@@ -155,31 +157,37 @@ EXP: ('e' | 'E' ) ('+' | '-') DEC_LIT;
 
 FLOAT_LIT: DEC_LIT ( ( '.' DEC_LIT EXP? ) | EXP );
 
-FLOAT32_SUFFIX: ('f' | 'F') '32' -> skip;
+fragment FLOAT32_SUFFIX: ('f' | 'F') '32';
 FLOAT32_LIT: ( ( HEX_LIT '\'' FLOAT32_SUFFIX )
             | ( ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\'' FLOAT32_SUFFIX ) );
 
-FLOAT64_SUFFIX: ( ( ('f' | 'F') '64' ) | 'd' | 'D' ) -> skip;
+fragment FLOAT64_SUFFIX: ( ( ('f' | 'F') '64' ) | 'd' | 'D' );
 FLOAT64_LIT: ( HEX_LIT '\'' FLOAT64_SUFFIX
             | ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\'' FLOAT64_SUFFIX );
 
 // TODO: could cause problems
-QUOTATION_MARK: '"';
-APOSTRAPHE: '\'';
-CARRIAGE_RETURN: ('\\r' | '\\c');
-ALERT: '\\a';
-BACKSPACE: '\\b';
-BACKSLASH: '\\';
-ESCAPE: '\\e';
-LINE_FEED: ( '\\n' | '\\l' );
-FORM_FEED: '\\f';
-TAB: ('\\t' | '\\v');
-CODE_CHARACTER: '\\' DIGIT+;
-PLATFORM_SPECIFIC_NEWLINE: '\\p'; 
+fragment QUOTATION_MARK: '"';
+fragment APOSTRAPHE: '\'';
+fragment CARRIAGE_RETURN: ('\\r' | '\\c');
+fragment ALERT: '\\a';
+fragment BACKSPACE: '\\b';
+fragment BACKSLASH: '\\';
+fragment ESCAPE: '\\e';
+fragment LINE_FEED: ( '\\n' | '\\l' );
+fragment FORM_FEED: '\\f';
+fragment TAB: ('\\t' | '\\v');
+fragment CODE_CHARACTER: '\\' DIGIT+;
+fragment PLATFORM_SPECIFIC_NEWLINE: '\\p'; 
 // UNICODE OF LF is x0A and of CR LF, xOD followed by xOA
-// PLATFORM_SPECIFIC_NEWLINE: (\u000A|\u000D \u000A) -> skip;
+// fragment PLATFORM_SPECIFIC_NEWLINE: (\u000A|\u000D \u000A);
 
-CHAR_ESCAPE_SEQUENCES: (
+CHAR_LIT: '\'' CHAR_LIT_ITEM '\''; 
+fragment CHAR_LIT_ITEM: ( CHAR_ESCAPE_SEQUENCES | [\u0020-\u00FF] );
+
+STR_LIT: '"' STR_LIT_ITEM* '"'; //allow for empty string
+fragment STR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u0021] | [\u0023-\u00FF] );
+
+fragment CHAR_ESCAPE_SEQUENCES: (
     CARRIAGE_RETURN 
     | QUOTATION_MARK 
     | APOSTRAPHE 
@@ -192,16 +200,10 @@ CHAR_ESCAPE_SEQUENCES: (
     | TAB 
     | CODE_CHARACTER
     | ('\\x' HEXDIGIT HEXDIGIT) 
-    ) -> skip;
-
-CHAR_LIT: '\'' CHAR_LIT_ITEM '\''; 
-fragment CHAR_LIT_ITEM: ( CHAR_ESCAPE_SEQUENCES | [\u0020-\u00FF] );
-
-STR_LIT: '"' STR_LIT_ITEM* '"'; //allow for empty string
-fragment STR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u0021] | [\u0023-\u00FF] );
+    );
 
 // TRIPLESTR_LIT: '"""' TRIPLESTR_LIT_ITEM '"""';
-STR_LIT_ENDING: '"""' ~('"') -> skip;
+fragment STR_LIT_ENDING: '"""' ~('"');
 TRIPLESTR_LIT: '"""' TRIPLESTR_LIT_ITEM STR_LIT_ENDING;
 // [\u000A] //new line 
 fragment TRIPLESTR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u00FF] | NEWLINE )*;
@@ -210,10 +212,10 @@ fragment RAW_STR_LIT_BODY: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | 
 
 RSTR_LIT: ('r'|'R') '"' ( RAW_STR_LIT_BODY?('""')?RAW_STR_LIT_BODY('""')? )* '"';
 
-GENERALIZED_RSTR_LIT: IDENTIFIER OPEN_PAREN ('r'|'R') STR_LIT CLOSE_PAREN-> skip;
+fragment GENERALIZED_RSTR_LIT: IDENTIFIER OPEN_PAREN ('r'|'R') STR_LIT CLOSE_PAREN;
 GENERALIZED_STR_LIT: IDENTIFIER STR_LIT;
 
-GENERALIZED_RTRIPSTR_LIT: IDENTIFIER  ('r'|'R') OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN-> skip;
+fragment GENERALIZED_RTRIPSTR_LIT: IDENTIFIER  ('r'|'R') OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
 GENERALIZED_TRIPLESTR_LIT: IDENTIFIER '""' STR_LIT '""';
 
 start: AND;
