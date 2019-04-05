@@ -21,7 +21,7 @@ def tokenize_file(filename):
     token = lexer.nextToken()
     res = []
     while not token.type == Token.EOF:
-        res.append(get_token_type(token) + " " + token.text)
+        res.append(get_token_type(token) + "  " + token.text)
         token = lexer.nextToken()
     return res
 
