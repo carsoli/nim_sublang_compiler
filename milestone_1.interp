@@ -1,6 +1,7 @@
 token literal names:
 null
 '#'
+'\\r\\n'
 null
 null
 null
@@ -119,14 +120,49 @@ null
 null
 null
 null
+<<<<<<< HEAD
+=======
+null
+null
+null
+null
+null
+null
+'"'
+'\''
+null
+'\\a'
+'\\b'
+'\\'
+'\\e'
+null
+'\\f'
+null
+null
+'\\p'
+null
+null
+null
+null
+null
+null
+null
+null
+null
+null
+>>>>>>> af808ec03b9272b14962127841e4f65da9743746
 
 token symbolic names:
 null
 HASH
+<<<<<<< HEAD
+=======
+NEWLINE
+COMMENT_BODY
+>>>>>>> af808ec03b9272b14962127841e4f65da9743746
 COMMENT
 MULTILINE_COMMENT
 DOCUMENTATION_COMMENT
-NEWLINE
 WS
 INDENT
 COMMA

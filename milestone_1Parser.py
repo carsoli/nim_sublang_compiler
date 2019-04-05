@@ -23,6 +23,7 @@ class milestone_1Parser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
+<<<<<<< HEAD
     literalNames = [ "<INVALID>", "'#'", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "' '", "<INVALID>", "','", "';'", "':'", 
                      "'.'", "'('", "')'", "'{'", "'}'", "'['", "']'", "'interface'", 
@@ -44,6 +45,39 @@ class milestone_1Parser ( Parser ):
     symbolicNames = [ "<INVALID>", "HASH", "COMMENT", "MULTILINE_COMMENT", 
                       "DOCUMENTATION_COMMENT", "NEWLINE", "WS", "INDENT", 
                       "COMMA", "SEMI_COLON", "COLON", "DOT", "OPEN_PAREN", 
+=======
+    literalNames = [ "<INVALID>", "'#'", "'\\r\\n'", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "' '", "<INVALID>", "','", 
+                     "';'", "':'", "'.'", "'('", "')'", "'{'", "'}'", "'['", 
+                     "']'", "'interface'", "'enum'", "'object'", "'concept'", 
+                     "'type'", "'and'", "'or'", "'xor'", "'shl'", "'shr'", 
+                     "'mod'", "'div'", "'@'", "'&'", "'|'", "'+'", "'-'", 
+                     "'/'", "'<'", "'>'", "'%'", "'^'", "<INVALID>", "'*'", 
+                     "'~'", "'!'", "'var'", "'let'", "'const'", "'bind'", 
+                     "'proc'", "'static'", "'method'", "'func'", "'mixin'", 
+                     "'end'", "'except'", "'return'", "'try'", "'raise'", 
+                     "'finally'", "'out'", "'case'", "'else'", "'elif'", 
+                     "'do'", "'while'", "'iterator'", "'for'", "'in'", "'notin'", 
+                     "'continue'", "'break'", "'template'", "'tuple'", "'using'", 
+                     "'when'", "'yield'", "'include'", "'import'", "'from'", 
+                     "'as'", "'export'", "'ref'", "'ptr'", "'addr'", "'is'", 
+                     "'not'", "'isnot'", "'asm'", "'block'", "'macro'", 
+                     "'nil'", "'cast'", "'converter'", "'of'", "'defer'", 
+                     "'discard'", "'distinct'", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "'\"'", "'''", "<INVALID>", 
+                     "'\\a'", "'\\b'", "'\\'", "'\\e'", "<INVALID>", "'\\f'", 
+                     "<INVALID>", "<INVALID>", "'\\p'" ]
+
+    symbolicNames = [ "<INVALID>", "HASH", "NEWLINE", "COMMENT_BODY", "COMMENT", 
+                      "MULTILINE_COMMENT", "DOCUMENTATION_COMMENT", "WS", 
+                      "INDENT", "COMMA", "SEMI_COLON", "COLON", "DOT", "OPEN_PAREN", 
+>>>>>>> af808ec03b9272b14962127841e4f65da9743746
                       "CLOSE_PAREN", "OPEN_BRACE", "CLOSE_BRACE", "OPEN_BRACK", 
                       "CLOSE_BRACK", "INTERFACE", "ENUM", "OBJECT", "CONCEPT", 
                       "TYPE", "AND", "OR", "XOR", "SHL", "SHR", "MOD", "DIV", 
@@ -72,6 +106,7 @@ class milestone_1Parser ( Parser ):
 
     EOF = Token.EOF
     HASH=1
+<<<<<<< HEAD
     COMMENT=2
     MULTILINE_COMMENT=3
     DOCUMENTATION_COMMENT=4
@@ -115,6 +150,51 @@ class milestone_1Parser ( Parser ):
     BITWISE_NOT_OPERATOR=42
     NOT_OPERATOR=43
     IF=44
+=======
+    NEWLINE=2
+    COMMENT_BODY=3
+    COMMENT=4
+    MULTILINE_COMMENT=5
+    DOCUMENTATION_COMMENT=6
+    WS=7
+    INDENT=8
+    COMMA=9
+    SEMI_COLON=10
+    COLON=11
+    DOT=12
+    OPEN_PAREN=13
+    CLOSE_PAREN=14
+    OPEN_BRACE=15
+    CLOSE_BRACE=16
+    OPEN_BRACK=17
+    CLOSE_BRACK=18
+    INTERFACE=19
+    ENUM=20
+    OBJECT=21
+    CONCEPT=22
+    TYPE=23
+    AND=24
+    OR=25
+    XOR=26
+    SHL=27
+    SHR=28
+    MOD=29
+    DIV=30
+    AT=31
+    AND_OPERATOR=32
+    OR_OPERATOR=33
+    ADD_OPERATOR=34
+    MINUS_OPERATOR=35
+    DIV_OPERATOR=36
+    LESS_THAN=37
+    GREATER_THAN=38
+    MODULUS=39
+    XOR_OPERATOR=40
+    EQUALS_OPERATOR=41
+    MUL_OPERATOR=42
+    BITWISE_NOT_OPERATOR=43
+    NOT_OPERATOR=44
+>>>>>>> af808ec03b9272b14962127841e4f65da9743746
     VARIABLE=45
     LET=46
     CONST=47

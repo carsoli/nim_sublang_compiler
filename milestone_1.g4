@@ -165,7 +165,7 @@ FLOAT64_LIT: ( HEX_LIT '\'' FLOAT64_SUFFIX
             | ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\'' FLOAT64_SUFFIX );
 
 // TODO: could cause problems
-fragment QUOTATION_MARK: '\\"';
+fragment QUOTATION_MARK: '"';
 fragment APOSTRAPHE: '\'';
 fragment CARRIAGE_RETURN: ('\\r' | '\\c');
 fragment ALERT: '\\a';
@@ -175,7 +175,7 @@ fragment ESCAPE: '\\e';
 fragment LINE_FEED: ( '\\n' | '\\l' );
 fragment FORM_FEED: '\\f';
 fragment TAB: ('\\t' | '\\v');
-fragment CODE_CHARACTER: '\\'DIGIT+;
+fragment CODE_CHARACTER: '\\' DIGIT+;
 fragment PLATFORM_SPECIFIC_NEWLINE: '\\p'; 
 // UNICODE OF LF is x0A and of CR LF, xOD followed by xOA
 // PLATFORM_SPECIFIC_NEWLINE: (\u000A|\u000D \u000A) -> skip;
@@ -202,7 +202,7 @@ STR_LIT: '"' STR_LIT_ITEM* '"'; //allow for empty string
 fragment STR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u0021] | [\u0023-\u00FF] );
 
 // TRIPLESTR_LIT: '"""' TRIPLESTR_LIT_ITEM '"""';
-fragment STR_LIT_ENDING: '"""';
+fragment STR_LIT_ENDING: '"""' ~('"');
 TRIPLESTR_LIT: '"""' TRIPLESTR_LIT_ITEM STR_LIT_ENDING;
 // [\u000A] //new line 
 fragment TRIPLESTR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u00FF] | NEWLINE )*;
