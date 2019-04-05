@@ -2,7 +2,7 @@ grammar milestone_1;
 
 options {language='Python3';}
 
-HASH: '#' -> skip;
+fragment HASH: '#';
 fragment COMMENT_BODY: ( [\u0020-\u00FF] | TAB );
 COMMENT: HASH COMMENT_BODY* ->skip;
 fragment MULTILINE_COMMENT_BODY: ( [\u0020-\u00FF] | TAB | NEWLINE );
@@ -165,8 +165,6 @@ FLOAT64_LIT: ( HEX_LIT '\'' FLOAT64_SUFFIX
             | ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\'' FLOAT64_SUFFIX );
 
 // TODO: could cause problems
-fragment QUOTATION_MARK: '"';
-fragment APOSTRAPHE: '\'';
 fragment CARRIAGE_RETURN: ('\\r' | '\\c');
 fragment ALERT: '\\a';
 fragment BACKSPACE: '\\b';
@@ -182,8 +180,6 @@ fragment PLATFORM_SPECIFIC_NEWLINE: '\\p';
 
 CHAR_ESCAPE_SEQUENCES: (
     CARRIAGE_RETURN 
-    | QUOTATION_MARK 
-    | APOSTRAPHE 
     | ALERT 
     | BACKSLASH 
     | BACKSPACE 
@@ -196,7 +192,7 @@ CHAR_ESCAPE_SEQUENCES: (
     ) -> skip;
 
 CHAR_LIT: '\'' CHAR_LIT_ITEM '\''; 
-fragment CHAR_LIT_ITEM: ( CHAR_ESCAPE_SEQUENCES | [\u0020-\u00FF] );
+fragment CHAR_LIT_ITEM: ( CHAR_ESCAPE_SEQUENCES | [\u0020-\u0026] | [\u0028-\u00FF] );
 
 STR_LIT: '"' STR_LIT_ITEM* '"'; //allow for empty string
 fragment STR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u0021] | [\u0023-\u00FF] );

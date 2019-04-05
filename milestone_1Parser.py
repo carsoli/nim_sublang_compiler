@@ -7,9 +7,9 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3y")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3x")
         buf.write("\7\4\2\t\2\3\2\3\2\3\2\2\2\3\2\2\2\2\5\2\4\3\2\2\2\4\5")
-        buf.write("\7\31\2\2\5\3\3\2\2\2\2")
+        buf.write("\7\30\2\2\5\3\3\2\2\2\2")
         return buf.getvalue()
 
 
@@ -23,8 +23,7 @@ class milestone_1Parser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-<<<<<<< HEAD
-    literalNames = [ "<INVALID>", "'#'", "<INVALID>", "<INVALID>", "<INVALID>", 
+    literalNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "' '", "<INVALID>", "','", "';'", "':'", 
                      "'.'", "'('", "')'", "'{'", "'}'", "'['", "']'", "'interface'", 
                      "'enum'", "'object'", "'concept'", "'type'", "'and'", 
@@ -42,234 +41,154 @@ class milestone_1Parser ( Parser ):
                      "'asm'", "'block'", "'macro'", "'nil'", "'cast'", "'converter'", 
                      "'of'", "'defer'", "'discard'", "'distinct'" ]
 
-    symbolicNames = [ "<INVALID>", "HASH", "COMMENT", "MULTILINE_COMMENT", 
-                      "DOCUMENTATION_COMMENT", "NEWLINE", "WS", "INDENT", 
-                      "COMMA", "SEMI_COLON", "COLON", "DOT", "OPEN_PAREN", 
-=======
-    literalNames = [ "<INVALID>", "'#'", "'\\r\\n'", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "' '", "<INVALID>", "','", 
-                     "';'", "':'", "'.'", "'('", "')'", "'{'", "'}'", "'['", 
-                     "']'", "'interface'", "'enum'", "'object'", "'concept'", 
-                     "'type'", "'and'", "'or'", "'xor'", "'shl'", "'shr'", 
-                     "'mod'", "'div'", "'@'", "'&'", "'|'", "'+'", "'-'", 
-                     "'/'", "'<'", "'>'", "'%'", "'^'", "<INVALID>", "'*'", 
-                     "'~'", "'!'", "'var'", "'let'", "'const'", "'bind'", 
-                     "'proc'", "'static'", "'method'", "'func'", "'mixin'", 
-                     "'end'", "'except'", "'return'", "'try'", "'raise'", 
-                     "'finally'", "'out'", "'case'", "'else'", "'elif'", 
-                     "'do'", "'while'", "'iterator'", "'for'", "'in'", "'notin'", 
-                     "'continue'", "'break'", "'template'", "'tuple'", "'using'", 
-                     "'when'", "'yield'", "'include'", "'import'", "'from'", 
-                     "'as'", "'export'", "'ref'", "'ptr'", "'addr'", "'is'", 
-                     "'not'", "'isnot'", "'asm'", "'block'", "'macro'", 
-                     "'nil'", "'cast'", "'converter'", "'of'", "'defer'", 
-                     "'discard'", "'distinct'", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "'\"'", "'''", "<INVALID>", 
-                     "'\\a'", "'\\b'", "'\\'", "'\\e'", "<INVALID>", "'\\f'", 
-                     "<INVALID>", "<INVALID>", "'\\p'" ]
-
-    symbolicNames = [ "<INVALID>", "HASH", "NEWLINE", "COMMENT_BODY", "COMMENT", 
-                      "MULTILINE_COMMENT", "DOCUMENTATION_COMMENT", "WS", 
-                      "INDENT", "COMMA", "SEMI_COLON", "COLON", "DOT", "OPEN_PAREN", 
->>>>>>> af808ec03b9272b14962127841e4f65da9743746
-                      "CLOSE_PAREN", "OPEN_BRACE", "CLOSE_BRACE", "OPEN_BRACK", 
-                      "CLOSE_BRACK", "INTERFACE", "ENUM", "OBJECT", "CONCEPT", 
-                      "TYPE", "AND", "OR", "XOR", "SHL", "SHR", "MOD", "DIV", 
-                      "AT", "AND_OPERATOR", "OR_OPERATOR", "ADD_OPERATOR", 
-                      "MINUS_OPERATOR", "DIV_OPERATOR", "LESS_THAN", "GREATER_THAN", 
-                      "MODULUS", "XOR_OPERATOR", "EQUALS_OPERATOR", "MUL_OPERATOR", 
-                      "BITWISE_NOT_OPERATOR", "NOT_OPERATOR", "IF", "VARIABLE", 
-                      "LET", "CONST", "BIND", "PROC", "STATIC", "METHOD", 
-                      "FUNC", "MIXIN", "END", "EXCEPT", "RETURN", "TRY", 
-                      "RAISE", "FINALLY", "OUT", "CASE", "ELSE", "ELIF", 
-                      "DO", "WHILE", "ITERATOR", "FOR", "IN", "NOTIN", "CONTINUE", 
-                      "BREAK", "TEMPLATE", "TUPLE", "USING", "WHEN", "YIELD", 
-                      "INCLUDE", "IMPORT", "FROM", "AS", "EXPORT", "REF", 
-                      "PTR", "ADDR", "IS", "NOT", "ISNOT", "ASM", "BLOCK", 
-                      "MACRO", "NIL", "CAST", "CONVERTER", "OF", "DEFER", 
-                      "DISCARD", "DISTINCT", "IDENTIFIER", "INT_LIT", "INT8_LIT", 
-                      "INT16_LIT", "INT32_LIT", "INT64_LIT", "UINT_LIT", 
-                      "UINT8_LIT", "UINT16_LIT", "UINT32_LIT", "UINT64_LIT", 
-                      "EXP", "FLOAT_LIT", "FLOAT32_LIT", "FLOAT64_LIT", 
-                      "CHAR_ESCAPE_SEQUENCES", "CHAR_LIT", "STR_LIT", "TRIPLESTR_LIT", 
-                      "RSTR_LIT", "GENERALIZED_STR_LIT", "GENERALIZED_TRIPLESTR_LIT" ]
+    symbolicNames = [ "<INVALID>", "COMMENT", "MULTILINE_COMMENT", "DOCUMENTATION_COMMENT", 
+                      "NEWLINE", "WS", "INDENT", "COMMA", "SEMI_COLON", 
+                      "COLON", "DOT", "OPEN_PAREN", "CLOSE_PAREN", "OPEN_BRACE", 
+                      "CLOSE_BRACE", "OPEN_BRACK", "CLOSE_BRACK", "INTERFACE", 
+                      "ENUM", "OBJECT", "CONCEPT", "TYPE", "AND", "OR", 
+                      "XOR", "SHL", "SHR", "MOD", "DIV", "AT", "AND_OPERATOR", 
+                      "OR_OPERATOR", "ADD_OPERATOR", "MINUS_OPERATOR", "DIV_OPERATOR", 
+                      "LESS_THAN", "GREATER_THAN", "MODULUS", "XOR_OPERATOR", 
+                      "EQUALS_OPERATOR", "MUL_OPERATOR", "BITWISE_NOT_OPERATOR", 
+                      "NOT_OPERATOR", "IF", "VARIABLE", "LET", "CONST", 
+                      "BIND", "PROC", "STATIC", "METHOD", "FUNC", "MIXIN", 
+                      "END", "EXCEPT", "RETURN", "TRY", "RAISE", "FINALLY", 
+                      "OUT", "CASE", "ELSE", "ELIF", "DO", "WHILE", "ITERATOR", 
+                      "FOR", "IN", "NOTIN", "CONTINUE", "BREAK", "TEMPLATE", 
+                      "TUPLE", "USING", "WHEN", "YIELD", "INCLUDE", "IMPORT", 
+                      "FROM", "AS", "EXPORT", "REF", "PTR", "ADDR", "IS", 
+                      "NOT", "ISNOT", "ASM", "BLOCK", "MACRO", "NIL", "CAST", 
+                      "CONVERTER", "OF", "DEFER", "DISCARD", "DISTINCT", 
+                      "IDENTIFIER", "INT_LIT", "INT8_LIT", "INT16_LIT", 
+                      "INT32_LIT", "INT64_LIT", "UINT_LIT", "UINT8_LIT", 
+                      "UINT16_LIT", "UINT32_LIT", "UINT64_LIT", "EXP", "FLOAT_LIT", 
+                      "FLOAT32_LIT", "FLOAT64_LIT", "CHAR_ESCAPE_SEQUENCES", 
+                      "CHAR_LIT", "STR_LIT", "TRIPLESTR_LIT", "RSTR_LIT", 
+                      "GENERALIZED_STR_LIT", "GENERALIZED_TRIPLESTR_LIT" ]
 
     RULE_start = 0
 
     ruleNames =  [ "start" ]
 
     EOF = Token.EOF
-    HASH=1
-<<<<<<< HEAD
-    COMMENT=2
-    MULTILINE_COMMENT=3
-    DOCUMENTATION_COMMENT=4
-    NEWLINE=5
-    WS=6
-    INDENT=7
-    COMMA=8
-    SEMI_COLON=9
-    COLON=10
-    DOT=11
-    OPEN_PAREN=12
-    CLOSE_PAREN=13
-    OPEN_BRACE=14
-    CLOSE_BRACE=15
-    OPEN_BRACK=16
-    CLOSE_BRACK=17
-    INTERFACE=18
-    ENUM=19
-    OBJECT=20
-    CONCEPT=21
-    TYPE=22
-    AND=23
-    OR=24
-    XOR=25
-    SHL=26
-    SHR=27
-    MOD=28
-    DIV=29
-    AT=30
-    AND_OPERATOR=31
-    OR_OPERATOR=32
-    ADD_OPERATOR=33
-    MINUS_OPERATOR=34
-    DIV_OPERATOR=35
-    LESS_THAN=36
-    GREATER_THAN=37
-    MODULUS=38
-    XOR_OPERATOR=39
-    EQUALS_OPERATOR=40
-    MUL_OPERATOR=41
-    BITWISE_NOT_OPERATOR=42
-    NOT_OPERATOR=43
-    IF=44
-=======
-    NEWLINE=2
-    COMMENT_BODY=3
-    COMMENT=4
-    MULTILINE_COMMENT=5
-    DOCUMENTATION_COMMENT=6
-    WS=7
-    INDENT=8
-    COMMA=9
-    SEMI_COLON=10
-    COLON=11
-    DOT=12
-    OPEN_PAREN=13
-    CLOSE_PAREN=14
-    OPEN_BRACE=15
-    CLOSE_BRACE=16
-    OPEN_BRACK=17
-    CLOSE_BRACK=18
-    INTERFACE=19
-    ENUM=20
-    OBJECT=21
-    CONCEPT=22
-    TYPE=23
-    AND=24
-    OR=25
-    XOR=26
-    SHL=27
-    SHR=28
-    MOD=29
-    DIV=30
-    AT=31
-    AND_OPERATOR=32
-    OR_OPERATOR=33
-    ADD_OPERATOR=34
-    MINUS_OPERATOR=35
-    DIV_OPERATOR=36
-    LESS_THAN=37
-    GREATER_THAN=38
-    MODULUS=39
-    XOR_OPERATOR=40
-    EQUALS_OPERATOR=41
-    MUL_OPERATOR=42
-    BITWISE_NOT_OPERATOR=43
-    NOT_OPERATOR=44
->>>>>>> af808ec03b9272b14962127841e4f65da9743746
-    VARIABLE=45
-    LET=46
-    CONST=47
-    BIND=48
-    PROC=49
-    STATIC=50
-    METHOD=51
-    FUNC=52
-    MIXIN=53
-    END=54
-    EXCEPT=55
-    RETURN=56
-    TRY=57
-    RAISE=58
-    FINALLY=59
-    OUT=60
-    CASE=61
-    ELSE=62
-    ELIF=63
-    DO=64
-    WHILE=65
-    ITERATOR=66
-    FOR=67
-    IN=68
-    NOTIN=69
-    CONTINUE=70
-    BREAK=71
-    TEMPLATE=72
-    TUPLE=73
-    USING=74
-    WHEN=75
-    YIELD=76
-    INCLUDE=77
-    IMPORT=78
-    FROM=79
-    AS=80
-    EXPORT=81
-    REF=82
-    PTR=83
-    ADDR=84
-    IS=85
-    NOT=86
-    ISNOT=87
-    ASM=88
-    BLOCK=89
-    MACRO=90
-    NIL=91
-    CAST=92
-    CONVERTER=93
-    OF=94
-    DEFER=95
-    DISCARD=96
-    DISTINCT=97
-    IDENTIFIER=98
-    INT_LIT=99
-    INT8_LIT=100
-    INT16_LIT=101
-    INT32_LIT=102
-    INT64_LIT=103
-    UINT_LIT=104
-    UINT8_LIT=105
-    UINT16_LIT=106
-    UINT32_LIT=107
-    UINT64_LIT=108
-    EXP=109
-    FLOAT_LIT=110
-    FLOAT32_LIT=111
-    FLOAT64_LIT=112
-    CHAR_ESCAPE_SEQUENCES=113
-    CHAR_LIT=114
-    STR_LIT=115
-    TRIPLESTR_LIT=116
-    RSTR_LIT=117
-    GENERALIZED_STR_LIT=118
-    GENERALIZED_TRIPLESTR_LIT=119
+    COMMENT=1
+    MULTILINE_COMMENT=2
+    DOCUMENTATION_COMMENT=3
+    NEWLINE=4
+    WS=5
+    INDENT=6
+    COMMA=7
+    SEMI_COLON=8
+    COLON=9
+    DOT=10
+    OPEN_PAREN=11
+    CLOSE_PAREN=12
+    OPEN_BRACE=13
+    CLOSE_BRACE=14
+    OPEN_BRACK=15
+    CLOSE_BRACK=16
+    INTERFACE=17
+    ENUM=18
+    OBJECT=19
+    CONCEPT=20
+    TYPE=21
+    AND=22
+    OR=23
+    XOR=24
+    SHL=25
+    SHR=26
+    MOD=27
+    DIV=28
+    AT=29
+    AND_OPERATOR=30
+    OR_OPERATOR=31
+    ADD_OPERATOR=32
+    MINUS_OPERATOR=33
+    DIV_OPERATOR=34
+    LESS_THAN=35
+    GREATER_THAN=36
+    MODULUS=37
+    XOR_OPERATOR=38
+    EQUALS_OPERATOR=39
+    MUL_OPERATOR=40
+    BITWISE_NOT_OPERATOR=41
+    NOT_OPERATOR=42
+    IF=43
+    VARIABLE=44
+    LET=45
+    CONST=46
+    BIND=47
+    PROC=48
+    STATIC=49
+    METHOD=50
+    FUNC=51
+    MIXIN=52
+    END=53
+    EXCEPT=54
+    RETURN=55
+    TRY=56
+    RAISE=57
+    FINALLY=58
+    OUT=59
+    CASE=60
+    ELSE=61
+    ELIF=62
+    DO=63
+    WHILE=64
+    ITERATOR=65
+    FOR=66
+    IN=67
+    NOTIN=68
+    CONTINUE=69
+    BREAK=70
+    TEMPLATE=71
+    TUPLE=72
+    USING=73
+    WHEN=74
+    YIELD=75
+    INCLUDE=76
+    IMPORT=77
+    FROM=78
+    AS=79
+    EXPORT=80
+    REF=81
+    PTR=82
+    ADDR=83
+    IS=84
+    NOT=85
+    ISNOT=86
+    ASM=87
+    BLOCK=88
+    MACRO=89
+    NIL=90
+    CAST=91
+    CONVERTER=92
+    OF=93
+    DEFER=94
+    DISCARD=95
+    DISTINCT=96
+    IDENTIFIER=97
+    INT_LIT=98
+    INT8_LIT=99
+    INT16_LIT=100
+    INT32_LIT=101
+    INT64_LIT=102
+    UINT_LIT=103
+    UINT8_LIT=104
+    UINT16_LIT=105
+    UINT32_LIT=106
+    UINT64_LIT=107
+    EXP=108
+    FLOAT_LIT=109
+    FLOAT32_LIT=110
+    FLOAT64_LIT=111
+    CHAR_ESCAPE_SEQUENCES=112
+    CHAR_LIT=113
+    STR_LIT=114
+    TRIPLESTR_LIT=115
+    RSTR_LIT=116
+    GENERALIZED_STR_LIT=117
+    GENERALIZED_TRIPLESTR_LIT=118
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)

@@ -1,7 +1,5 @@
 token literal names:
 null
-'#'
-'\\r\\n'
 null
 null
 null
@@ -120,49 +118,13 @@ null
 null
 null
 null
-<<<<<<< HEAD
-=======
-null
-null
-null
-null
-null
-null
-'"'
-'\''
-null
-'\\a'
-'\\b'
-'\\'
-'\\e'
-null
-'\\f'
-null
-null
-'\\p'
-null
-null
-null
-null
-null
-null
-null
-null
-null
-null
->>>>>>> af808ec03b9272b14962127841e4f65da9743746
 
 token symbolic names:
 null
-HASH
-<<<<<<< HEAD
-=======
-NEWLINE
-COMMENT_BODY
->>>>>>> af808ec03b9272b14962127841e4f65da9743746
 COMMENT
 MULTILINE_COMMENT
 DOCUMENTATION_COMMENT
+NEWLINE
 WS
 INDENT
 COMMA
@@ -283,4 +245,4 @@ start
 
 
 atn:
-[3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 121, 7, 4, 2, 9, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 5, 2, 4, 3, 2, 2, 2, 4, 5, 7, 25, 2, 2, 5, 3, 3, 2, 2, 2, 2]
+[3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 120, 7, 4, 2, 9, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 5, 2, 4, 3, 2, 2, 2, 4, 5, 7, 24, 2, 2, 5, 3, 3, 2, 2, 2, 2]
