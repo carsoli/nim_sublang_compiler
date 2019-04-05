@@ -16,12 +16,23 @@ CLOSE_PAREN )
 COLON :
 IDENTIFIER untyped
 EQUALS_OPERATOR =
-COMMENT ## "Multi regex match". Usage:
-COMMENT ## multiMatch inp:
-COMMENT ## of pattern1:
-COMMENT ##   x = matches[0]
-COMMENT ## of pattern2:
-COMMENT ##   ...
+IDENTIFIER multiMatch
+IDENTIFIER inp
+COLON :
+OF of
+IDENTIFIER pattern1
+COLON :
+IDENTIFIER x
+EQUALS_OPERATOR =
+IDENTIFIER matches
+OPEN_BRACK [
+INT_LIT 0
+CLOSE_BRACK ]
+OF of
+IDENTIFIER pattern2
+COLON :
+CLOSE_BRACK ]
+COMMENT #   ...
 TEMPLATE template
 IDENTIFIER branch
 OPEN_PAREN (
