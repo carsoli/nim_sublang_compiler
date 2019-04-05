@@ -24,7 +24,7 @@ class milestone_1Parser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'#'", "<INVALID>", "<INVALID>", "<INVALID>", 
+    literalNames = [ "<INVALID>", "'#'", "'\\r\\n'", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "' '", "<INVALID>", "','", 
                      "';'", "':'", "'.'", "'('", "')'", "'{'", "'}'", "'['", 
                      "']'", "'interface'", "'enum'", "'object'", "'concept'", 
