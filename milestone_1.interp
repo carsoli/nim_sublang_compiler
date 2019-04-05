@@ -42,7 +42,6 @@ null
 '*'
 '~'
 '!'
-'if'
 'var'
 'let'
 'const'
@@ -60,8 +59,9 @@ null
 'finally'
 'out'
 'case'
-'else'
+'if'
 'elif'
+'else'
 'do'
 'while'
 'iterator'
@@ -96,7 +96,6 @@ null
 'defer'
 'discard'
 'distinct'
-null
 null
 null
 null
@@ -163,7 +162,6 @@ EQUALS_OPERATOR
 MUL_OPERATOR
 BITWISE_NOT_OPERATOR
 NOT_OPERATOR
-IF
 VARIABLE
 LET
 CONST
@@ -181,8 +179,9 @@ RAISE
 FINALLY
 OUT
 CASE
-ELSE
+IF
 ELIF
+ELSE
 DO
 WHILE
 ITERATOR
@@ -232,7 +231,6 @@ EXP
 FLOAT_LIT
 FLOAT32_LIT
 FLOAT64_LIT
-CHAR_ESCAPE_SEQUENCES
 CHAR_LIT
 STR_LIT
 TRIPLESTR_LIT
@@ -245,4 +243,4 @@ start
 
 
 atn:
-[3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 120, 7, 4, 2, 9, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 5, 2, 4, 3, 2, 2, 2, 4, 5, 7, 24, 2, 2, 5, 3, 3, 2, 2, 2, 2]
+[3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 119, 7, 4, 2, 9, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 5, 2, 4, 3, 2, 2, 2, 4, 5, 7, 24, 2, 2, 5, 3, 3, 2, 2, 2, 2]

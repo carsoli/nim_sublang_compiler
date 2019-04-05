@@ -1,13 +1,14 @@
-# Generated from milestone_1.g4 by ANTLR 4.7.1
+# Generated from milestone_1.g4 by ANTLR 4.7.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
 import sys
 
+
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3x")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3w")
         buf.write("\7\4\2\t\2\3\2\3\2\3\2\2\2\3\2\2\2\2\5\2\4\3\2\2\2\4\5")
         buf.write("\7\30\2\2\5\3\3\2\2\2\2")
         return buf.getvalue()
@@ -29,17 +30,18 @@ class milestone_1Parser ( Parser ):
                      "'enum'", "'object'", "'concept'", "'type'", "'and'", 
                      "'or'", "'xor'", "'shl'", "'shr'", "'mod'", "'div'", 
                      "'@'", "'&'", "'|'", "'+'", "'-'", "'/'", "'<'", "'>'", 
-                     "'%'", "'^'", "<INVALID>", "'*'", "'~'", "'!'", "'if'", 
-                     "'var'", "'let'", "'const'", "'bind'", "'proc'", "'static'", 
+                     "'%'", "'^'", "<INVALID>", "'*'", "'~'", "'!'", "'var'", 
+                     "'let'", "'const'", "'bind'", "'proc'", "'static'", 
                      "'method'", "'func'", "'mixin'", "'end'", "'except'", 
                      "'return'", "'try'", "'raise'", "'finally'", "'out'", 
-                     "'case'", "'else'", "'elif'", "'do'", "'while'", "'iterator'", 
-                     "'for'", "'in'", "'notin'", "'continue'", "'break'", 
-                     "'template'", "'tuple'", "'using'", "'when'", "'yield'", 
-                     "'include'", "'import'", "'from'", "'as'", "'export'", 
-                     "'ref'", "'ptr'", "'addr'", "'is'", "'not'", "'isnot'", 
-                     "'asm'", "'block'", "'macro'", "'nil'", "'cast'", "'converter'", 
-                     "'of'", "'defer'", "'discard'", "'distinct'" ]
+                     "'case'", "'if'", "'elif'", "'else'", "'do'", "'while'", 
+                     "'iterator'", "'for'", "'in'", "'notin'", "'continue'", 
+                     "'break'", "'template'", "'tuple'", "'using'", "'when'", 
+                     "'yield'", "'include'", "'import'", "'from'", "'as'", 
+                     "'export'", "'ref'", "'ptr'", "'addr'", "'is'", "'not'", 
+                     "'isnot'", "'asm'", "'block'", "'macro'", "'nil'", 
+                     "'cast'", "'converter'", "'of'", "'defer'", "'discard'", 
+                     "'distinct'" ]
 
     symbolicNames = [ "<INVALID>", "COMMENT", "MULTILINE_COMMENT", "DOCUMENTATION_COMMENT", 
                       "NEWLINE", "WS", "INDENT", "COMMA", "SEMI_COLON", 
@@ -50,10 +52,10 @@ class milestone_1Parser ( Parser ):
                       "OR_OPERATOR", "ADD_OPERATOR", "MINUS_OPERATOR", "DIV_OPERATOR", 
                       "LESS_THAN", "GREATER_THAN", "MODULUS", "XOR_OPERATOR", 
                       "EQUALS_OPERATOR", "MUL_OPERATOR", "BITWISE_NOT_OPERATOR", 
-                      "NOT_OPERATOR", "IF", "VARIABLE", "LET", "CONST", 
-                      "BIND", "PROC", "STATIC", "METHOD", "FUNC", "MIXIN", 
-                      "END", "EXCEPT", "RETURN", "TRY", "RAISE", "FINALLY", 
-                      "OUT", "CASE", "ELSE", "ELIF", "DO", "WHILE", "ITERATOR", 
+                      "NOT_OPERATOR", "VARIABLE", "LET", "CONST", "BIND", 
+                      "PROC", "STATIC", "METHOD", "FUNC", "MIXIN", "END", 
+                      "EXCEPT", "RETURN", "TRY", "RAISE", "FINALLY", "OUT", 
+                      "CASE", "IF", "ELIF", "ELSE", "DO", "WHILE", "ITERATOR", 
                       "FOR", "IN", "NOTIN", "CONTINUE", "BREAK", "TEMPLATE", 
                       "TUPLE", "USING", "WHEN", "YIELD", "INCLUDE", "IMPORT", 
                       "FROM", "AS", "EXPORT", "REF", "PTR", "ADDR", "IS", 
@@ -62,9 +64,9 @@ class milestone_1Parser ( Parser ):
                       "IDENTIFIER", "INT_LIT", "INT8_LIT", "INT16_LIT", 
                       "INT32_LIT", "INT64_LIT", "UINT_LIT", "UINT8_LIT", 
                       "UINT16_LIT", "UINT32_LIT", "UINT64_LIT", "EXP", "FLOAT_LIT", 
-                      "FLOAT32_LIT", "FLOAT64_LIT", "CHAR_ESCAPE_SEQUENCES", 
-                      "CHAR_LIT", "STR_LIT", "TRIPLESTR_LIT", "RSTR_LIT", 
-                      "GENERALIZED_STR_LIT", "GENERALIZED_TRIPLESTR_LIT" ]
+                      "FLOAT32_LIT", "FLOAT64_LIT", "CHAR_LIT", "STR_LIT", 
+                      "TRIPLESTR_LIT", "RSTR_LIT", "GENERALIZED_STR_LIT", 
+                      "GENERALIZED_TRIPLESTR_LIT" ]
 
     RULE_start = 0
 
@@ -113,26 +115,26 @@ class milestone_1Parser ( Parser ):
     MUL_OPERATOR=40
     BITWISE_NOT_OPERATOR=41
     NOT_OPERATOR=42
-    IF=43
-    VARIABLE=44
-    LET=45
-    CONST=46
-    BIND=47
-    PROC=48
-    STATIC=49
-    METHOD=50
-    FUNC=51
-    MIXIN=52
-    END=53
-    EXCEPT=54
-    RETURN=55
-    TRY=56
-    RAISE=57
-    FINALLY=58
-    OUT=59
-    CASE=60
-    ELSE=61
-    ELIF=62
+    VARIABLE=43
+    LET=44
+    CONST=45
+    BIND=46
+    PROC=47
+    STATIC=48
+    METHOD=49
+    FUNC=50
+    MIXIN=51
+    END=52
+    EXCEPT=53
+    RETURN=54
+    TRY=55
+    RAISE=56
+    FINALLY=57
+    OUT=58
+    CASE=59
+    IF=60
+    ELIF=61
+    ELSE=62
     DO=63
     WHILE=64
     ITERATOR=65
@@ -182,19 +184,19 @@ class milestone_1Parser ( Parser ):
     FLOAT_LIT=109
     FLOAT32_LIT=110
     FLOAT64_LIT=111
-    CHAR_ESCAPE_SEQUENCES=112
-    CHAR_LIT=113
-    STR_LIT=114
-    TRIPLESTR_LIT=115
-    RSTR_LIT=116
-    GENERALIZED_STR_LIT=117
-    GENERALIZED_TRIPLESTR_LIT=118
+    CHAR_LIT=112
+    STR_LIT=113
+    TRIPLESTR_LIT=114
+    RSTR_LIT=115
+    GENERALIZED_STR_LIT=116
+    GENERALIZED_TRIPLESTR_LIT=117
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.1")
+        self.checkVersion("4.7.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
+
 
 
 
