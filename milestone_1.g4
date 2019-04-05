@@ -1,9 +1,11 @@
-grammar nim_grammar;
+grammar milestone_1;
 
-HASH: '#' ->skip;
-COMMENT_BODY: ( [\u0020-\u00FF] | TAB )* NEWLINE ->skip;
+options {language='Python3';}
+
+HASH: '#' -> skip;
+COMMENT_BODY: ( [\u0020-\u00FF] | TAB )* NEWLINE -> skip;
 COMMENT: HASH COMMENT_BODY ->skip;
-MULTILINE_COMMENT: HASH OPEN_BRACK (COMMENT_BODY+ | ( [\u0020-\u00FF] | TAB )*) CLOSE_BRACK HASH ->skip;
+MULTILINE_COMMENT: HASH OPEN_BRACK (COMMENT_BODY+ | ( [\u0020-\u00FF] | TAB )*) CLOSE_BRACK HASH -> skip;
 NEWLINE: '\r\n' ->skip;
 WS: ' ' -> skip;
 INDENT: WS WS WS WS;
@@ -189,9 +191,7 @@ CHAR_ESCAPE_SEQUENCES: (
     | ('\\x' HEXDIGIT HEXDIGIT) 
     ) -> skip;
 
-//TODO: action: character_literals
 CHAR_LIT: '\'' CHAR_LIT_ITEM '\''; 
-//TODO: action: CHAR_LIT
 fragment CHAR_LIT_ITEM: ( CHAR_ESCAPE_SEQUENCES | [\u0020-\u00FF] );
 
 STR_LIT: '"' STR_LIT_ITEM* '"'; //allow for empty string
