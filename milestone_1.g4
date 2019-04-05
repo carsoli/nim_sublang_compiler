@@ -3,11 +3,13 @@ grammar milestone_1;
 options {language='Python3';}
 
 HASH: '#' -> skip;
+NEWLINE: '\\r\\n' ->skip;
+// a comment can be followed by another as part of its body
 COMMENT_BODY: ( [\u0020-\u00FF] | TAB )* NEWLINE -> skip;
 COMMENT: HASH COMMENT_BODY -> skip;
+
 MULTILINE_COMMENT: HASH OPEN_BRACK (COMMENT_BODY+ | ( [\u0020-\u00FF] | TAB )*) CLOSE_BRACK HASH -> skip;
 DOCUMENTATION_COMMENT: HASH MULTILINE_COMMENT HASH -> skip;
-NEWLINE: '\\r\\n' ->skip;
 WS: ' ' -> skip;
 INDENT: WS WS WS WS;
 
@@ -162,18 +164,18 @@ FLOAT64_LIT: ( HEX_LIT '\'' FLOAT64_SUFFIX
             | ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\'' FLOAT64_SUFFIX );
 
 // TODO: could cause problems
-QUOTATION_MARK: '\\"' -> skip;
-APOSTRAPHE: '\'' -> skip;
-CARRIAGE_RETURN: ('\\r' | '\\c') -> skip;
-ALERT: '\\a' -> skip;
-BACKSPACE: '\\b' -> skip;
-BACKSLASH: '\\' -> skip;
-ESCAPE: '\\e' -> skip;
-LINE_FEED: ( '\\n' | '\\l' ) -> skip;
-FORM_FEED: '\\f' -> skip;
-TAB: ('\\t' | '\\v') -> skip;
-CODE_CHARACTER: '\\'DIGIT+ -> skip;
-PLATFORM_SPECIFIC_NEWLINE: '\\p' -> skip; 
+QUOTATION_MARK: '"';
+APOSTRAPHE: '\'';
+CARRIAGE_RETURN: ('\\r' | '\\c');
+ALERT: '\\a';
+BACKSPACE: '\\b';
+BACKSLASH: '\\';
+ESCAPE: '\\e';
+LINE_FEED: ( '\\n' | '\\l' );
+FORM_FEED: '\\f';
+TAB: ('\\t' | '\\v');
+CODE_CHARACTER: '\\' DIGIT+;
+PLATFORM_SPECIFIC_NEWLINE: '\\p'; 
 // UNICODE OF LF is x0A and of CR LF, xOD followed by xOA
 // PLATFORM_SPECIFIC_NEWLINE: (\u000A|\u000D \u000A) -> skip;
 
@@ -199,7 +201,7 @@ STR_LIT: '"' STR_LIT_ITEM* '"'; //allow for empty string
 fragment STR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u0021] | [\u0023-\u00FF] );
 
 // TRIPLESTR_LIT: '"""' TRIPLESTR_LIT_ITEM '"""';
-STR_LIT_ENDING: '"""' [^"] -> skip;
+STR_LIT_ENDING: '"""' ~('"') -> skip;
 TRIPLESTR_LIT: '"""' TRIPLESTR_LIT_ITEM STR_LIT_ENDING;
 // [\u000A] //new line 
 fragment TRIPLESTR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u00FF] | NEWLINE )*;

@@ -15,7 +15,6 @@ def write_to_file(path, txt=''):
 def tokenize_file(filename):
     prog = read_file(filename)
     input_stream = InputStream(prog)
-    # print(input_stream)
 
     lexer = milestone_1Lexer(input_stream)
     token = lexer.nextToken()

@@ -7,7 +7,7 @@ def main():
     tokens = tokenize_file(testfile_path)
     print(tokens)
     res_filename = sys.modules[__name__].__file__.rpartition(".")[0] + "_result.txt" 
-    # write_to_file(res_filename, "\n".join(tokens) )
+    write_to_file(res_filename, "\\n".join(tokens) )
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ null
 null
 null
 null
-'\r\n'
+null
 ' '
 null
 ','
@@ -125,7 +125,7 @@ null
 null
 null
 null
-'\\"'
+'"'
 '\''
 null
 '\\a'
@@ -151,11 +151,11 @@ null
 token symbolic names:
 null
 HASH
+NEWLINE
 COMMENT_BODY
 COMMENT
 MULTILINE_COMMENT
 DOCUMENTATION_COMMENT
-NEWLINE
 WS
 INDENT
 COMMA

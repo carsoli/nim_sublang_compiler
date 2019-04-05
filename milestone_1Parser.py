@@ -25,36 +25,36 @@ class milestone_1Parser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'#'", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "'\r\n'", "' '", "<INVALID>", "','", "';'", 
-                     "':'", "'.'", "'('", "')'", "'{'", "'}'", "'['", "']'", 
-                     "'interface'", "'enum'", "'object'", "'concept'", "'type'", 
-                     "'and'", "'or'", "'xor'", "'shl'", "'shr'", "'mod'", 
-                     "'div'", "'@'", "'&'", "'|'", "'+'", "'-'", "'/'", 
-                     "'<'", "'>'", "'%'", "'^'", "<INVALID>", "'*'", "'~'", 
-                     "'!'", "'var'", "'let'", "'const'", "'bind'", "'proc'", 
-                     "'static'", "'method'", "'func'", "'mixin'", "'end'", 
-                     "'except'", "'return'", "'try'", "'raise'", "'finally'", 
-                     "'out'", "'case'", "'else'", "'elif'", "'do'", "'while'", 
-                     "'iterator'", "'for'", "'in'", "'notin'", "'continue'", 
-                     "'break'", "'template'", "'tuple'", "'using'", "'when'", 
-                     "'yield'", "'include'", "'import'", "'from'", "'as'", 
-                     "'export'", "'ref'", "'ptr'", "'addr'", "'is'", "'not'", 
-                     "'isnot'", "'asm'", "'block'", "'macro'", "'nil'", 
-                     "'cast'", "'converter'", "'of'", "'defer'", "'discard'", 
-                     "'distinct'", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "' '", "<INVALID>", "','", 
+                     "';'", "':'", "'.'", "'('", "')'", "'{'", "'}'", "'['", 
+                     "']'", "'interface'", "'enum'", "'object'", "'concept'", 
+                     "'type'", "'and'", "'or'", "'xor'", "'shl'", "'shr'", 
+                     "'mod'", "'div'", "'@'", "'&'", "'|'", "'+'", "'-'", 
+                     "'/'", "'<'", "'>'", "'%'", "'^'", "<INVALID>", "'*'", 
+                     "'~'", "'!'", "'var'", "'let'", "'const'", "'bind'", 
+                     "'proc'", "'static'", "'method'", "'func'", "'mixin'", 
+                     "'end'", "'except'", "'return'", "'try'", "'raise'", 
+                     "'finally'", "'out'", "'case'", "'else'", "'elif'", 
+                     "'do'", "'while'", "'iterator'", "'for'", "'in'", "'notin'", 
+                     "'continue'", "'break'", "'template'", "'tuple'", "'using'", 
+                     "'when'", "'yield'", "'include'", "'import'", "'from'", 
+                     "'as'", "'export'", "'ref'", "'ptr'", "'addr'", "'is'", 
+                     "'not'", "'isnot'", "'asm'", "'block'", "'macro'", 
+                     "'nil'", "'cast'", "'converter'", "'of'", "'defer'", 
+                     "'discard'", "'distinct'", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "'\\\"'", "'''", "<INVALID>", "'\\a'", 
-                     "'\\b'", "'\\'", "'\\e'", "<INVALID>", "'\\f'", "<INVALID>", 
-                     "<INVALID>", "'\\p'" ]
+                     "<INVALID>", "<INVALID>", "'\"'", "'''", "<INVALID>", 
+                     "'\\a'", "'\\b'", "'\\'", "'\\e'", "<INVALID>", "'\\f'", 
+                     "<INVALID>", "<INVALID>", "'\\p'" ]
 
-    symbolicNames = [ "<INVALID>", "HASH", "COMMENT_BODY", "COMMENT", "MULTILINE_COMMENT", 
-                      "DOCUMENTATION_COMMENT", "NEWLINE", "WS", "INDENT", 
-                      "COMMA", "SEMI_COLON", "COLON", "DOT", "OPEN_PAREN", 
+    symbolicNames = [ "<INVALID>", "HASH", "NEWLINE", "COMMENT_BODY", "COMMENT", 
+                      "MULTILINE_COMMENT", "DOCUMENTATION_COMMENT", "WS", 
+                      "INDENT", "COMMA", "SEMI_COLON", "COLON", "DOT", "OPEN_PAREN", 
                       "CLOSE_PAREN", "OPEN_BRACE", "CLOSE_BRACE", "OPEN_BRACK", 
                       "CLOSE_BRACK", "INTERFACE", "ENUM", "OBJECT", "CONCEPT", 
                       "TYPE", "AND", "OR", "XOR", "SHL", "SHR", "MOD", "DIV", 
@@ -90,11 +90,11 @@ class milestone_1Parser ( Parser ):
 
     EOF = Token.EOF
     HASH=1
-    COMMENT_BODY=2
-    COMMENT=3
-    MULTILINE_COMMENT=4
-    DOCUMENTATION_COMMENT=5
-    NEWLINE=6
+    NEWLINE=2
+    COMMENT_BODY=3
+    COMMENT=4
+    MULTILINE_COMMENT=5
+    DOCUMENTATION_COMMENT=6
     WS=7
     INDENT=8
     COMMA=9
