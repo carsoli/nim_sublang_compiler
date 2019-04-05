@@ -53,7 +53,6 @@ MUL_OPERATOR: '*';
 BITWISE_NOT_OPERATOR: '~';
 NOT_OPERATOR: '!'; 
 
-IF: 'if';
 VARIABLE: 'var';
 LET: 'let';
 CONST: 'const';
@@ -77,8 +76,10 @@ FINALLY: 'finally';
 OUT: 'out';
 
 CASE: 'case';
-ELSE: 'else';
+IF: 'if';
 ELIF: 'elif';
+ELSE: 'else';
+
 
 DO: 'do';
 WHILE: 'while';
@@ -131,7 +132,7 @@ IDENTIFIER: LETTER ( '_'ALPHANUMERIC | ALPHANUMERIC )*;
 
 fragment OCTDIGIT: [0-7];
 fragment BINDIGIT: [0-1];
-fragment HEXDIGIT: ( DIGIT | [a-f] );
+fragment HEXDIGIT: ( DIGIT | [a-f] | [A-F]);
 
 fragment HEX_LIT: '0' ('x' | 'X' ) HEXDIGIT ( ('_')? HEXDIGIT )*;
 fragment BIN_LIT: '0' ('b' | 'B') BINDIGIT ( ('_')? BINDIGIT )*;
@@ -178,7 +179,7 @@ fragment PLATFORM_SPECIFIC_NEWLINE: '\\p';
 // UNICODE OF LF is x0A and of CR LF, xOD followed by xOA
 // PLATFORM_SPECIFIC_NEWLINE: (\u000A|\u000D \u000A) -> skip;
 
-CHAR_ESCAPE_SEQUENCES: (
+fragment CHAR_ESCAPE_SEQUENCES: (
     CARRIAGE_RETURN 
     | ALERT 
     | BACKSLASH 
@@ -189,7 +190,7 @@ CHAR_ESCAPE_SEQUENCES: (
     | TAB 
     | CODE_CHARACTER
     | ('\\x' HEXDIGIT HEXDIGIT)
-    ) -> skip;
+    );
 
 CHAR_LIT: '\'' CHAR_LIT_ITEM '\''; 
 fragment CHAR_LIT_ITEM: ( CHAR_ESCAPE_SEQUENCES | [\u0020-\u0026] | [\u0028-\u00FF] );
