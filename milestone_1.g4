@@ -124,57 +124,58 @@ DEFER: 'defer';
 DISCARD: 'discard';
 DISTINCT: 'distinct';
 
-fragment DIGIT: [0-9];
 //TODO: ADD A SPECIAL CHARACTER TO TEST THIS
 fragment LETTER: ( [A-Za-z] | [\u0080-\u00FF] );
-fragment ALPHANUMERIC: (LETTER | DIGIT);
+fragment ALPHANUMERIC: (LETTER | DECDIGIT);
 IDENTIFIER: LETTER ( '_'ALPHANUMERIC | ALPHANUMERIC )*;
 
+fragment DECDIGIT: [0-9];
 fragment OCTDIGIT: [0-7];
 fragment BINDIGIT: [0-1];
-fragment HEXDIGIT: ( DIGIT | [a-f] | [A-F]);
+fragment HEXDIGIT: ( DECDIGIT | [a-fA-F] );
 
 fragment HEX_LIT: '0' ('x' | 'X' ) HEXDIGIT ( ('_')? HEXDIGIT )*;
 fragment BIN_LIT: '0' ('b' | 'B') BINDIGIT ( ('_')? BINDIGIT )*;
 fragment OCT_LIT: '0' ('o' | 'O') OCTDIGIT ( ('_')? OCTDIGIT )*;
-fragment DEC_LIT: DIGIT ( ('_')? DIGIT )*; 
+fragment DEC_LIT: DECDIGIT ( ('_')? DECDIGIT )*; 
 
 INT_LIT: HEX_LIT | DEC_LIT | OCT_LIT | BIN_LIT;
-fragment INT_SUFFIX: '\'' ('i' | 'I'); 
+fragment INT_SUFFIX: '\''? ('i' | 'I'); 
 INT8_LIT: INT_LIT INT_SUFFIX '8';
 INT16_LIT: INT_LIT INT_SUFFIX '16';
 INT32_LIT: INT_LIT INT_SUFFIX '32';
 INT64_LIT: INT_LIT INT_SUFFIX '64';
 
-fragment UINT_SUFFIX: '\'' ('u' | 'U');
+fragment UINT_SUFFIX: '\''? ('u' | 'U');
 UINT_LIT: INT_LIT UINT_SUFFIX;
 UINT8_LIT: UINT_LIT '8';
 UINT16_LIT: UINT_LIT '16';
 UINT32_LIT: UINT_LIT '32';
 UINT64_LIT: UINT_LIT '64';
 
-EXP: ('e' | 'E' ) ('+' | '-') DEC_LIT;
+EXP: ('e' | 'E' ) ('+' | '-')? DEC_LIT;
 
 FLOAT_LIT: DEC_LIT ( ( '.' DEC_LIT EXP? ) | EXP );
 
-fragment FLOAT32_SUFFIX: ('f' | 'F') '32';
+fragment FLOAT32_SUFFIX: ('f' | 'F') '32'?;
 FLOAT32_LIT: ( ( HEX_LIT '\'' FLOAT32_SUFFIX )
-            | ( ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\'' FLOAT32_SUFFIX ) );
+            | ( ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\''? FLOAT32_SUFFIX ) );
 
 fragment FLOAT64_SUFFIX: ( ( ('f' | 'F') '64' ) | 'd' | 'D' );
 FLOAT64_LIT: ( HEX_LIT '\'' FLOAT64_SUFFIX
-            | ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\'' FLOAT64_SUFFIX );
+            | ( FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT ) '\''? FLOAT64_SUFFIX );
 
 // TODO: could cause problems
-fragment CARRIAGE_RETURN: ('\\r' | '\\c');
+fragment CARRIAGE_RETURN: ('\\r' | '\\c') ;
 fragment ALERT: '\\a';
 fragment BACKSPACE: '\\b';
 fragment BACKSLASH: '\\';
 fragment ESCAPE: '\\e';
-fragment LINE_FEED: ( '\\n' | '\\l' );
+fragment LINE_FEED: ( '\\n' | '\\l' ) ; 
 fragment FORM_FEED: '\\f';
 fragment TAB: ('\\t' | '\\v');
-fragment CODE_CHARACTER: '\\' DIGIT+;
+fragment ASCII_CODE_CHARACTER: '\\' DECDIGIT+ ;
+fragment UNICODE_CODE_CHARACTER: '\\' 'u' HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT; 
 fragment PLATFORM_SPECIFIC_NEWLINE: '\\p'; 
 // UNICODE OF LF is x0A and of CR LF, xOD followed by xOA
 // PLATFORM_SPECIFIC_NEWLINE: (\u000A|\u000D \u000A) -> skip;
@@ -188,7 +189,8 @@ fragment CHAR_ESCAPE_SEQUENCES: (
     | LINE_FEED 
     | FORM_FEED 
     | TAB 
-    | CODE_CHARACTER
+    | ASCII_CODE_CHARACTER
+    | UNICODE_CODE_CHARACTER
     | ('\\x' HEXDIGIT HEXDIGIT)
     );
 
@@ -198,20 +200,19 @@ fragment CHAR_LIT_ITEM: ( CHAR_ESCAPE_SEQUENCES | [\u0020-\u0026] | [\u0028-\u00
 STR_LIT: '"' STR_LIT_ITEM* '"'; //allow for empty string
 fragment STR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u0021] | [\u0023-\u00FF] );
 
-// TRIPLESTR_LIT: '"""' TRIPLESTR_LIT_ITEM '"""';
-fragment STR_LIT_ENDING: '"""' ~('"');
-TRIPLESTR_LIT: '"""' TRIPLESTR_LIT_ITEM STR_LIT_ENDING;
-// [\u000A] //new line 
-fragment TRIPLESTR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u00FF] | NEWLINE )*;
+TRIPLESTR_LIT: '"""' QUOTED_TRIPLESTR_LIT_ITEM TRIPLESTR_LIT_ENDING;
+fragment QUOTED_TRIPLESTR_LIT_ITEM: (('"' '"'? TRIPLESTR_LIT_ITEM) | TRIPLESTR_LIT_ITEM)* ('"' '"'?)?;
+fragment TRIPLESTR_LIT_ITEM: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u0021] | [\u0023-\u00FF] | NEWLINE );
+fragment TRIPLESTR_LIT_ENDING: '"""' ~('"');
 
+RSTR_LIT: RSTR_PREFIX ( '""' | '"' RAW_STR_LIT_BODY (RAW_STR_LIT_BODY | '""')* '"' );
 fragment RAW_STR_LIT_BODY: (CHAR_ESCAPE_SEQUENCES | PLATFORM_SPECIFIC_NEWLINE | [\u0020-\u0021] | [\u0023-\u00FF] );
+fragment RSTR_PREFIX: ('r'|'R');
 
-RSTR_LIT: ('r'|'R') '"' ( RAW_STR_LIT_BODY?('""')?RAW_STR_LIT_BODY('""')? )* '"';
+GENERALIZED_STR_LIT: IDENTIFIER ( '"' RAW_STR_LIT_BODY '"' | GENERALIZED_STR_LIT_LONG );
+fragment GENERALIZED_STR_LIT_LONG: OPEN_PAREN RSTR_LIT CLOSE_PAREN;
 
-fragment GENERALIZED_RSTR_LIT: IDENTIFIER OPEN_PAREN ('r'|'R') STR_LIT CLOSE_PAREN;
-GENERALIZED_STR_LIT: IDENTIFIER STR_LIT;
-
-fragment GENERALIZED_RTRIPSTR_LIT: IDENTIFIER  ('r'|'R') OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
-GENERALIZED_TRIPLESTR_LIT: IDENTIFIER '""' STR_LIT '""';
+GENERALIZED_TRIPLESTR_LIT: IDENTIFIER ( TRIPLESTR_LIT | GENERALIZED_TRIPLESTR_LIT_LONG);
+fragment GENERALIZED_TRIPLESTR_LIT_LONG: OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
 
 start: AND;
