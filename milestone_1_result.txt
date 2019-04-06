@@ -1,3 +1,4 @@
-STR_LIT  ""
-IDENTIFIER  abcdadsadsad
-STR_LIT  ""
+GENERALIZED_TRIPLESTR_LIT  ident"""
+abcdadsadsad
+"""
+IDENTIFIER  a

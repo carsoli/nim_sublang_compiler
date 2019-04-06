@@ -29,7 +29,7 @@ def tokenize_file(filename):
 def get_token_type(token):
     return milestone_1Lexer.symbolicNames[token.type]
 
-triple_str_regex = r'\"\"\"[\t\s]+\n'
+triple_str_regex = r'\"\"\"[\t ]+\n'
 def correct_text(token_type, token_text):
     if token_type == 'TRIPLESTR_LIT' or token_type == 'GENERALIZED_TRIPLESTR_LIT':
         return re.sub(triple_str_regex, '"""', token_text)
