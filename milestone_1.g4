@@ -136,7 +136,7 @@ fragment HEXDIGIT: ( DIGIT | [a-f] | [A-F]);
 
 fragment HEX_LIT: '0' ('x' | 'X' ) HEXDIGIT ( ('_')? HEXDIGIT )*;
 fragment BIN_LIT: '0' ('b' | 'B') BINDIGIT ( ('_')? BINDIGIT )*;
-fragment OCT_LIT: '0' 'o' OCTDIGIT ( ('_')? OCTDIGIT )*;
+fragment OCT_LIT: '0' ('o' | 'O') OCTDIGIT ( ('_')? OCTDIGIT )*;
 fragment DEC_LIT: DIGIT ( ('_')? DIGIT )*; 
 
 INT_LIT: HEX_LIT | DEC_LIT | OCT_LIT | BIN_LIT;

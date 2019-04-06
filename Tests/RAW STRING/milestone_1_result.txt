@@ -1,0 +1,16 @@
+IDENTIFIER  echo
+RSTR_LIT  r"a""b"
+IDENTIFIER  echo
+RSTR_LIT  r""
+STR_LIT  ""
+IDENTIFIER  echo
+RSTR_LIT  r""
+IDENTIFIER  echo
+RSTR_LIT  r"a"
+IDENTIFIER  b
+IDENTIFIER  echo
+RSTR_LIT  r"aa'aa"
+IDENTIFIER  echo
+RSTR_LIT  r"aaaa"
+IDENTIFIER  echo
+RSTR_LIT  r""

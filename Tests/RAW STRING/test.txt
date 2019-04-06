@@ -1,0 +1,12 @@
+echo r"a""b" 
+echo r""""
+echo r"""
+echo r"a"b"
+echo r"aa'aa"
+echo r"aaaa"
+echo r""
+echo r""""""
+echo r""'""""
+echo r"""'"'"""
+# var rs = r"""4""a'""a"""
+# echo rs
