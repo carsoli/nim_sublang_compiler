@@ -1,5 +1,5 @@
 from antlr4 import Token, InputStream
-from milestone_1Lexer import milestone_1Lexer
+from milestone_2Lexer import milestone_2Lexer
 import re
 
 def read_file(filename):
@@ -17,17 +17,34 @@ def tokenize_file(filename):
     prog = read_file(filename)
     input_stream = InputStream(prog)
 
-    lexer = milestone_1Lexer(input_stream)
+    lexer = milestone_2Lexer(input_stream)
     token = lexer.nextToken()
     res = []
+    allow_indents = True 
+    indent_list = []
     while not token.type == Token.EOF:
         token_type = get_token_type(token)
+        if token_type == 'NEWLINE':
+            allow_indents = True
+            indent_list.clear()
+            token = lexer.nextToken()
+            continue
+        elif token_type == 'ERROR_INDENT' or token_type == 'INDENT':
+            if allow_indents:
+                indent_list.append(token_type + "  " + token.text)
+            token = lexer.nextToken()
+            continue
+        
+        allow_indents = False
+        res = res + indent_list
+        indent_list.clear()
+
         res.append(token_type + "  " + correct_text(token_type, token.text))
         token = lexer.nextToken()
     return res
 
 def get_token_type(token):
-    return milestone_1Lexer.symbolicNames[token.type]
+    return milestone_2Lexer.symbolicNames[token.type]
 
 triple_str_regex = r'\"\"\"[\t ]+\n'
 def correct_text(token_type, token_text):

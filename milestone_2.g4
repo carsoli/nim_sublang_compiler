@@ -1,4 +1,4 @@
-grammar milestone_1;
+grammar milestone_2;
 
 options {language='Python3';}
 
@@ -8,10 +8,11 @@ COMMENT: HASH COMMENT_BODY* ->skip;
 fragment MULTILINE_COMMENT_BODY: ( [\u0020-\u00FF] | TAB | NEWLINE );
 MULTILINE_COMMENT: HASH OPEN_BRACK MULTILINE_COMMENT_BODY* CLOSE_BRACK HASH -> skip;
 DOCUMENTATION_COMMENT: HASH MULTILINE_COMMENT HASH -> skip;
-NEWLINE: '\r'? '\n' ->skip;
-WS: ' ' -> skip;
-//TODO: LATER
+NEWLINE: '\r'? '\n';
+
 INDENT: WS WS WS WS;
+ERROR_INDENT: WS WS? WS?;
+WS: ' ' -> skip;
 
 COMMA: ',';
 SEMI_COLON: ';';
@@ -49,10 +50,17 @@ GREATER_THAN: '>';
 MODULUS: '%';
 
 XOR_OPERATOR: '^';
-EQUALS_OPERATOR: ('='|'==');
+EQUALS_OPERATOR: '==';
 MUL_OPERATOR: '*';
 BITWISE_NOT_OPERATOR: '~';
 NOT_OPERATOR: '!'; 
+
+ASSIGNMENT_OPERATOR: '=';
+
+// OP0: 
+OP1: (ASSIGNMENT_OPERATOR );
+OP3: OR_OPERATOR | XOR_OPERATOR;
+
 
 VARIABLE: 'var';
 LET: 'let';
@@ -215,4 +223,12 @@ fragment GENERALIZED_STR_LIT_LONG: OPEN_PAREN RSTR_LIT CLOSE_PAREN;
 GENERALIZED_TRIPLESTR_LIT: IDENTIFIER ( TRIPLESTR_LIT | GENERALIZED_TRIPLESTR_LIT_LONG);
 fragment GENERALIZED_TRIPLESTR_LIT_LONG: OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
 
-start: AND;
+/*=================================
+    GRAMMAR
+==================================*/
+
+// stmt: CHAR_LIT;
+
+// module: (stmt (SEMI_COLON | DOT stmt)* )? ;
+
+start: module;
