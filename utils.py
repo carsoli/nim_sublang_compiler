@@ -1,5 +1,5 @@
 from antlr4 import Token, InputStream
-from milestone_2Lexer import milestone_2Lexer
+from m2_lexer import m2_lexer as milestone_2Lexer
 import re
 
 def read_file(filename):
@@ -14,6 +14,22 @@ def write_to_file(path, txt=''):
     file.close()
 
 def tokenize_file(filename):
+    prog = read_file(filename)
+    input_stream = InputStream(prog)
+
+    lexer = milestone_2Lexer(input_stream)
+    token = lexer.nextToken()
+    res = []
+    while not token.type == Token.EOF:
+        token_type = get_token_type(token)
+
+        res.append(token_type + "  " + correct_text(token_type, token.text))
+        token = lexer.nextToken()
+    return res
+
+    
+
+def tokenize_file2(filename):
     prog = read_file(filename)
     input_stream = InputStream(prog)
 

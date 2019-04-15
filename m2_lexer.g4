@@ -1,4 +1,4 @@
-grammar milestone_2;
+lexer grammar m2_lexer;
 
 options {language='Python3';}
 
@@ -8,10 +8,8 @@ COMMENT: HASH COMMENT_BODY* ->skip;
 fragment MULTILINE_COMMENT_BODY: ( [\u0020-\u00FF] | TAB | NEWLINE );
 MULTILINE_COMMENT: HASH OPEN_BRACK MULTILINE_COMMENT_BODY* CLOSE_BRACK HASH -> skip;
 DOCUMENTATION_COMMENT: HASH MULTILINE_COMMENT HASH -> skip;
-NEWLINE: '\r'? '\n';
-
-INDENT: WS WS WS WS;
-ERROR_INDENT: WS WS? WS?;
+// USELESS_LINE: WS+ NEWLINE;
+NEWLINE: '\r'? '\n' -> pushMode(INDENTS_MODE), skip;
 WS: ' ' -> skip;
 
 COMMA: ',';
@@ -223,12 +221,8 @@ fragment GENERALIZED_STR_LIT_LONG: OPEN_PAREN RSTR_LIT CLOSE_PAREN;
 GENERALIZED_TRIPLESTR_LIT: IDENTIFIER ( TRIPLESTR_LIT | GENERALIZED_TRIPLESTR_LIT_LONG);
 fragment GENERALIZED_TRIPLESTR_LIT_LONG: OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
 
-/*=================================
-    GRAMMAR
-==================================*/
-
-// stmt: CHAR_LIT;
-
-// module: (stmt (SEMI_COLON | DOT stmt)* )? ;
-
-start: module;
+mode INDENTS_MODE;
+    EXIT: {self._input.LA(1) != ' '} -> popMode, skip;
+    USELESS_LINE: WS* NEWLINE -> skip;
+    INDENT: WS WS WS WS;
+    ERROR_INDENT: WS WS? WS?;
