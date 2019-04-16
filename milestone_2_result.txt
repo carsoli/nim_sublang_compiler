@@ -1,47 +1,14 @@
-IMPORT  import
-IDENTIFIER  tables
-COMMA  ,
-IDENTIFIER  strutils
-VARIABLE  var
-IDENTIFIER  wordFrequencies
+LET  let
+IDENTIFIER  typ
 ASSIGNMENT_OPERATOR  =
-IDENTIFIER  initCountTable
+IDENTIFIER  c
 OPEN_BRACK  [
-IDENTIFIER  string
+INT_LIT  0
 CLOSE_BRACK  ]
-OPEN_PAREN  (
-CLOSE_PAREN  )
-FOR  for
-IDENTIFIER  line
-IN  in
-IDENTIFIER  stdin
-DOT  .
-IDENTIFIER  lines
-COLON  :
-INDENT      
-FOR  for
-IDENTIFIER  word
-IN  in
-IDENTIFIER  line
-DOT  .
-IDENTIFIER  split
-OPEN_PAREN  (
-STR_LIT  ", "
-CLOSE_PAREN  )
-COLON  :
-INDENT      
-INDENT      
-IDENTIFIER  wordFrequencies
-DOT  .
-IDENTIFIER  inc
-OPEN_PAREN  (
-IDENTIFIER  word
-CLOSE_PAREN  )
-IDENTIFIER  echo
-STR_LIT  "The most frequent word is '"
-COMMA  ,
-IDENTIFIER  wordFrequencies
-DOT  .
-IDENTIFIER  largest
-COMMA  ,
-STR_LIT  "'"
+LET  let
+IDENTIFIER  b
+ASSIGNMENT_OPERATOR  =
+IDENTIFIER  c
+OPEN_BRACK  [
+INT_LIT  2
+CLOSE_BRACK  ]

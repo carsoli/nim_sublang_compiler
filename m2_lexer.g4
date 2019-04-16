@@ -3,11 +3,30 @@ lexer grammar m2_lexer;
 options {language='Python3';}
 
 fragment HASH: '#';
+
+fragment COMPOSITE_COMMENT_PART: ( [\u0020-\u0022] | [\u0024-\u005A] | [\u005C-\u00FF] | TAB | NEWLINE );
+
+fragment DOCUMENTATION_COMMENT_BODY 
+    : (
+        COMPOSITE_COMMENT_PART 
+        |  DOCUMENTATION_COMMENT
+        |  {self._input.LA(-2) != ord(']') or self._input.LA(-1) != ord('#')}? '#' 
+        |  {self._input.LA(-2) != ord('#') or self._input.LA(-1) != ord('#')}? '['
+    );
+DOCUMENTATION_COMMENT: HASH HASH OPEN_BRACK DOCUMENTATION_COMMENT_BODY* CLOSE_BRACK HASH HASH -> skip;
+
+fragment MULTILINE_COMMENT_BODY 
+    : (
+        COMPOSITE_COMMENT_PART 
+        |  MULTILINE_COMMENT
+        |  {self._input.LA(-1) != ord(']')}? '#' 
+        |  {self._input.LA(-1) != ord('#')}? '['
+    );
+MULTILINE_COMMENT: HASH OPEN_BRACK MULTILINE_COMMENT_BODY* CLOSE_BRACK HASH -> skip;
+
 fragment COMMENT_BODY: ( [\u0020-\u00FF] | TAB );
 COMMENT: HASH COMMENT_BODY* -> skip;
-fragment MULTILINE_COMMENT_BODY: ( [\u0020-\u00FF] | TAB | NEWLINE );
-MULTILINE_COMMENT: HASH OPEN_BRACK MULTILINE_COMMENT_BODY* CLOSE_BRACK HASH -> skip;
-DOCUMENTATION_COMMENT: HASH MULTILINE_COMMENT HASH -> skip;
+
 // USELESS_LINE: WS+ NEWLINE;
 NEWLINE: '\r'? '\n' -> pushMode(INDENTS_MODE), skip;
 WS: ' ' -> skip;
@@ -223,7 +242,7 @@ fragment GENERALIZED_TRIPLESTR_LIT_LONG: OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
 
 mode INDENTS_MODE;
     fragment SPACE_OR_TAB: WS | TAB;
-    EXIT: {self._input.LA(1) not in [' ', '\t']} -> popMode, skip;
-    USELESS_LINE: (SPACE_OR_TAB | COMMENT | MULTILINE_COMMENT | DOCUMENTATION_COMMENT)* (NEWLINE | EOF) -> skip;
+    EXIT: {self._input.LA(1) not in [ord(' '), ord('\t')]} -> popMode, skip;
+    USELESS_LINE: SPACE_OR_TAB* (MULTILINE_COMMENT | DOCUMENTATION_COMMENT | COMMENT) (NEWLINE? | EOF) -> skip;
     INDENT: WS WS WS WS;
     ERROR_INDENT: SPACE_OR_TAB SPACE_OR_TAB? SPACE_OR_TAB?;
