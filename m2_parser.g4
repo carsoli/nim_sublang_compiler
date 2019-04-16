@@ -5,11 +5,14 @@ options {language='Python3'; tokenVocab=m2_lexer;}
 levels = []
 indent_level = 0
 
-def getToken():
-    super().getToken()
+def nextToken(self):
+    super().nextToken()
+    print('aaa')
+    print(tokens.peek())
     return Token.EOF if tokens.isEmpty() else tokens.poll()
 
 def jump(self, ttype):
+    print(self.tokens.peek())
     print("ai haga")
 }
 

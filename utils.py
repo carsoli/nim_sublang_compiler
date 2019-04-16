@@ -1,8 +1,21 @@
 from antlr4 import Token, InputStream, CommonTokenStream, ParseTreeWalker
+from antlr4.error.ErrorListener import *
 from m2_lexer import m2_lexer
 from m2_parserListener import m2_parserListener
 from m2_parser import m2_parser 
 import re
+
+class DefaultErrorListener(ErrorListener):
+ 
+    def __init__(self):
+        self._symbol = ''
+    
+    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):        
+        self._symbol = offendingSymbol.text
+ 
+    @property        
+    def symbol(self):
+        return self._symbol
 
 def read_file(filename):
     file = open(filename, 'r')
@@ -21,9 +34,13 @@ def recognize_file(filename):
     lexer = m2_lexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = m2_parser(stream)
+    parser.removeErrorListeners()
+    errorListener = DefaultErrorListener()
+    parser.addErrorListener(errorListener)
     st_ctx = parser.start()
-
-    return True
+    if len(errorListener.symbol) == 0:
+        return True
+    return False
 
 
 def tokenize_file(filename):
