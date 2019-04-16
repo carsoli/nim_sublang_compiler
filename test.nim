@@ -15,3 +15,11 @@ proc createNext(c: NimNode): NimNode =
     ## agsdg
     ## asfa
     let typ = c[0]
+
+    #[
+
+    ]# #[
+
+    ]# #[
+
+    ]#  var xx #[ aa ]# #[ aa]#  
