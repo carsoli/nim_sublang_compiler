@@ -1,5 +1,7 @@
-from antlr4 import Token, InputStream
-from m2_lexer import m2_lexer as milestone_2Lexer
+from antlr4 import Token, InputStream, CommonTokenStream, ParseTreeWalker
+from m2_lexer import m2_lexer
+from m2_parserListener import m2_parserListener
+from m2_parser import m2_parser 
 import re
 
 def read_file(filename):
@@ -13,11 +15,21 @@ def write_to_file(path, txt=''):
     file.write(txt) 
     file.close()
 
+def recognize_file(filename):
+    prog = read_file(filename)
+    input_stream = InputStream(prog)
+    lexer = m2_lexer(input_stream)
+    stream = CommonTokenStream(lexer)
+    parser = m2_parser(stream)
+    st_ctx = parser.start()
+
+    return True
+
+
 def tokenize_file(filename):
     prog = read_file(filename)
     input_stream = InputStream(prog)
-
-    lexer = milestone_2Lexer(input_stream)
+    lexer = m2_lexer(input_stream)
     token = lexer.nextToken()
     res = []
     while not token.type == Token.EOF:
@@ -28,7 +40,7 @@ def tokenize_file(filename):
     return res
 
 def get_token_type(token):
-    return milestone_2Lexer.symbolicNames[token.type]
+    return m2_lexer.symbolicNames[token.type]
 
 triple_str_regex = r'\"\"\"[\t ]+\n'
 def correct_text(token_type, token_text):

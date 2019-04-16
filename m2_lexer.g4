@@ -2,10 +2,22 @@ lexer grammar m2_lexer;
 
 options {language='Python3';}
 
+OP1: (ASSIGNMENT_OPERATOR );
+OP2: AT; 
+OP3: OR | XOR;
+OP4: AND; 
+OP5: EQUALS_OPERATOR | LESS_THAN | GREATER_THAN | IS | ISNOT | IN | NOTIN | NOT | OF; 
+OP7: AND_OPERATOR;
+OP8: ADD_OPERATOR | MINUS_OPERATOR; 
+OP9: MUL_OPERATOR | DIV_OPERATOR | DIV | MOD | SHL | SHR | MODULUS;
+
 fragment HASH: '#';
 
 fragment COMPOSITE_COMMENT_PART: ( [\u0020-\u0022] | [\u0024-\u005A] | [\u005C-\u00FF] | TAB | NEWLINE );
-
+/*
+    allow nested documentation comments,
+    do not allow ]## within without closing it (part of nested documentation comment)
+*/ 
 fragment DOCUMENTATION_COMMENT_BODY 
     : (
         COMPOSITE_COMMENT_PART 
@@ -73,11 +85,6 @@ BITWISE_NOT_OPERATOR: '~';
 NOT_OPERATOR: '!'; 
 
 ASSIGNMENT_OPERATOR: '=';
-
-// OP0: 
-OP1: (ASSIGNMENT_OPERATOR );
-OP3: OR_OPERATOR | XOR_OPERATOR;
-
 
 VARIABLE: 'var';
 LET: 'let';
@@ -242,7 +249,7 @@ fragment GENERALIZED_TRIPLESTR_LIT_LONG: OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
 
 mode INDENTS_MODE;
     fragment SPACE_OR_TAB: WS | TAB;
-    EXIT: {self._input.LA(1) not in [ord(' '), ord('\t')]} -> popMode, skip;
-    USELESS_LINE: SPACE_OR_TAB* (MULTILINE_COMMENT | DOCUMENTATION_COMMENT | COMMENT) (NEWLINE? | EOF) -> skip;
+    EXIT: {self._input.LA(1) not in [ord(' '), ord('\t'), ord('\v')]} -> popMode, skip;
+    USELESS_LINE: (SPACE_OR_TAB |MULTILINE_COMMENT | DOCUMENTATION_COMMENT | COMMENT)* (NEWLINE? | EOF) -> skip;
     INDENT: WS WS WS WS;
     ERROR_INDENT: SPACE_OR_TAB SPACE_OR_TAB? SPACE_OR_TAB?;
