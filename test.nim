@@ -3,7 +3,12 @@ proc createNext(c: NimNode): NimNode =
         here.
     ]## ##[
         comm2
-    ]## #as
+    ]##     #as
+    #[
+        #[
+            aasaf
+        ]#
+    ]#
     let typ = c[0]
     ## asd
     ## asgg
