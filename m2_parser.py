@@ -229,14 +229,12 @@ class m2_parser ( Parser ):
     levels = []
     indent_level = 0
 
-    def nextToken(self):
-        super().nextToken()
-        print('aaa')
-        print(tokens.peek())
-        return Token.EOF if tokens.isEmpty() else tokens.poll()
+    def getCurrentToken(self):
+        token = super().getCurrentToken()
+        print(self.INDENT == token.type)
+        return token 
 
     def jump(self, ttype):
-        print(self.tokens.peek())
         print("ai haga")
 
 

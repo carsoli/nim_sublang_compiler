@@ -2,19 +2,32 @@ parser grammar m2_parser;
 options {language='Python3'; tokenVocab=m2_lexer;}
 
 @members {
-levels = []
-indent_level = 0
+indent_stk = [0]
+indent_mode = False
 
-def nextToken(self):
-    super().nextToken()
-    print('aaa')
-    print(tokens.peek())
-    return Token.EOF if tokens.isEmpty() else tokens.poll()
+def getCurrentToken(self):
+    token = super().getCurrentToken()
+    if token.type == self.INDENT:
+        self.indent_mode = True
+        self.indent_stk[-1] += 1
+        
+    elif: token.type == self.NEWLINE:
 
-def jump(self, ttype):
-    print(self.tokens.peek())
-    print("ai haga")
+    elif: self.indent_mode:
+        self.indent_mode.push(0)
+        self.indent_mode = False
+
+    print(self.INDENT == token.type)
+    return token 
+
+def IND():
+    return self.indent_stk[-2] == self.indent_stk[-1] - 1
+def INDE():
+    return self.indent_stk[-2] == self.indent_stk[-1]
+def DED():
+    self.indent_stk = self.indent_stk[:-1]
 }
+
 
 
 stmt: {self.jump('beda')} CHAR_LIT;
