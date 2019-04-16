@@ -8,7 +8,7 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0083")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0084")
         buf.write("\31\4\2\t\2\4\3\t\3\4\4\t\4\3\2\3\2\3\2\3\3\3\3\3\3\3")
         buf.write("\3\7\3\20\n\3\f\3\16\3\23\13\3\5\3\25\n\3\3\4\3\4\3\4")
         buf.write("\2\2\5\2\4\6\2\2\2\30\2\b\3\2\2\2\4\24\3\2\2\2\6\26\3")
@@ -77,7 +77,8 @@ class m2_parser ( Parser ):
                       "EXP", "FLOAT_LIT", "FLOAT32_LIT", "FLOAT64_LIT", 
                       "CHAR_LIT", "STR_LIT", "TRIPLESTR_LIT", "RSTR_LIT", 
                       "GENERALIZED_STR_LIT", "GENERALIZED_TRIPLESTR_LIT", 
-                      "EXIT", "USELESS_LINE", "INDENT", "ERROR_INDENT" ]
+                      "EXIT", "USELESS_LINE", "USELSSS_INDENTS", "INDENT", 
+                      "ERROR_INDENT" ]
 
     RULE_stmt = 0
     RULE_module = 1
@@ -213,8 +214,9 @@ class m2_parser ( Parser ):
     GENERALIZED_TRIPLESTR_LIT=125
     EXIT=126
     USELESS_LINE=127
-    INDENT=128
-    ERROR_INDENT=129
+    USELSSS_INDENTS=128
+    INDENT=129
+    ERROR_INDENT=130
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -231,7 +233,7 @@ class m2_parser ( Parser ):
         super().getToken()
         return Token.EOF if tokens.isEmpty() else tokens.poll()
 
-    def jumpp(ttype):
+    def jump(self, ttype):
         print("ai haga")
 
 
@@ -265,7 +267,7 @@ class m2_parser ( Parser ):
         self.enterRule(localctx, 0, self.RULE_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.jumpp('beda')
+            self.jump('beda')
             self.state = 7
             self.match(m2_parser.CHAR_LIT)
         except RecognitionException as re:
