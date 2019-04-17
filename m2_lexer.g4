@@ -83,33 +83,68 @@ ENUM: 'enum';
 OBJECT: 'object';
 CONCEPT: 'concept';
 TYPE: 'type';
+//OPERATORS
+OP0: ARROW_OPERATOR;
+OP1: ASSIGNMENT_OPERATOR;
+OP2: (AT ANY_OP*) 
+    | (COLON ANY_OP_EXCLUDING_COLON) 
+    | (COLON ANY_OP ANY_OP+);
+OP3: (OR | XOR);
+OP4: AND;
+OP5: (EQUALS_OPERATOR ANY_OP+)
+    | ((GREATER_THAN | LESS_THAN | NOT_OPERATOR) ANY_OP*)
+    | (IN | NOTIN | IS | ISNOT | NOT | OF);
+OP6: DOT ANY_OP+;
+OP7: CONCAT_OPERATOR ANY_OP*;
+OP8: (ADD_OPERATOR | MINUS_OPERATOR | BITWISE_NOT_OPERATOR | OR_OPERATOR) ANY_OP*;
+OP9: (DIV_OPERATOR| MODULUS | MUL_OPERATOR) ANY_OP*;
+OP10: (XOR_OPERATOR) ANY_OP*;
 
-AND: 'and';
-OR: 'or';
-XOR: 'xor';
-SHL: 'shl';
-SHR: 'shr';
-MOD: 'mod';
-DIV: 'div';
+fragment ARROW_OPERATOR: ANY_OP* (MINUS_OPERATOR | BITWISE_NOT_OPERATOR | EQUALS_OPERATOR) GREATER_THAN;
+fragment ASSIGNMENT_OPERATOR: ASSIGNMENT_SPECIFIC_ANY_OP ANY_OP* EQUALS_OPERATOR;
+fragment AND: 'and';
+fragment OR: 'or';
+fragment XOR: 'xor';
+fragment SHL: 'shl';
+fragment SHR: 'shr';
+fragment MOD: 'mod';
+fragment DIV: 'div';
+fragment IN: 'in';
+fragment NOTIN: 'notin';
+fragment IS: 'is';
+fragment NOT: 'not';
+fragment ISNOT: 'isnot';
+fragment OF: 'of';
 
-AT: '@';
-CONCAT_OPERATOR: '&';
-// OR_OPERATOR: '|';
-ADD_OPERATOR: '+';
-MINUS_OPERATOR: '-';
-DIV_OPERATOR: '/';
-LESS_THAN: '<';
-GREATER_THAN: '>';
-MODULUS: '%';
+fragment AT: '@';
+fragment CONCAT_OPERATOR: '&';
+fragment OR_OPERATOR: '|';
+fragment ADD_OPERATOR: '+';
+fragment MINUS_OPERATOR: '-';
+fragment DIV_OPERATOR: '/';
+fragment LESS_THAN: '<';
+fragment GREATER_THAN: '>';
+fragment MODULUS: '%';
+fragment XOR_OPERATOR: '^';
+fragment EQUALS_OPERATOR: '=';
+fragment MUL_OPERATOR: '*';
+fragment BITWISE_NOT_OPERATOR: '~';
+fragment NOT_OPERATOR: '!';
 
-RIGHT_ASSOCIATIVE_OPERATOR: '^'
-// XOR_OPERATOR: '^';
-EQUALS_OPERATOR: '==';
-MUL_OPERATOR: '*';
-BITWISE_NOT_OPERATOR: '~';
-NOT_OPERATOR: '!'; 
+fragment ANY_OP_EXCLUDING_COLON: (AT | CONCAT_OPERATOR | OR_OPERATOR | ADD_OPERATOR 
+                     | MINUS_OPERATOR | DIV_OPERATOR | LESS_THAN | GREATER_THAN
+                     | MODULUS | XOR_OPERATOR | EQUALS_OPERATOR | MUL_OPERATOR
+                     | BITWISE_NOT_OPERATOR | NOT_OPERATOR | DOT | SEMI_COLON);
 
-ASSIGNMENT_OPERATOR: '=';
+fragment ANY_OP: (AT | CONCAT_OPERATOR | OR_OPERATOR | ADD_OPERATOR 
+                     | MINUS_OPERATOR | DIV_OPERATOR | LESS_THAN | GREATER_THAN
+                     | MODULUS | XOR_OPERATOR | EQUALS_OPERATOR | MUL_OPERATOR
+                     | BITWISE_NOT_OPERATOR | NOT_OPERATOR | DOT | SEMI_COLON | COLON);
+
+fragment ASSIGNMENT_SPECIFIC_ANY_OP: (AT | CONCAT_OPERATOR | OR_OPERATOR | ADD_OPERATOR 
+                     | MINUS_OPERATOR | DIV_OPERATOR | DOT | SEMI_COLON
+                     | MODULUS | XOR_OPERATOR | MUL_OPERATOR | COLON);
+//OPERATORS
 
 VARIABLE: 'var';
 LET: 'let';
@@ -143,9 +178,6 @@ WHILE: 'while';
 ITERATOR: 'iterator';
 FOR: 'for';
 
-IN: 'in';
-NOTIN: 'notin';
-
 CONTINUE: 'continue';
 BREAK: 'break';
 
@@ -165,10 +197,6 @@ REF: 'ref';
 PTR: 'ptr';
 ADDR: 'addr';
 
-IS: 'is';
-NOT: 'not';
-ISNOT: 'isnot';
-
 ASM: 'asm';
 BLOCK: 'block';
 MACRO: 'macro';
@@ -176,7 +204,6 @@ MACRO: 'macro';
 NIL: 'nil';
 CAST: 'cast';
 CONVERTER: 'converter';
-OF: 'of';
 DEFER: 'defer';
 DISCARD: 'discard';
 DISTINCT: 'distinct';
