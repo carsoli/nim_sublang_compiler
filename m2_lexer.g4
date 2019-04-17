@@ -2,9 +2,6 @@ lexer grammar m2_lexer;
 
 options {language='Python3';}
 
-@lexer::header{
-from antlr4.Token import CommonToken
-}
 
 @lexer::members{
 previous_line_indents = 0
@@ -35,14 +32,6 @@ def dedent(self):
         self.hook_tokens.append(dedent_token)
 }
 
-OP1: (ASSIGNMENT_OPERATOR );
-OP2: AT; 
-OP3: OR | XOR;
-OP4: AND; 
-OP5: EQUALS_OPERATOR | LESS_THAN | GREATER_THAN | IS | ISNOT | IN | NOTIN | NOT | OF; 
-OP7: AND_OPERATOR;
-OP8: ADD_OPERATOR | MINUS_OPERATOR; 
-OP9: MUL_OPERATOR | DIV_OPERATOR | DIV | MOD | SHL | SHR | MODULUS;
 
 fragment HASH: '#';
 
@@ -104,8 +93,8 @@ MOD: 'mod';
 DIV: 'div';
 
 AT: '@';
-AND_OPERATOR: '&';
-OR_OPERATOR: '|';
+CONCAT_OPERATOR: '&';
+// OR_OPERATOR: '|';
 ADD_OPERATOR: '+';
 MINUS_OPERATOR: '-';
 DIV_OPERATOR: '/';
@@ -113,7 +102,8 @@ LESS_THAN: '<';
 GREATER_THAN: '>';
 MODULUS: '%';
 
-XOR_OPERATOR: '^';
+RIGHT_ASSOCIATIVE_OPERATOR: '^'
+// XOR_OPERATOR: '^';
 EQUALS_OPERATOR: '==';
 MUL_OPERATOR: '*';
 BITWISE_NOT_OPERATOR: '~';

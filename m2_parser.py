@@ -1,18 +1,23 @@
-# Generated from m2_parser.g4 by ANTLR 4.7.1
+# Generated from m2_parser.g4 by ANTLR 4.7.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
 import sys
 
+
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0084")
-        buf.write("\20\4\2\t\2\4\3\t\3\3\2\3\2\3\2\3\2\3\2\5\2\f\n\2\3\3")
-        buf.write("\3\3\3\3\2\2\4\2\4\2\2\2\16\2\13\3\2\2\2\4\r\3\2\2\2\6")
-        buf.write("\7\7z\2\2\7\f\7z\2\2\b\t\7z\2\2\t\n\7z\2\2\n\f\7z\2\2")
-        buf.write("\13\6\3\2\2\2\13\b\3\2\2\2\f\3\3\2\2\2\r\16\5\2\2\2\16")
-        buf.write("\5\3\2\2\2\3\13")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0087")
+        buf.write("\33\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\6\2\f\n\2\r\2")
+        buf.write("\16\2\r\3\3\3\3\3\4\3\4\3\4\3\4\3\4\5\4\27\n\4\3\5\3\5")
+        buf.write("\3\5\2\2\6\2\4\6\b\2\2\2\30\2\13\3\2\2\2\4\17\3\2\2\2")
+        buf.write("\6\26\3\2\2\2\b\30\3\2\2\2\n\f\7\u0084\2\2\13\n\3\2\2")
+        buf.write("\2\f\r\3\2\2\2\r\13\3\2\2\2\r\16\3\2\2\2\16\3\3\2\2\2")
+        buf.write("\17\20\7\u0087\2\2\20\5\3\2\2\2\21\22\7z\2\2\22\27\7z")
+        buf.write("\2\2\23\24\7z\2\2\24\25\7z\2\2\25\27\7z\2\2\26\21\3\2")
+        buf.write("\2\2\26\23\3\2\2\2\27\7\3\2\2\2\30\31\5\6\4\2\31\t\3\2")
+        buf.write("\2\2\4\r\26")
         return buf.getvalue()
 
 
@@ -49,36 +54,38 @@ class m2_parser ( Parser ):
 
     symbolicNames = [ "<INVALID>", "OP1", "OP2", "OP3", "OP4", "OP5", "OP7", 
                       "OP8", "OP9", "DOCUMENTATION_COMMENT", "MULTILINE_COMMENT", 
-                      "COMMENT", "NEWLINE", "WS", "COMMA", "SEMI_COLON", 
-                      "COLON", "DOT", "OPEN_PAREN", "CLOSE_PAREN", "OPEN_BRACE", 
-                      "CLOSE_BRACE", "OPEN_BRACK", "CLOSE_BRACK", "INTERFACE", 
-                      "ENUM", "OBJECT", "CONCEPT", "TYPE", "AND", "OR", 
-                      "XOR", "SHL", "SHR", "MOD", "DIV", "AT", "AND_OPERATOR", 
-                      "OR_OPERATOR", "ADD_OPERATOR", "MINUS_OPERATOR", "DIV_OPERATOR", 
-                      "LESS_THAN", "GREATER_THAN", "MODULUS", "XOR_OPERATOR", 
-                      "EQUALS_OPERATOR", "MUL_OPERATOR", "BITWISE_NOT_OPERATOR", 
-                      "NOT_OPERATOR", "ASSIGNMENT_OPERATOR", "VARIABLE", 
-                      "LET", "CONST", "BIND", "PROC", "STATIC", "METHOD", 
-                      "FUNC", "MIXIN", "END", "EXCEPT", "RETURN", "TRY", 
-                      "RAISE", "FINALLY", "OUT", "CASE", "IF", "ELIF", "ELSE", 
-                      "DO", "WHILE", "ITERATOR", "FOR", "IN", "NOTIN", "CONTINUE", 
-                      "BREAK", "TEMPLATE", "TUPLE", "USING", "WHEN", "YIELD", 
-                      "INCLUDE", "IMPORT", "FROM", "AS", "EXPORT", "REF", 
-                      "PTR", "ADDR", "IS", "NOT", "ISNOT", "ASM", "BLOCK", 
-                      "MACRO", "NIL", "CAST", "CONVERTER", "OF", "DEFER", 
-                      "DISCARD", "DISTINCT", "IDENTIFIER", "INT_LIT", "INT8_LIT", 
-                      "INT16_LIT", "INT32_LIT", "INT64_LIT", "UINT_LIT", 
-                      "UINT8_LIT", "UINT16_LIT", "UINT32_LIT", "UINT64_LIT", 
-                      "EXP", "FLOAT_LIT", "FLOAT32_LIT", "FLOAT64_LIT", 
+                      "COMMENT", "UNCONDITIONAL_NEWLINE", "WS", "COMMA", 
+                      "SEMI_COLON", "COLON", "DOT", "OPEN_PAREN", "CLOSE_PAREN", 
+                      "OPEN_BRACE", "CLOSE_BRACE", "OPEN_BRACK", "CLOSE_BRACK", 
+                      "INTERFACE", "ENUM", "OBJECT", "CONCEPT", "TYPE", 
+                      "AND", "OR", "XOR", "SHL", "SHR", "MOD", "DIV", "AT", 
+                      "AND_OPERATOR", "OR_OPERATOR", "ADD_OPERATOR", "MINUS_OPERATOR", 
+                      "DIV_OPERATOR", "LESS_THAN", "GREATER_THAN", "MODULUS", 
+                      "XOR_OPERATOR", "EQUALS_OPERATOR", "MUL_OPERATOR", 
+                      "BITWISE_NOT_OPERATOR", "NOT_OPERATOR", "ASSIGNMENT_OPERATOR", 
+                      "VARIABLE", "LET", "CONST", "BIND", "PROC", "STATIC", 
+                      "METHOD", "FUNC", "MIXIN", "END", "EXCEPT", "RETURN", 
+                      "TRY", "RAISE", "FINALLY", "OUT", "CASE", "IF", "ELIF", 
+                      "ELSE", "DO", "WHILE", "ITERATOR", "FOR", "IN", "NOTIN", 
+                      "CONTINUE", "BREAK", "TEMPLATE", "TUPLE", "USING", 
+                      "WHEN", "YIELD", "INCLUDE", "IMPORT", "FROM", "AS", 
+                      "EXPORT", "REF", "PTR", "ADDR", "IS", "NOT", "ISNOT", 
+                      "ASM", "BLOCK", "MACRO", "NIL", "CAST", "CONVERTER", 
+                      "OF", "DEFER", "DISCARD", "DISTINCT", "IDENTIFIER", 
+                      "INT_LIT", "INT8_LIT", "INT16_LIT", "INT32_LIT", "INT64_LIT", 
+                      "UINT_LIT", "UINT8_LIT", "UINT16_LIT", "UINT32_LIT", 
+                      "UINT64_LIT", "EXP", "FLOAT_LIT", "FLOAT32_LIT", "FLOAT64_LIT", 
                       "CHAR_LIT", "STR_LIT", "TRIPLESTR_LIT", "RSTR_LIT", 
                       "GENERALIZED_STR_LIT", "GENERALIZED_TRIPLESTR_LIT", 
-                      "EXIT", "USELESS_LINE", "USELSSS_INDENTS", "INDENT", 
-                      "ERROR_INDENT" ]
+                      "DED", "EXIT", "USELESS_LINE", "USELSSS_INDENTS", 
+                      "INDENT", "INDENTS_PASS", "ERROR_INDENT", "DEDENT" ]
 
-    RULE_stmt = 0
-    RULE_start = 1
+    RULE_ind = 0
+    RULE_ded = 1
+    RULE_stmt = 2
+    RULE_start = 3
 
-    ruleNames =  [ "stmt", "start" ]
+    ruleNames =  [ "ind", "ded", "stmt", "start" ]
 
     EOF = Token.EOF
     OP1=1
@@ -92,7 +99,7 @@ class m2_parser ( Parser ):
     DOCUMENTATION_COMMENT=9
     MULTILINE_COMMENT=10
     COMMENT=11
-    NEWLINE=12
+    UNCONDITIONAL_NEWLINE=12
     WS=13
     COMMA=14
     SEMI_COLON=15
@@ -206,38 +213,116 @@ class m2_parser ( Parser ):
     RSTR_LIT=123
     GENERALIZED_STR_LIT=124
     GENERALIZED_TRIPLESTR_LIT=125
-    EXIT=126
-    USELESS_LINE=127
-    USELSSS_INDENTS=128
-    INDENT=129
-    ERROR_INDENT=130
+    DED=126
+    EXIT=127
+    USELESS_LINE=128
+    USELSSS_INDENTS=129
+    INDENT=130
+    INDENTS_PASS=131
+    ERROR_INDENT=132
+    DEDENT=133
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.1")
+        self.checkVersion("4.7.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
 
 
-    indent_stk = [0]
-    indent_mode = False
 
-    def consume(self):
-        token = super().consume()
-        if token.type == self.INDENT:
-            #self.indent_mode = True
-            self.indent_stk[-1] += 1
-            return self.getCurrentToken()
+    class IndContext(ParserRuleContext):
 
-        return token
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
 
-    def IND():
-        return self.indent_stk[-2] == self.indent_stk[-1] - 1
-    def INDE():
-        return self.indent_stk[-2] == self.indent_stk[-1]
-    def DED():
-        self.indent_stk = self.indent_stk[:-1]
+        def INDENT(self, i:int=None):
+            if i is None:
+                return self.getTokens(m2_parser.INDENT)
+            else:
+                return self.getToken(m2_parser.INDENT, i)
+
+        def getRuleIndex(self):
+            return m2_parser.RULE_ind
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInd" ):
+                listener.enterInd(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInd" ):
+                listener.exitInd(self)
+
+
+
+
+    def ind(self):
+
+        localctx = m2_parser.IndContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 0, self.RULE_ind)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 9 
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while True:
+                self.state = 8
+                self.match(m2_parser.INDENT)
+                self.state = 11 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if not (_la==m2_parser.INDENT):
+                    break
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class DedContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def DEDENT(self):
+            return self.getToken(m2_parser.DEDENT, 0)
+
+        def getRuleIndex(self):
+            return m2_parser.RULE_ded
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDed" ):
+                listener.enterDed(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDed" ):
+                listener.exitDed(self)
+
+
+
+
+    def ded(self):
+
+        localctx = m2_parser.DedContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 2, self.RULE_ded)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 13
+            self.match(m2_parser.DEDENT)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
 
 
     class StmtContext(ParserRuleContext):
@@ -269,25 +354,25 @@ class m2_parser ( Parser ):
     def stmt(self):
 
         localctx = m2_parser.StmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 0, self.RULE_stmt)
+        self.enterRule(localctx, 4, self.RULE_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 9
+            self.state = 20
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
-                self.state = 4
+                self.state = 15
                 self.match(m2_parser.CHAR_LIT)
-                self.state = 5
+                self.state = 16
                 self.match(m2_parser.CHAR_LIT)
                 pass
 
             elif la_ == 2:
-                self.state = 6
+                self.state = 17
                 self.match(m2_parser.CHAR_LIT)
-                self.state = 7
+                self.state = 18
                 self.match(m2_parser.CHAR_LIT)
-                self.state = 8
+                self.state = 19
                 self.match(m2_parser.CHAR_LIT)
                 pass
 
@@ -299,6 +384,7 @@ class m2_parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class StartContext(ParserRuleContext):
 
@@ -327,10 +413,10 @@ class m2_parser ( Parser ):
     def start(self):
 
         localctx = m2_parser.StartContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 2, self.RULE_start)
+        self.enterRule(localctx, 6, self.RULE_start)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 11
+            self.state = 22
             self.stmt()
         except RecognitionException as re:
             localctx.exception = re
