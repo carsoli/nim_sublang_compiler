@@ -5,7 +5,7 @@ from utils import write_to_file, tokenize_file, recognize_file
 def main():
     testfile_path = args.file
     tokens = tokenize_file(testfile_path)
-    recognized = recognize_file(testfile_path)
+    #recognized = recognize_file(testfile_path)
 
     res_filename = sys.modules[__name__].__file__.rpartition(".")[0] + "_result.txt" 
     write_to_file(res_filename, "\n".join(tokens) )
