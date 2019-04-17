@@ -1,4 +1,4 @@
-# Generated from m2_parser.g4 by ANTLR 4.7.2
+# Generated from m2_parser.g4 by ANTLR 4.7.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .m2_parser import m2_parser
@@ -14,15 +14,6 @@ class m2_parserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_parser#stmt.
     def exitStmt(self, ctx:m2_parser.StmtContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_parser#module.
-    def enterModule(self, ctx:m2_parser.ModuleContext):
-        pass
-
-    # Exit a parse tree produced by m2_parser#module.
-    def exitModule(self, ctx:m2_parser.ModuleContext):
         pass
 
 

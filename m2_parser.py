@@ -1,23 +1,18 @@
-# Generated from m2_parser.g4 by ANTLR 4.7.2
+# Generated from m2_parser.g4 by ANTLR 4.7.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
 import sys
 
-
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0084")
-        buf.write("\31\4\2\t\2\4\3\t\3\4\4\t\4\3\2\3\2\3\2\3\3\3\3\3\3\3")
-        buf.write("\3\7\3\20\n\3\f\3\16\3\23\13\3\5\3\25\n\3\3\4\3\4\3\4")
-        buf.write("\2\2\5\2\4\6\2\2\2\30\2\b\3\2\2\2\4\24\3\2\2\2\6\26\3")
-        buf.write("\2\2\2\b\t\b\2\1\2\t\n\7z\2\2\n\3\3\2\2\2\13\21\5\2\2")
-        buf.write("\2\f\20\7\21\2\2\r\16\7\23\2\2\16\20\5\2\2\2\17\f\3\2")
-        buf.write("\2\2\17\r\3\2\2\2\20\23\3\2\2\2\21\17\3\2\2\2\21\22\3")
-        buf.write("\2\2\2\22\25\3\2\2\2\23\21\3\2\2\2\24\13\3\2\2\2\24\25")
-        buf.write("\3\2\2\2\25\5\3\2\2\2\26\27\5\2\2\2\27\7\3\2\2\2\5\17")
-        buf.write("\21\24")
+        buf.write("\20\4\2\t\2\4\3\t\3\3\2\3\2\3\2\3\2\3\2\5\2\f\n\2\3\3")
+        buf.write("\3\3\3\3\2\2\4\2\4\2\2\2\16\2\13\3\2\2\2\4\r\3\2\2\2\6")
+        buf.write("\7\7z\2\2\7\f\7z\2\2\b\t\7z\2\2\t\n\7z\2\2\n\f\7z\2\2")
+        buf.write("\13\6\3\2\2\2\13\b\3\2\2\2\f\3\3\2\2\2\r\16\5\2\2\2\16")
+        buf.write("\5\3\2\2\2\3\13")
         return buf.getvalue()
 
 
@@ -81,10 +76,9 @@ class m2_parser ( Parser ):
                       "ERROR_INDENT" ]
 
     RULE_stmt = 0
-    RULE_module = 1
-    RULE_start = 2
+    RULE_start = 1
 
-    ruleNames =  [ "stmt", "module", "start" ]
+    ruleNames =  [ "stmt", "start" ]
 
     EOF = Token.EOF
     OP1=1
@@ -220,23 +214,30 @@ class m2_parser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.2")
+        self.checkVersion("4.7.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
 
 
-    levels = []
-    indent_level = 0
+    indent_stk = [0]
+    indent_mode = False
 
-    def getCurrentToken(self):
-        token = super().getCurrentToken()
-        print(self.INDENT == token.type)
-        return token 
+    def consume(self):
+        token = super().consume()
+        if token.type == self.INDENT:
+            #self.indent_mode = True
+            self.indent_stk[-1] += 1
+            return self.getCurrentToken()
 
-    def jump(self, ttype):
-        print("ai haga")
+        return token
 
+    def IND():
+        return self.indent_stk[-2] == self.indent_stk[-1] - 1
+    def INDE():
+        return self.indent_stk[-2] == self.indent_stk[-1]
+    def DED():
+        self.indent_stk = self.indent_stk[:-1]
 
 
     class StmtContext(ParserRuleContext):
@@ -245,8 +246,11 @@ class m2_parser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def CHAR_LIT(self):
-            return self.getToken(m2_parser.CHAR_LIT, 0)
+        def CHAR_LIT(self, i:int=None):
+            if i is None:
+                return self.getTokens(m2_parser.CHAR_LIT)
+            else:
+                return self.getToken(m2_parser.CHAR_LIT, i)
 
         def getRuleIndex(self):
             return m2_parser.RULE_stmt
@@ -268,94 +272,24 @@ class m2_parser ( Parser ):
         self.enterRule(localctx, 0, self.RULE_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.jump('beda')
-            self.state = 7
-            self.match(m2_parser.CHAR_LIT)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class ModuleContext(ParserRuleContext):
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def stmt(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(m2_parser.StmtContext)
-            else:
-                return self.getTypedRuleContext(m2_parser.StmtContext,i)
-
-
-        def SEMI_COLON(self, i:int=None):
-            if i is None:
-                return self.getTokens(m2_parser.SEMI_COLON)
-            else:
-                return self.getToken(m2_parser.SEMI_COLON, i)
-
-        def DOT(self, i:int=None):
-            if i is None:
-                return self.getTokens(m2_parser.DOT)
-            else:
-                return self.getToken(m2_parser.DOT, i)
-
-        def getRuleIndex(self):
-            return m2_parser.RULE_module
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterModule" ):
-                listener.enterModule(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitModule" ):
-                listener.exitModule(self)
-
-
-
-
-    def module(self):
-
-        localctx = m2_parser.ModuleContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 2, self.RULE_module)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 18
+            self.state = 9
             self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==m2_parser.CHAR_LIT:
-                self.state = 9
-                self.stmt()
-                self.state = 15
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                while _la==m2_parser.SEMI_COLON or _la==m2_parser.DOT:
-                    self.state = 13
-                    self._errHandler.sync(self)
-                    token = self._input.LA(1)
-                    if token in [m2_parser.SEMI_COLON]:
-                        self.state = 10
-                        self.match(m2_parser.SEMI_COLON)
-                        pass
-                    elif token in [m2_parser.DOT]:
-                        self.state = 11
-                        self.match(m2_parser.DOT)
-                        self.state = 12
-                        self.stmt()
-                        pass
-                    else:
-                        raise NoViableAltException(self)
+            la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
+            if la_ == 1:
+                self.state = 4
+                self.match(m2_parser.CHAR_LIT)
+                self.state = 5
+                self.match(m2_parser.CHAR_LIT)
+                pass
 
-                    self.state = 17
-                    self._errHandler.sync(self)
-                    _la = self._input.LA(1)
-
+            elif la_ == 2:
+                self.state = 6
+                self.match(m2_parser.CHAR_LIT)
+                self.state = 7
+                self.match(m2_parser.CHAR_LIT)
+                self.state = 8
+                self.match(m2_parser.CHAR_LIT)
+                pass
 
 
         except RecognitionException as re:
@@ -365,7 +299,6 @@ class m2_parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class StartContext(ParserRuleContext):
 
@@ -394,10 +327,10 @@ class m2_parser ( Parser ):
     def start(self):
 
         localctx = m2_parser.StartContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_start)
+        self.enterRule(localctx, 2, self.RULE_start)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 20
+            self.state = 11
             self.stmt()
         except RecognitionException as re:
             localctx.exception = re

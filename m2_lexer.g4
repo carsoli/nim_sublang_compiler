@@ -2,6 +2,39 @@ lexer grammar m2_lexer;
 
 options {language='Python3';}
 
+@lexer::header{
+from antlr4.Token import CommonToken
+}
+
+@lexer::members{
+previous_line_indents = 0
+current_line_indents = 0
+hook_tokens = []
+
+def nextToken(self):
+    if len(self.hook_tokens) > 0:
+        return self.hook_tokens.pop()
+    return super().nextToken()
+
+def adjustIndents(self):
+    self.previous_line_indents = self.current_line_indents
+    self.current_line_indents = 0
+
+def incrementIndents(self):
+    self.current_line_indents += 1
+
+def canMatch(self):
+    return self.current_line_indents >= self.previous_line_indents
+
+def canDedent(self):
+    return self.current_line_indents < self.previous_line_indents
+
+def dedent(self):
+    dedent_token = self._factory.create(self._tokenFactorySourcePair, self.DEDENT, '', self._channel, 1, 2, self._tokenStartLine, self._tokenStartColumn)
+    for i in range(self.previous_line_indents - self.current_line_indents - 1):
+        self.hook_tokens.append(dedent_token)
+}
+
 OP1: (ASSIGNMENT_OPERATOR );
 OP2: AT; 
 OP3: OR | XOR;
@@ -38,10 +71,11 @@ MULTILINE_COMMENT: HASH OPEN_BRACK MULTILINE_COMMENT_BODY* CLOSE_BRACK HASH -> s
 
 fragment COMMENT_PART: ( [\u0020-\u005A] | [\u005C-\u00FF] | TAB );
 fragment COMMENT_BODY: (COMMENT_PART? | COMMENT_PART COMMENT_PART (COMMENT_PART | OPEN_BRACK)*);
-COMMENT: HASH COMMENT_BODY;
+COMMENT: HASH COMMENT_BODY -> skip;
 
 // USELESS_LINE: WS+ NEWLINE;
-NEWLINE: '\r'? '\n' -> pushMode(INDENTS_MODE), skip;
+UNCONDITIONAL_NEWLINE:  '\r'? '\n' {self.adjustIndents()} -> pushMode(INDENTS_MODE), skip;
+fragment NEWLINE: '\r'? '\n';
 WS: ' ' -> skip;
 
 COMMA: ',';
@@ -250,8 +284,10 @@ fragment GENERALIZED_TRIPLESTR_LIT_LONG: OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
 
 mode INDENTS_MODE;
     fragment SPACE_OR_TAB: WS | TAB;
-    EXIT: {self._input.LA(1) not in [ord(' '), ord('\t'), ord('\v')]} -> popMode, skip;
-    USELESS_LINE: SPACE_OR_TAB* (MULTILINE_COMMENT | DOCUMENTATION_COMMENT | COMMENT) (NEWLINE? | EOF);
-    USELSSS_INDENTS: SPACE_OR_TAB* NEWLINE ;
-    INDENT: WS WS WS WS;
-    ERROR_INDENT: SPACE_OR_TAB SPACE_OR_TAB? SPACE_OR_TAB?;
+    DEDENT: {self.canDedent() and self._input.LA(1) not in [ord(' '), ord('\t'), ord('\v')]}? {self.dedent()}-> popMode;
+    EXIT: {self._input.LA(1) not in [ord(' '), ord('\t'), ord('\v')]}? -> popMode, skip;
+    USELESS_LINE: SPACE_OR_TAB* (MULTILINE_COMMENT | DOCUMENTATION_COMMENT | COMMENT) (NEWLINE? | EOF) -> skip;
+    USELSSS_INDENTS: SPACE_OR_TAB* NEWLINE -> skip;
+    INDENT: {self.canMatch()}? WS WS WS WS {self.incrementIndents()};
+    INDENTS_PASS: WS WS WS WS {self.incrementIndents()} -> skip;
+    ERROR_INDENT:  {self.canMatch()}? SPACE_OR_TAB SPACE_OR_TAB? SPACE_OR_TAB?;
