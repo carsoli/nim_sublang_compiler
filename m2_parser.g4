@@ -2,9 +2,21 @@ parser grammar m2_parser;
 options {language='Python3'; tokenVocab=m2_lexer;}
 @parser::members{
 parKeyWList = [self.DISCARD, self.INCLUDE, self.IF, self.WHILE, self.CASE, self.TRY, self.FINALLY, self.EXCEPT, self.FOR, self.BLOCK, self.CONST, self.LET,self.WHEN, self.VARIABLE, self.MIXIN]
+primarySuffixList = [self.SYM_HEADER, self.IDENTIFIER, self.literal, self.CAST, self.ADDR, self.TYPE]
 }
 
-operator: OP0 | OP1 | OP2 | OP3 | OP4 | OP5 | OP6 | OP7 | OP8 | OP10 | STATIC;
+op0: OP0;
+op1: OP1;
+op2: OP2;
+op3: OP3;
+op4: OP4;
+op5: OP5 | IN;
+op6: OP6;
+op7: OP7;
+op8: OP8;
+op9: OP9;
+op10: OP10;
+operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 | op10 | STATIC;
 
 ind: INDENT;
 ded: DEDENT;
@@ -47,8 +59,8 @@ primarySuffix: OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN doBlocks?
       | doBlocks
       | DOT symbol generalizedLit?
       | OPEN_BRACK indexExprList optPar CLOSE_BRACK
-      | OPEN_BRACE indexExprList optPar CLOSE_BRACE;
-     // | &( SYM_HEADER | IDENTIFIER | literal| 'cast' | 'addr' | 'type' ) expr
+      | OPEN_BRACE indexExprList optPar CLOSE_BRACE
+      | {_input.LT(1).getType() in self.primarySuffixList}? expr;
 
       
 primary: typeKeyw typeDescK
