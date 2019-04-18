@@ -34,7 +34,7 @@ def dedent(self):
 
 fragment HASH: '#';
 
-fragment COMPOSITE_COMMENT_PART: ( [\u0020-\u0022] | [\u0024-\u005A] | [\u005C-\u00FF] | TAB | NEWLINE );
+fragment COMPOSITE_COMMENT_PART: ( [\u0020-\u0022] | [\u0024-\u005A] | [\u005C-\u00FF] | '\t' | NEWLINE );
 /*
     allow nested documentation comments,
     do not allow ]## within without closing it (part of nested documentation comment)
@@ -57,7 +57,7 @@ fragment MULTILINE_COMMENT_BODY
     );
 MULTILINE_COMMENT: HASH OPEN_BRACK MULTILINE_COMMENT_BODY* CLOSE_BRACK HASH -> skip;
 
-fragment COMMENT_PART: ( [\u0020-\u005A] | [\u005C-\u00FF] | TAB );
+fragment COMMENT_PART: ( [\u0020-\u005A] | [\u005C-\u00FF] | '\t' );
 fragment COMMENT_BODY: (COMMENT_PART? | COMMENT_PART COMMENT_PART (COMMENT_PART | OPEN_BRACK)*);
 COMMENT: HASH COMMENT_BODY -> skip;
 
@@ -303,11 +303,11 @@ GENERALIZED_TRIPLESTR_LIT: IDENTIFIER ( TRIPLESTR_LIT | GENERALIZED_TRIPLESTR_LI
 fragment GENERALIZED_TRIPLESTR_LIT_LONG: OPEN_PAREN TRIPLESTR_LIT CLOSE_PAREN;
 
 mode INDENTS_MODE;
-    fragment SPACE_OR_TAB: WS | TAB;
+    fragment SPACE_OR_TAB: WS | '\t';
     DEDENT: {self.canDedent() and self._input.LA(1) not in [ord(' '), ord('\t'), ord('\v')]}? {self.dedent()}-> popMode;
     EXIT: {self._input.LA(1) not in [ord(' '), ord('\t'), ord('\v')]}? -> popMode, skip;
     USELESS_LINE: SPACE_OR_TAB* (MULTILINE_COMMENT | DOCUMENTATION_COMMENT | COMMENT) (NEWLINE? | EOF) -> skip;
-    USELSSS_INDENTS: SPACE_OR_TAB* NEWLINE -> skip;
+    USELSSS_INDENTS: SPACE_OR_TAB* (NEWLINE | EOF) -> skip;
     INDENT: {self.canMatch()}? WS WS WS WS {self.incrementIndents()};
     INDENTS_PASS: WS WS WS WS {self.incrementIndents()} -> skip;
-    ERROR_INDENT:  {self.canMatch()}? SPACE_OR_TAB SPACE_OR_TAB? SPACE_OR_TAB?;
+    ERROR_INDENT: SPACE_OR_TAB SPACE_OR_TAB? SPACE_OR_TAB?;
