@@ -1,9 +1,11 @@
 parser grammar m2_parser;
 options {language='Python3'; tokenVocab=m2_lexer;}
 @parser::members{
-parKeyWList = [self.DISCARD, self.INCLUDE, self.IF, self.WHILE, self.CASE, self.TRY, self.FINALLY, self.EXCEPT, self.FOR, self.BLOCK, self.CONST, self.LET,self.WHEN, self.VARIABLE, self.MIXIN]
-primarySuffixList = [self.SYM_HEADER, self.IDENTIFIER, self.literal, self.CAST, self.ADDR, self.TYPE]
-def tryExprBody():
+parKeyWList = [DISCARD, INCLUDE, IF, WHILE, CASE, TRY, FINALLY, EXCEPT, FOR, BLOCK, CONST, LET, WHEN, VARIABLE, MIXIN]
+literals = [INT_LIT, INT8_LIT, INT16_LIT , INT32_LIT , INT64_LIT, UINT_LIT , UINT8_LIT , UINT16_LIT , UINT32_LIT , UINT64_LIT, 
+FLOAT_LIT , FLOAT32_LIT , FLOAT64_LIT, STR_LIT , RSTR_LIT , TRIPLESTR_LIT, CHAR_LIT, NIL ]
+primarySuffixList = [SYM_HEADER, IDENTIFIER, literals, CAST, ADDR, TYPE]
+def tryExprBody(self):
     return self._input.LT(1).getType() in [self.EXCEPT, self.FINALLY] or (self._input.LT(1).getType() == self.INDENT and self._input.LT(2).getType() in [self.EXCEPT, self.FINALLY])
 }
 
