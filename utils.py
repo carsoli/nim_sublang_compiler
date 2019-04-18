@@ -1,8 +1,9 @@
 from antlr4 import Token, InputStream, CommonTokenStream, ParseTreeWalker
 from antlr4.error.ErrorListener import *
-from m2_lexer import m2_lexer
-from m2_parserListener import m2_parserListener
-from m2_parser import m2_parser 
+from m2_Lexer import m2_Lexer
+from m2_ParserListener import m2_ParserListener
+from m2_Parser import m2_Parser 
+from antlr4.tree.Trees import Trees
 import re
 
 class DefaultErrorListener(ErrorListener):
@@ -31,13 +32,14 @@ def write_to_file(path, txt=''):
 def recognize_file(filename):
     prog = read_file(filename)
     input_stream = InputStream(prog)
-    lexer = m2_lexer(input_stream)
+    lexer = m2_Lexer(input_stream)
     stream = CommonTokenStream(lexer)
-    parser = m2_parser(stream)
+    parser = m2_Parser(stream)
     parser.removeErrorListeners()
     errorListener = DefaultErrorListener()
     parser.addErrorListener(errorListener)
-    st_ctx = parser.start()
+    st_ctx = parser.module()
+    print(Trees.toStringTree(st_ctx, None, m2_Parser))
     if len(errorListener.symbol) == 0:
         return True
     return False
@@ -46,7 +48,7 @@ def recognize_file(filename):
 def tokenize_file(filename):
     prog = read_file(filename)
     input_stream = InputStream(prog)
-    lexer = m2_lexer(input_stream)
+    lexer = m2_Lexer(input_stream)
     token = lexer.nextToken()
     res = []
     while not token.type == Token.EOF:
@@ -57,7 +59,7 @@ def tokenize_file(filename):
     return res
 
 def get_token_type(token):
-    return m2_lexer.symbolicNames[token.type]
+    return m2_Lexer.symbolicNames[token.type]
 
 triple_str_regex = r'\"\"\"[\t ]+\n'
 def correct_text(token_type, token_text):

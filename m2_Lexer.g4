@@ -1,4 +1,4 @@
-lexer grammar m2_lexer;
+lexer grammar m2_Lexer;
 
 options {language='Python3';}
 

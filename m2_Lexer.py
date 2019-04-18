@@ -1,4 +1,4 @@
-# Generated from m2_lexer.g4 by ANTLR 4.7.2
+# Generated from m2_Lexer.g4 by ANTLR 4.7.2
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
@@ -759,7 +759,7 @@ def serializedATN():
         return buf.getvalue()
 
 
-class m2_lexer(Lexer):
+class m2_Lexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -959,7 +959,7 @@ class m2_lexer(Lexer):
                   "EXIT", "USELESS_LINE", "USELSSS_INDENTS", "INDENT", "INDENTS_PASS", 
                   "ERROR_INDENT" ]
 
-    grammarFileName = "m2_lexer.g4"
+    grammarFileName = "m2_Lexer.g4"
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)
