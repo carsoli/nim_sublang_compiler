@@ -86,6 +86,8 @@ COLON: ':';
 DOT: '.';
 EQUALS: '=';
 IN: 'in';
+OF: 'of';
+NOT: 'not';
 
 OP0: ARROW_OPERATOR;
 OP1: ASSIGNMENT_OPERATOR;
@@ -96,7 +98,7 @@ OP3: (OR | XOR);
 OP4: AND;
 OP5: (EQUALS ANY_OP+)
     | ((GREATER_THAN | LESS_THAN | NOT_OPERATOR) ANY_OP*)
-    | (IN | NOTIN | IS | ISNOT | NOT | OF);
+    | (NOTIN | IS | ISNOT );
 OP6: DOT ANY_OP+;
 OP7: CONCAT_OPERATOR ANY_OP*;
 OP8: (ADD_OPERATOR | MINUS_OPERATOR | BITWISE_NOT_OPERATOR | OR_OPERATOR) ANY_OP*;
@@ -120,9 +122,7 @@ fragment MOD: 'mod';
 fragment DIV: 'div';
 fragment NOTIN: 'notin';
 fragment IS: 'is';
-fragment NOT: 'not';
 fragment ISNOT: 'isnot';
-fragment OF: 'of';
 
 fragment AT: '@';
 fragment CONCAT_OPERATOR: '&';
