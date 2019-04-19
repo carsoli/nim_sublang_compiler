@@ -5,7 +5,7 @@ parKeyWList = [DISCARD, INCLUDE, IF, WHILE, CASE, TRY, FINALLY, EXCEPT, FOR, BLO
 literals = [INT_LIT, INT8_LIT, INT16_LIT , INT32_LIT , INT64_LIT, UINT_LIT , UINT8_LIT , UINT16_LIT , UINT32_LIT , UINT64_LIT, 
 FLOAT_LIT , FLOAT32_LIT , FLOAT64_LIT, STR_LIT , RSTR_LIT , TRIPLESTR_LIT, CHAR_LIT, NIL ]
 primarySuffixList = [SYM_HEADER, IDENTIFIER, literals, CAST, ADDR, TYPE]
-def tryExprBody(self):
+def tryExprBody():
     return self._input.LT(1).type in [self.EXCEPT, self.FINALLY] or (self._input.LT(1).type == self.INDENT and self._input.LT(2).type in [self.EXCEPT, self.FINALLY])
 }
 
@@ -27,7 +27,7 @@ prefixOperator: operator;
 ind: INDENT;
 optInd: ind?;
 optPar: ind?;
-ded: DEDENT;
+ded: DEDENT | EOF;
 
 
 typeKeyw: VARIABLE | OUT | REF | PTR | TUPLE
@@ -44,11 +44,12 @@ generalizedLit: GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT;
 pragmaStmt: pragma (COLON stmt)?;
 
 par: OPEN_PAREN optInd
-          ( {self._input.LT(1).type in self.parKeyWList}? (complexStmt | simpleStmt) (COLON (complexStmt | simpleStmt))*
-          | COLON (complexStmt | simpleStmt) (COLON (complexStmt | simpleStmt))*
+          ( {self._input.LT(1).type in self.parKeyWList}? (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))*
+          | SEMI_COLON (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))*
           | pragmaStmt
-          | simpleExpr ( (EQUALS expr (COLON (complexStmt | simpleStmt) (COLON (complexStmt | simpleStmt))* )? )
-                       | (COLON expr (COMMA exprColonEqExpr (COLON exprColonEqExpr)*  )? ) ) );
+          | simpleExpr ( (EQUALS expr (SEMI_COLON (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))* )? )
+                       | (COLON expr (COMMA exprColonEqExpr (COMMA exprColonEqExpr)*  )? ) ) )
+        optPar CLOSE_PAREN;
 
 tupleConstr: OPEN_PAREN optInd (exprColonEqExpr COMMA?)* optPar CLOSE_PAREN;
 arrayConstr: OPEN_BRACK optInd (exprColonEqExpr COMMA?)* optPar CLOSE_BRACK;
@@ -65,7 +66,9 @@ identOrLiteral: generalizedLit | symbol | literal
 
 indexExpr: expr;
 indexExprList: indexExpr (COMMA indexExpr)*; 
-primarySuffix: OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN
+primarySuffix: 
+        (exprColonEqExpr COMMA?)+
+      | OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN
       | DOT optInd symbol generalizedLit?
       | OPEN_BRACK optInd indexExprList optPar CLOSE_BRACK
       | OPEN_BRACE optInd indexExprList optPar CLOSE_BRACE
@@ -75,12 +78,10 @@ primary: typeKeyw typeDesc
         | prefixOperator* identOrLiteral primarySuffix*
         | BIND primary;
 
-exprColonEqExpr: expr (COLON|EQUALS expr)?;
-exprColonExpr: expr (COLON expr)?;
 
 pragma: OPEN_BRACE DOT optInd (exprColonExpr COMMA?)* optPar (DOT CLOSE_BRACE | CLOSE_BRACE);
 
-simpleExpr: arrowExpr (OP0 optInd arrowExpr)*; //pragma?;
+simpleExpr: arrowExpr (OP0 optInd arrowExpr)*; //pragma?; //?
 arrowExpr: assignExpr (OP1 optInd assignExpr)*;
 assignExpr: orExpr (OP2 optInd orExpr)*;
 orExpr: andExpr (OP3 optInd andExpr)*;
@@ -93,6 +94,10 @@ mulExpr: dollarExpr (OP9 optInd dollarExpr)*;
 dollarExpr: primary (OP10 optInd primary)*;
 
 exprList: expr (COMMA expr)*;
+exprColonExpr: expr (COLON expr)?;
+exprColonEqExpr: expr (COLON|EQUALS expr)?;
+exprColonEqExprList: exprColonEqExpr (COMMA exprColonEqExpr)* (COMMA)?;
+
 condExpr: expr COLON expr optInd (ELIF expr COLON expr optInd)* (ELSE COLON expr);
 
 literal: INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
@@ -105,8 +110,8 @@ literal: INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
 symbolBody:( 
                 // keyw | 
                 IDENTIFIER | literal | 
-                operator | OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
-                CLOSE_BRACK | OPEN_BRACE | CLOSE_BRACE | EQUALS
+                (operator | OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
+                CLOSE_BRACK | OPEN_BRACE | CLOSE_BRACE | EQUALS) //TODO MISSING + 
         );  
 
 symbol: ( SYM_HEADER symbolBody+ SYM_HEADER ) 
@@ -201,7 +206,7 @@ typeDefAux: simpleExpr | CONCEPT;
 
 typeClassParam: (VARIABLE | OUT)? symbol;
 typeClass: (typeClassParam (COMMA typeClassParam)*)? (pragma)? (OF (typeDesc (COMMA typeDesc)*)?)?
-              {self._input.LT(1).type == self.IND}? stmt;
+              {self._input.LT(1).type == self.INDENT}? stmt;
 
 typeDef: identWithPragmaDot genericParamList? EQUALS optInd typeDefAux ind?;
 
@@ -261,8 +266,10 @@ complexStmt: (
         );
 
 
-stmt: (ind (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))* ded)
-    | (simpleStmt (SEMI_COLON simpleStmt)*);
+stmt:
+      (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))* 
+    | (ind (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))* ded)
+    | (simpleStmt (SEMI_COLON simpleStmt)* );
 
 module: (stmt (SEMI_COLON stmt)*)?;
 
