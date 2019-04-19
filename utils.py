@@ -2,12 +2,15 @@ from antlr4 import Token, InputStream, CommonTokenStream, ParseTreeWalker
 from antlr4.error.ErrorListener import ErrorListener
 from antlr4.error.ErrorStrategy import DefaultErrorStrategy, ErrorStrategy, BailErrorStrategy
 from antlr4.tree.Tree import ParseTreeVisitor
+from antlr4.Utils import escapeWhitespace
 from m2_Lexer import m2_Lexer
 from m2_ParserListener import m2_ParserListener
 from m2_Parser import m2_Parser 
 from antlr4.tree.Trees import Trees
 import re
 from pprint import pprint
+from tkinter import *  
+from tkinter import ttk  
 
 class PVisitor(ParseTreeVisitor):
     def __init__(self):
@@ -39,10 +42,12 @@ def recognize_file(filename):
     visitor = ParseTreeVisitor
     # parser._errHandler = errHandler
     # try:
-    st_ctx = parser.start()
+    st_ctx = parser.module()
+    print(st_ctx.EMPTY)
     visitor = PVisitor()
     visitor.visit(st_ctx)
     pprint(Trees.toStringTree(st_ctx, None, m2_Parser), indent=1, width=1)
+    visualize_tree(st_ctx, parser)
     print(visitor.terminalCount)
     print(terminalCnt)
     if abs(visitor.terminalCount - terminalCnt) != 0:
@@ -51,6 +56,25 @@ def recognize_file(filename):
         # print(e)
         # return False
     return True
+
+def dfs_tree(treeview, parent_idx, idx_in_parent, node, ruleNames):
+    current_rule_text = escapeWhitespace(Trees.getNodeText(node, ruleNames), False)
+    print(current_rule_text)
+    current_idx = treeview.insert(parent_idx, idx_in_parent, text=current_rule_text)  
+    for i in range(0, node.getChildCount()):
+        dfs_tree(treeview, current_idx, i, node.getChild(i), ruleNames)
+
+def visualize_tree(tree, parser):
+    ruleNames = parser.ruleNames
+    tree_gui = Tk()
+    tree_gui.geometry("1680x1200+200+200") 
+    tree_gui.title("AST")
+    ttk.Label(tree_gui, text="Tree View").pack()  
+    treeview=ttk.Treeview(tree_gui, height=37, show="tree")
+    treeview.pack(fill="both", expand=True)
+    dfs_tree(treeview, '', 'end', tree, ruleNames)
+    tree_gui.mainloop()
+    
 
 def tokenize_file(filename):
     prog = read_file(filename)
