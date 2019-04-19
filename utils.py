@@ -65,7 +65,7 @@ def dfs_tree(treeview, parent_idx, idx_in_parent, node, ruleNames):
         dfs_tree(treeview, current_idx, i, node.getChild(i), ruleNames)
 
 def dfs_tree_w_cs(treeview, parent_idx, idx_in_parent, node, ruleNames):
-    current_rule_text = escapeWhitespace(Trees.getNodeText(node, ruleNames), False)
+    current_rule_text = escapeWhitespace(Trees.getNodeText(node, ruleNames), True)
     current_idx = treeview.insert(parent_idx, idx_in_parent, text=current_rule_text)
     subTreeText = (current_rule_text if node.getChildCount() == 0 else "")
     for i in range(0, node.getChildCount()):
@@ -76,7 +76,7 @@ def dfs_tree_w_cs(treeview, parent_idx, idx_in_parent, node, ruleNames):
     
     return subTreeText
 
-def visualize_tree(tree, parser, allow_cs=True):
+def visualize_tree(tree, parser, allow_cs=False):
     ruleNames = parser.ruleNames
     tree_gui = Tk()
     tree_gui.geometry("1680x1200+200+200") 
