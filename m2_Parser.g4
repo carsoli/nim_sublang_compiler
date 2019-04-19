@@ -44,11 +44,13 @@ generalizedLit: GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT;
 pragmaStmt: pragma (COLON stmt)?;
 
 par: OPEN_PAREN optInd
-          ( {self._input.LT(1).type in self.parKeyWList}? (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))*
+        ( {self._input.LT(1).type in self.parKeyWList}? (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))*
           | SEMI_COLON (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))*
           | pragmaStmt
           | simpleExpr ( (EQUALS expr (SEMI_COLON (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))* )? )
-                       | (COLON expr (COMMA exprColonEqExpr (COMMA exprColonEqExpr)*  )? ) ) )
+                        | (COLON expr (COMMA exprColonEqExpr (COMMA exprColonEqExpr)*  )? ) 
+                       ) 
+        )
         optPar CLOSE_PAREN;
 
 tupleConstr: OPEN_PAREN optInd (exprColonEqExpr COMMA?)* optPar CLOSE_PAREN;
@@ -67,7 +69,7 @@ identOrLiteral: generalizedLit | symbol | literal
 indexExpr: expr;
 indexExprList: indexExpr (COMMA indexExpr)*; 
 primarySuffix: 
-        (exprColonEqExpr COMMA?)+
+        // (exprColonEqExpr COMMA?)+ //TODO : REMOVE
       | OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN
       | DOT optInd symbol generalizedLit?
       | OPEN_BRACK optInd indexExprList optPar CLOSE_BRACK
@@ -78,10 +80,10 @@ primary: typeKeyw typeDesc
         | prefixOperator* identOrLiteral primarySuffix*
         | BIND primary;
 
+//TODO: 
+pragma: OPEN_BRACE DOT optInd (exprColonExpr COMMA?)* optPar (DOT? CLOSE_BRACE);
 
-pragma: OPEN_BRACE DOT optInd (exprColonExpr COMMA?)* optPar (DOT CLOSE_BRACE | CLOSE_BRACE);
-
-simpleExpr: arrowExpr (OP0 optInd arrowExpr)*; //pragma?; //?
+simpleExpr: arrowExpr (OP0 optInd arrowExpr)*; //pragma?; //? //TODO: don't need for test cases
 arrowExpr: assignExpr (OP1 optInd assignExpr)*;
 assignExpr: orExpr (OP2 optInd orExpr)*;
 orExpr: andExpr (OP3 optInd andExpr)*;
@@ -129,22 +131,18 @@ tryExpr: TRY COLON stmt { tryExprBody()}?
            (optInd EXCEPT exprList COLON stmt)*
            (optInd FINALLY COLON stmt)?;
 
-expr:   NOT? (
+expr: NOT? (
         blockExpr 
         | forExpr 
         | ifExpr 
         | whenExpr 
         | caseExpr 
         | tryExpr
-        | simpleExpr);
+        | simpleExpr); 
 
-ifStmt: IF expr COLON stmt
-        (ELIF expr COLON stmt)*
-        (ELSE COLON stmt)?
-        ;
 
 moduleName: IDENTIFIER;
-colonBody: COLON stmt;
+colonBody: COLON stmt;//removed do blocks, don't have them in test cases
 
 returnStmt: RETURN optInd expr?;
 raiseStmt: RAISE optInd expr?;
@@ -152,12 +150,13 @@ yieldStmt: YIELD optInd expr?;
 discardStmt: DISCARD optInd expr?;
 breakStmt: BREAK optInd expr?;
 continueStmt: CONTINUE optInd expr?;
-importStmt: IMPORT optInd expr ((COMMA expr)* | EXCEPT optInd (expr (COMMA expr)*));
+importStmt: IMPORT optInd expr ((COMMA expr)* | ( EXCEPT optInd (expr (COMMA expr)*) ) );
 fromStmt: FROM moduleName IMPORT optInd expr (COMMA expr)*;
 
 caseExpr: CASE IDENTIFIER ofBranches;
-caseStmt: CASE IDENTIFIER COLON?
-        (ind ofBranches ded | ofBranches);
+// caseStmt: CASE IDENTIFIER COLON?
+        // (ind ofBranches ded | ofBranches);
+caseStmt: CASE expr COLON? ((ind ofBranches ded) | ofBranches);//TODO:
 
 ofBranch: OF exprList COLON stmt;
 ofBranches: ofBranch+
@@ -174,7 +173,8 @@ simpleStmt: (
         | yieldStmt 
         | discardStmt 
         | breakStmt
-        | continueStmt  
+        | continueStmt
+        | pragmaStmt  
         | importStmt 
         | fromStmt
         | includeStmt
@@ -185,10 +185,11 @@ condStmt: expr COLON stmt
            (ELIF expr COLON stmt)*
            (ELSE COLON stmt)?;
 
-identVis: symbol operator?; //
+identVis: symbol operator?; //TODO: speculation: opr is the postfix operator
 identVisDot: symbol DOT optInd symbol operator?;
 identWithPragma: identVis pragma?;
 
+ifStmt: IF condStmt;
 whenStmt: WHEN condStmt;
 whileStmt: WHILE expr COLON stmt;
 tryStmt: TRY COLON stmt {self._input.LT(1).type in [self.EXCEPT, self.FINALLY]}?
@@ -197,20 +198,45 @@ tryStmt: TRY COLON stmt {self._input.LT(1).type in [self.EXCEPT, self.FINALLY]}?
 
 pattern: OPEN_BRACE stmt CLOSE_BRACE;
 
-
 genericParam: symbol (COMMA symbol)* (COLON expr)? (EQUALS optInd expr)?;
 genericParamList: OPEN_BRACK optInd (genericParam ((COMMA|SEMI_COLON) genericParam)*)?  optPar CLOSE_BRACK;
 
 identWithPragmaDot: identVisDot pragma?;
-typeDefAux: simpleExpr | CONCEPT;
+typeDefAux: simpleExpr | CONCEPT typeClass;
+
+//==
+objectWhen: WHEN expr COLON objectPart
+            (ELIF expr COLON objectPart)*
+            (ELSE COLON objectPart)?;
+
+objectBranch: OF exprList COLON objectPart;
+
+objectBranches: objectBranch (objectBranch)*
+                (ELIF expr COLON objectPart)*
+                (ELSE COLON objectPart)?;
+
+objectCase: CASE identWithPragma COLON typeDesc COLON?
+        ( (ind objectBranches ded)
+          | objectBranches
+        );
+
+objectPart: (ind objectPart+ ded)
+           | objectWhen 
+           | objectCase 
+           | NIL 
+           | DISCARD 
+           | declColonEquals;
+
+object: OBJECT pragma? (OF typeDesc)? objectPart;
+//==
 
 typeClassParam: (VARIABLE | OUT)? symbol;
 typeClass: (typeClassParam (COMMA typeClassParam)*)? (pragma)? (OF (typeDesc (COMMA typeDesc)*)?)?
               {self._input.LT(1).type == self.INDENT}? stmt;
 
-typeDef: identWithPragmaDot genericParamList? EQUALS optInd typeDefAux ind?;
+typeDef: identWithPragmaDot genericParamList? EQUALS optInd typeDefAux optInd;
 
-constant: identWithPragma (COLON typeDesc)? EQUALS optInd expr ind?;
+constant: identWithPragma (COLON typeDesc)? EQUALS optInd expr optInd;
 varTuple: OPEN_PAREN optInd identWithPragma (COMMA identWithPragma)* optPar CLOSE_PAREN EQUALS optInd expr;
 
 declColonEquals: identWithPragma (COMMA identWithPragma)* COMMA?
@@ -219,12 +245,15 @@ declColonEquals: identWithPragma (COMMA identWithPragma)* COMMA?
 identColonEquals: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
                 (COLON optInd typeDesc)? (EQUALS optInd expr)?;
 
-
-paramList: OPEN_PAREN (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*)? CLOSE_PAREN;
+//TODO: think the parantheses should be optional instead of primsuffix
+paramList: OPEN_PAREN (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*)? CLOSE_PAREN
+                | (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*);
 
 paramListColon: paramList? (COLON optInd typeDesc)?;
+//TODO: compare to routine 
+procExpr: PROC paramListColon pragma? (EQUALS stmt)? optInd;
 
-variable: (varTuple | identColonEquals) colonBody? ind?;
+variable: (varTuple | identColonEquals) colonBody? optInd;
 
 qualifiedIdent: symbol (DOT optInd symbol)?;
 
@@ -236,9 +265,9 @@ asmStmt: ASM pragma? (STR_LIT | RSTR_LIT | TRIPLESTR_LIT);
 routine: optInd identVis pattern? genericParamList?
         paramListColon pragma? (EQUALS stmt)? optInd;
 
-sectionTypeDef: typeDef | (ind typeDef+ ded);
-sectionConstant: constant | (ind constant+ ded);
-sectionVariable: variable | (ind variable+ ded);
+typeDefSection: typeDef | (ind typeDef+ ded);
+constantSection: constant | (ind constant+ ded);
+variableSection: variable | (ind variable+ ded);
 bindStmt: BIND optInd qualifiedIdent (COMMA qualifiedIdent)*;
 mixinStmt: MIXIN optInd qualifiedIdent (COMMA qualifiedIdent)*;
 
@@ -252,15 +281,15 @@ complexStmt: (
         | staticStmt 
         | deferStmt 
         | asmStmt
-        | PROC routine
+        | PROC routine //TODO: procStmt?
         | METHOD routine
         | ITERATOR routine
         | MACRO routine
         | TEMPLATE routine
         | CONVERTER routine
-        | TYPE sectionTypeDef
-        | CONST sectionConstant
-        | (LET | VARIABLE | USING) sectionVariable
+        | TYPE typeDefSection
+        | CONST constantSection
+        | (LET | VARIABLE | USING) variableSection
         | bindStmt 
         | mixinStmt
         );
