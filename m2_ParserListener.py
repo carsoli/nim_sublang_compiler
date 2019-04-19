@@ -179,6 +179,15 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by m2_Parser#keyw.
+    def enterKeyw(self, ctx:m2_Parser.KeywContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#keyw.
+    def exitKeyw(self, ctx:m2_Parser.KeywContext):
+        pass
+
+
     # Enter a parse tree produced by m2_Parser#generalizedLit.
     def enterGeneralizedLit(self, ctx:m2_Parser.GeneralizedLitContext):
         pass

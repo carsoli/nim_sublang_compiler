@@ -37,7 +37,7 @@ parKeyw: DISCARD | INCLUDE | IF | WHILE | CASE | TRY
         | FINALLY | EXCEPT | FOR | BLOCK | CONST | LET
         | WHEN | VARIABLE | MIXIN;
 
-// keyw: typeKeyw | parKeyw; //TODO
+keyw: typeKeyw | parKeyw; //TODO
 
 generalizedLit: GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT;
 
@@ -77,7 +77,7 @@ primarySuffix:
       | {self._input.LT(1).type in self.primarySuffixList}? expr;
 
 primary: typeKeyw typeDesc
-        | prefixOperator* identOrLiteral primarySuffix*
+        | prefixOperator* identOrLiteral+ primarySuffix* //testcase6
         | BIND primary;
 
 //TODO: 
@@ -110,14 +110,14 @@ literal: INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
           | NIL;
 
 symbolBody:( 
-                // keyw | 
+                keyw | 
                 IDENTIFIER | literal | 
                 (operator | OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
                 CLOSE_BRACK | OPEN_BRACE | CLOSE_BRACE | EQUALS) 
         );  
 
 symbol: ( SYM_HEADER symbolBody+ SYM_HEADER )
-        // | keyw
+        | keyw
         | IDENTIFIER;
 
 blockExpr: BLOCK symbol? COLON stmt;
