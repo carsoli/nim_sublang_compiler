@@ -1,12 +1,11 @@
 parser grammar m2_Parser;
 options {language='Python3'; tokenVocab=m2_Lexer;}
+
 @parser::members{
-parKeyWList = [DISCARD, INCLUDE, IF, WHILE, CASE, TRY, FINALLY, EXCEPT, FOR, BLOCK, CONST, LET, WHEN, VARIABLE, MIXIN]
+parKeyWList = [DISCARD, IF, WHILE, CASE, FOR, BLOCK, CONST, LET, WHEN, VARIABLE]
 literals = [INT_LIT, INT8_LIT, INT16_LIT , INT32_LIT , INT64_LIT, UINT_LIT , UINT8_LIT , UINT16_LIT , UINT32_LIT , UINT64_LIT, 
 FLOAT_LIT , FLOAT32_LIT , FLOAT64_LIT, STR_LIT , RSTR_LIT , TRIPLESTR_LIT, CHAR_LIT, NIL ]
-primarySuffixList = [SYM_HEADER, IDENTIFIER, literals, CAST, ADDR, TYPE]
-def tryExprBody():
-    return self._input.LT(1).type in [self.EXCEPT, self.FINALLY] or (self._input.LT(1).type == self.INDENT and self._input.LT(2).type in [self.EXCEPT, self.FINALLY])
+primarySuffixList = [SYM_HEADER, IDENTIFIER, literals, TYPE]
 }
 
 op0: OP0;
@@ -20,7 +19,7 @@ op7: OP7;
 op8: OP8;
 op9: OP9;
 op10: OP10;
-operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 | op10 | STATIC;
+operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 | op10;
 
 prefixOperator: operator;
 
@@ -30,14 +29,14 @@ optPar: ind?;
 ded: DEDENT | EOF;
 
 
-typeKeyw: VARIABLE | OUT | REF | PTR | TUPLE
-         | PROC | ITERATOR | DISTINCT | OBJECT | ENUM;
+typeKeyw: VARIABLE | OUT | REF | TUPLE
+         | PROC | ITERATOR;
 
-parKeyw: DISCARD | INCLUDE | IF | WHILE | CASE | TRY
-        | FINALLY | EXCEPT | FOR | BLOCK | CONST | LET
-        | WHEN | VARIABLE | MIXIN;
+parKeyw: DISCARD | IF | WHILE | CASE
+        | FOR | BLOCK | CONST | LET
+        | WHEN | VARIABLE;
 
-keyw: typeKeyw | parKeyw; //TODO
+keyw: (typeKeyw | parKeyw)  ; //TODO
 
 generalizedLit: GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT;
 
@@ -60,11 +59,8 @@ typeDesc: simpleExpr;
 
 setOrTableConstr: OPEN_BRACE ((exprColonEqExpr COMMA)* | COLON ) CLOSE_BRACE;
 
-castExpr: CAST OPEN_BRACK optInd typeDesc optPar CLOSE_BRACK OPEN_PAREN optInd expr optPar CLOSE_PAREN;
-
 identOrLiteral: generalizedLit | symbol | literal
-               | par | arrayConstr | setOrTableConstr
-               | castExpr;
+               | par | arrayConstr | setOrTableConstr;
 
 indexExpr: expr;
 indexExprList: indexExpr (COMMA indexExpr)*; 
@@ -77,8 +73,7 @@ primarySuffix:
       | {self._input.LT(1).type in self.primarySuffixList}? expr;
 
 primary: typeKeyw typeDesc
-        | prefixOperator* identOrLiteral+ primarySuffix* //testcase6
-        | BIND primary;
+        | prefixOperator* identOrLiteral primarySuffix* ;
 
 //TODO: 
 pragma: OPEN_BRACE DOT optInd (exprColonExpr COMMA?)* optPar (DOT? CLOSE_BRACE);
@@ -128,9 +123,6 @@ whenExpr: WHEN condExpr;
 dotExpr: expr DOT optInd (symbol | (OPEN_BRACK COLON) exprList CLOSE_BRACK );
 
 forExpr: forStmt;
-tryExpr: TRY COLON stmt { tryExprBody()}?
-           (optInd EXCEPT exprList COLON stmt)*
-           (optInd FINALLY COLON stmt)?;
 
 expr: NOT? (
         blockExpr 
@@ -138,7 +130,6 @@ expr: NOT? (
         | ifExpr 
         | whenExpr 
         | caseExpr 
-        | tryExpr
         | simpleExpr); 
 
 
@@ -146,12 +137,10 @@ moduleName: IDENTIFIER;
 colonBody: COLON stmt;//removed do blocks, don't have them in test cases
 
 returnStmt: RETURN optInd expr?;
-raiseStmt: RAISE optInd expr?;
-yieldStmt: YIELD optInd expr?;
 discardStmt: DISCARD optInd expr?;
 breakStmt: BREAK optInd expr?;
 continueStmt: CONTINUE optInd expr?;
-importStmt: IMPORT optInd expr ((COMMA expr)* | ( EXCEPT optInd (expr (COMMA expr)*) ) );
+importStmt: IMPORT optInd expr (COMMA expr)* ;
 fromStmt: FROM moduleName IMPORT optInd expr (COMMA expr)*;
 
 caseExpr: CASE IDENTIFIER ofBranches;
@@ -164,21 +153,16 @@ ofBranches: ofBranch+
         (ELIF expr COLON stmt)*
         (ELSE COLON stmt)?;
 
-includeStmt: INCLUDE optInd expr (expr COMMA)*;
-
 exprStmt: simpleExpr (EQUALS optInd expr colonBody?)?;
 
 simpleStmt: (
         returnStmt 
-        | raiseStmt 
-        | yieldStmt 
         | discardStmt 
         | breakStmt
         | continueStmt
         | pragmaStmt  
         | importStmt 
         | fromStmt
-        | includeStmt
         | exprStmt
         );
 
@@ -187,15 +171,12 @@ condStmt: expr COLON stmt
            (ELSE COLON stmt)?;
 
 identVis: symbol operator?; //TODO: speculation: opr is the postfix operator
-identVisDot: symbol DOT? optInd symbol operator?;//testcase
+identVisDot: symbol (DOT symbol)? operator?;//testcase
 identWithPragma: identVis pragma?;
 
 ifStmt: IF condStmt;
 whenStmt: WHEN condStmt;
 whileStmt: WHILE expr COLON stmt;
-tryStmt: TRY COLON stmt {self._input.LT(1).type in [self.EXCEPT, self.FINALLY]}?
-           (EXCEPT exprList COLON stmt)*
-           (FINALLY COLON stmt)?;
 
 pattern: OPEN_BRACE stmt CLOSE_BRACE;
 
@@ -203,7 +184,7 @@ genericParam: symbol (COMMA symbol)* (COLON expr)? (EQUALS optInd expr)?;
 genericParamList: OPEN_BRACK optInd (genericParam ((COMMA|SEMI_COLON) genericParam)*)?  optPar CLOSE_BRACK;
 
 identWithPragmaDot: identVisDot pragma?;
-typeDefAux: simpleExpr | CONCEPT typeClass;
+typeDefAux: simpleExpr | objectType;
 
 //==
 objectWhen: WHEN expr COLON objectPart
@@ -259,46 +240,33 @@ qualifiedIdent: symbol (DOT optInd symbol)?;
 
 forStmt: FOR (identWithPragma (COMMA identWithPragma)*) IN expr COLON stmt;
 blockStmt: BLOCK symbol? COLON stmt;
-staticStmt: STATIC COLON stmt;
-deferStmt: DEFER COLON stmt;
-asmStmt: ASM pragma? (STR_LIT | RSTR_LIT | TRIPLESTR_LIT);
 routine: optInd identVis pattern? genericParamList?
         paramListColon pragma? (EQUALS stmt)? optInd;
 
 typeDefSection: typeDef | (ind typeDef+ ded);
 constantSection: constant | (ind constant+ ded);
 variableSection: variable | (ind variable+ ded);
-bindStmt: BIND optInd qualifiedIdent (COMMA qualifiedIdent)*;
-mixinStmt: MIXIN optInd qualifiedIdent (COMMA qualifiedIdent)*;
 
 complexStmt: (
         ifStmt 
         | whenStmt 
         | whileStmt
-        | tryStmt 
         | forStmt
         | blockStmt 
-        | staticStmt 
-        | deferStmt 
-        | asmStmt
         | PROC routine //TODO: procStmt?
-        | METHOD routine
         | ITERATOR routine
         | MACRO routine
         | TEMPLATE routine
-        | CONVERTER routine
         | TYPE typeDefSection
         | CONST constantSection
-        | (LET | VARIABLE | USING) variableSection
-        | bindStmt 
-        | mixinStmt
+        | (LET | VARIABLE) variableSection
         );
 
 
 stmt:
-      (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))* 
-    | (ind (complexStmt | simpleStmt) (SEMI_COLON (complexStmt | simpleStmt))* ded)
-    | (simpleStmt (SEMI_COLON simpleStmt)* );
+      (complexStmt | simpleStmt) (SEMI_COLON? (complexStmt | simpleStmt))* 
+    | (ind (complexStmt | simpleStmt) (SEMI_COLON? (complexStmt | simpleStmt))* ded)
+    | (simpleStmt (SEMI_COLON? simpleStmt)* );
 
 module: (stmt (SEMI_COLON stmt)*)?;
 

@@ -46,7 +46,7 @@ def recognize_file(filename):
     print(st_ctx.EMPTY)
     visitor = PVisitor()
     visitor.visit(st_ctx)
-    pprint(Trees.toStringTree(st_ctx, None, m2_Parser), indent=1, width=1)
+    # pprint(Trees.toStringTree(st_ctx, None, m2_Parser), indent=1, width=1)
     visualize_tree(st_ctx, parser)
     print(visitor.terminalCount)
     print(terminalCnt)
