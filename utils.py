@@ -1,22 +1,20 @@
 from antlr4 import Token, InputStream, CommonTokenStream, ParseTreeWalker
-from antlr4.error.ErrorListener import *
+from antlr4.error.ErrorListener import ErrorListener
+from antlr4.error.ErrorStrategy import DefaultErrorStrategy, ErrorStrategy, BailErrorStrategy
+from antlr4.tree.Tree import ParseTreeVisitor
 from m2_Lexer import m2_Lexer
 from m2_ParserListener import m2_ParserListener
 from m2_Parser import m2_Parser 
 from antlr4.tree.Trees import Trees
 import re
+from pprint import pprint
 
-class DefaultErrorListener(ErrorListener):
- 
+class PVisitor(ParseTreeVisitor):
     def __init__(self):
-        self._symbol = ''
-    
-    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):        
-        self._symbol = offendingSymbol.text
- 
-    @property        
-    def symbol(self):
-        return self._symbol
+        super().__init__()
+        self.terminalCount = 0
+    def visitTerminal(self, node):
+        self.terminalCount += 1
 
 def read_file(filename):
     file = open(filename, 'r')
@@ -30,20 +28,28 @@ def write_to_file(path, txt=''):
     file.close()
 
 def recognize_file(filename):
+    terminalCnt = len(tokenize_file(filename))
     prog = read_file(filename)
     input_stream = InputStream(prog)
     lexer = m2_Lexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = m2_Parser(stream)
-    parser.removeErrorListeners()
-    errorListener = DefaultErrorListener()
-    parser.addErrorListener(errorListener)
-    st_ctx = parser.module()
-    print(Trees.toStringTree(st_ctx, None, m2_Parser))
-    if len(errorListener.symbol) == 0:
-        return True
-    return False
-
+    errHandler = BailErrorStrategy()
+    visitor = ParseTreeVisitor
+    parser._errHandler = errHandler
+    try:
+        st_ctx = parser.start()
+        visitor = PVisitor()
+        visitor.visit(st_ctx)
+        pprint(Trees.toStringTree(st_ctx, None, m2_Parser), indent=1, width=1)
+        print(visitor.terminalCount)
+        print(terminalCnt)
+        if abs(visitor.terminalCount - terminalCnt) == 0:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+    return True
 
 def tokenize_file(filename):
     prog = read_file(filename)
