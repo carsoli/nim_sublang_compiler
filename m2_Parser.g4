@@ -117,7 +117,7 @@ symbolBody:(
         );  
 
 symbol: ( SYM_HEADER symbolBody+ SYM_HEADER )
-        | symbolBody+
+        // | symbolBody+
         | keyw
         | IDENTIFIER;
 

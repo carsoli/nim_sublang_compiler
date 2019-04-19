@@ -76,7 +76,7 @@ def dfs_tree_w_cs(treeview, parent_idx, idx_in_parent, node, ruleNames):
     
     return subTreeText
 
-def visualize_tree(tree, parser, allow_cs=True):
+def visualize_tree(tree, parser, allow_cs=False):
     ruleNames = parser.ruleNames
     tree_gui = Tk()
     tree_gui.geometry("1680x1200+200+200") 
