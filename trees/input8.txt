@@ -1,0 +1,38 @@
+StmtList
+  ImportStmt
+    Ident "tables"
+    Ident "strutils"
+  VarSection
+    IdentDefs
+      Ident "wordFrequencies"
+      Empty
+      Call
+        BracketExpr
+          Ident "initCountTable"
+          Ident "string"
+  ForStmt
+    Ident "line"
+    DotExpr
+      Ident "stdin"
+      Ident "lines"
+    StmtList
+      ForStmt
+        Ident "word"
+        Call
+          DotExpr
+            Ident "line"
+            Ident "split"
+          StrLit ", "
+        StmtList
+          Call
+            DotExpr
+              Ident "wordFrequencies"
+              Ident "inc"
+            Ident "word"
+  Command
+    Ident "echo"
+    StrLit "The most frequent word is \'"
+    DotExpr
+      Ident "wordFrequencies"
+      Ident "largest"
+    StrLit "\'"

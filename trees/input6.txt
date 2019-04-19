@@ -1,0 +1,313 @@
+StmtList
+  TypeSection
+    TypeDef
+      Ident "TreeList"
+      GenericParams
+        IdentDefs
+          Ident "T"
+          Empty
+          Empty
+      RefTy
+        BracketExpr
+          Ident "TTreeList"
+          Ident "T"
+    TypeDef
+      Ident "TTreeList"
+      GenericParams
+        IdentDefs
+          Ident "T"
+          Empty
+          Empty
+      ObjectTy
+        Empty
+        Empty
+        RecList
+          RecCase
+            IdentDefs
+              Ident "isLeaf"
+              Ident "bool"
+              Empty
+            OfBranch
+              Ident "true"
+              IdentDefs
+                Ident "data"
+                Ident "T"
+                Empty
+            OfBranch
+              Ident "false"
+              IdentDefs
+                Ident "list"
+                BracketExpr
+                  Ident "seq"
+                  BracketExpr
+                    Ident "TreeList"
+                    Ident "T"
+                Empty
+  ProcDef
+    Ident "L"
+    Empty
+    GenericParams
+      IdentDefs
+        Ident "T"
+        Empty
+        Empty
+    FormalParams
+      BracketExpr
+        Ident "TreeList"
+        Ident "T"
+      IdentDefs
+        Ident "list"
+        BracketExpr
+          Ident "varargs"
+          BracketExpr
+            Ident "TreeList"
+            Ident "T"
+        Empty
+    Empty
+    Empty
+    StmtList
+      VarSection
+        IdentDefs
+          Ident "s"
+          BracketExpr
+            Ident "seq"
+            BracketExpr
+              Ident "TreeList"
+              Ident "T"
+          Prefix
+            Ident "@"
+            Bracket
+      ForStmt
+        Ident "x"
+        Ident "list"
+        StmtList
+          Command
+            DotExpr
+              Ident "s"
+              Ident "add"
+            Ident "x"
+      ObjConstr
+        BracketExpr
+          Ident "TreeList"
+          Ident "T"
+        ExprColonExpr
+          Ident "isLeaf"
+          Ident "false"
+        ExprColonExpr
+          Ident "list"
+          Ident "s"
+  ProcDef
+    Ident "N"
+    Empty
+    GenericParams
+      IdentDefs
+        Ident "T"
+        Empty
+        Empty
+    FormalParams
+      BracketExpr
+        Ident "TreeList"
+        Ident "T"
+      IdentDefs
+        Ident "data"
+        Ident "T"
+        Empty
+    Empty
+    Empty
+    StmtList
+      ObjConstr
+        BracketExpr
+          Ident "TreeList"
+          Ident "T"
+        ExprColonExpr
+          Ident "isLeaf"
+          Ident "true"
+        ExprColonExpr
+          Ident "data"
+          Ident "data"
+  ProcDef
+    AccQuoted
+      Ident "$"
+    Empty
+    GenericParams
+      IdentDefs
+        Ident "T"
+        Empty
+        Empty
+    FormalParams
+      Ident "string"
+      IdentDefs
+        Ident "n"
+        BracketExpr
+          Ident "TreeList"
+          Ident "T"
+        Empty
+    Empty
+    Empty
+    StmtList
+      IfStmt
+        ElifBranch
+          DotExpr
+            Ident "n"
+            Ident "isLeaf"
+          StmtList
+            Asgn
+              Ident "result"
+              Prefix
+                Ident "$"
+                DotExpr
+                  Ident "n"
+                  Ident "data"
+        Else
+          StmtList
+            Asgn
+              Ident "result"
+              StrLit "["
+            ForStmt
+              Ident "i"
+              Ident "x"
+              DotExpr
+                Ident "n"
+                Ident "list"
+              StmtList
+                IfStmt
+                  ElifBranch
+                    Infix
+                      Ident ">"
+                      Ident "i"
+                      IntLit 0
+                    StmtList
+                      Command
+                        DotExpr
+                          Ident "result"
+                          Ident "add"
+                        StrLit ", "
+                Call
+                  DotExpr
+                    Ident "result"
+                    Ident "add"
+                  Prefix
+                    Ident "$"
+                    Ident "x"
+            Command
+              DotExpr
+                Ident "result"
+                Ident "add"
+              StrLit "]"
+  ProcDef
+    Ident "flatten"
+    Empty
+    GenericParams
+      IdentDefs
+        Ident "T"
+        Empty
+        Empty
+    FormalParams
+      BracketExpr
+        Ident "seq"
+        Ident "T"
+      IdentDefs
+        Ident "n"
+        BracketExpr
+          Ident "TreeList"
+          Ident "T"
+        Empty
+    Empty
+    Empty
+    StmtList
+      IfStmt
+        ElifBranch
+          DotExpr
+            Ident "n"
+            Ident "isLeaf"
+          StmtList
+            Asgn
+              Ident "result"
+              Prefix
+                Ident "@"
+                Bracket
+                  DotExpr
+                    Ident "n"
+                    Ident "data"
+        Else
+          StmtList
+            Asgn
+              Ident "result"
+              Prefix
+                Ident "@"
+                Bracket
+            ForStmt
+              Ident "x"
+              DotExpr
+                Ident "n"
+                Ident "list"
+              StmtList
+                Command
+                  DotExpr
+                    Ident "result"
+                    Ident "add"
+                  Command
+                    Ident "flatten"
+                    Ident "x"
+  VarSection
+    IdentDefs
+      Ident "x"
+      Empty
+      Call
+        Ident "L"
+        Call
+          Ident "L"
+          Command
+            Ident "N"
+            IntLit 1
+        Command
+          Ident "N"
+          IntLit 2
+        Call
+          Ident "L"
+          Call
+            Ident "L"
+            Command
+              Ident "N"
+              IntLit 3
+            Command
+              Ident "N"
+              IntLit 4
+          Command
+            Ident "N"
+            IntLit 5
+        Call
+          Ident "L"
+          Call
+            Ident "L"
+            Call
+              BracketExpr
+                Ident "L"
+                Ident "int"
+        Call
+          Ident "L"
+          Call
+            Ident "L"
+            Call
+              Ident "L"
+              Command
+                Ident "N"
+                IntLit 6
+        Command
+          Ident "N"
+          IntLit 7
+        Command
+          Ident "N"
+          IntLit 8
+        Call
+          BracketExpr
+            Ident "L"
+            Ident "int"
+  Command
+    Ident "echo"
+    Ident "x"
+  Command
+    Ident "echo"
+    Call
+      Ident "flatten"
+      Ident "x"

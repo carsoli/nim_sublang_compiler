@@ -296,24 +296,6 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#exprColonEqExpr.
-    def enterExprColonEqExpr(self, ctx:m2_Parser.ExprColonEqExprContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#exprColonEqExpr.
-    def exitExprColonEqExpr(self, ctx:m2_Parser.ExprColonEqExprContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#exprColonExpr.
-    def enterExprColonExpr(self, ctx:m2_Parser.ExprColonExprContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#exprColonExpr.
-    def exitExprColonExpr(self, ctx:m2_Parser.ExprColonExprContext):
-        pass
-
-
     # Enter a parse tree produced by m2_Parser#pragma.
     def enterPragma(self, ctx:m2_Parser.PragmaContext):
         pass
@@ -431,6 +413,33 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by m2_Parser#exprColonExpr.
+    def enterExprColonExpr(self, ctx:m2_Parser.ExprColonExprContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#exprColonExpr.
+    def exitExprColonExpr(self, ctx:m2_Parser.ExprColonExprContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#exprColonEqExpr.
+    def enterExprColonEqExpr(self, ctx:m2_Parser.ExprColonEqExprContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#exprColonEqExpr.
+    def exitExprColonEqExpr(self, ctx:m2_Parser.ExprColonEqExprContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#exprColonEqExprList.
+    def enterExprColonEqExprList(self, ctx:m2_Parser.ExprColonEqExprListContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#exprColonEqExprList.
+    def exitExprColonEqExprList(self, ctx:m2_Parser.ExprColonEqExprListContext):
+        pass
+
+
     # Enter a parse tree produced by m2_Parser#condExpr.
     def enterCondExpr(self, ctx:m2_Parser.CondExprContext):
         pass
@@ -527,15 +536,6 @@ class m2_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_Parser#expr.
     def exitExpr(self, ctx:m2_Parser.ExprContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#ifStmt.
-    def enterIfStmt(self, ctx:m2_Parser.IfStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#ifStmt.
-    def exitIfStmt(self, ctx:m2_Parser.IfStmtContext):
         pass
 
 
@@ -728,6 +728,15 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by m2_Parser#ifStmt.
+    def enterIfStmt(self, ctx:m2_Parser.IfStmtContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#ifStmt.
+    def exitIfStmt(self, ctx:m2_Parser.IfStmtContext):
+        pass
+
+
     # Enter a parse tree produced by m2_Parser#whenStmt.
     def enterWhenStmt(self, ctx:m2_Parser.WhenStmtContext):
         pass
@@ -797,6 +806,60 @@ class m2_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_Parser#typeDefAux.
     def exitTypeDefAux(self, ctx:m2_Parser.TypeDefAuxContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#objectWhen.
+    def enterObjectWhen(self, ctx:m2_Parser.ObjectWhenContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#objectWhen.
+    def exitObjectWhen(self, ctx:m2_Parser.ObjectWhenContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#objectBranch.
+    def enterObjectBranch(self, ctx:m2_Parser.ObjectBranchContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#objectBranch.
+    def exitObjectBranch(self, ctx:m2_Parser.ObjectBranchContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#objectBranches.
+    def enterObjectBranches(self, ctx:m2_Parser.ObjectBranchesContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#objectBranches.
+    def exitObjectBranches(self, ctx:m2_Parser.ObjectBranchesContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#objectCase.
+    def enterObjectCase(self, ctx:m2_Parser.ObjectCaseContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#objectCase.
+    def exitObjectCase(self, ctx:m2_Parser.ObjectCaseContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#objectPart.
+    def enterObjectPart(self, ctx:m2_Parser.ObjectPartContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#objectPart.
+    def exitObjectPart(self, ctx:m2_Parser.ObjectPartContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#objectType.
+    def enterObjectType(self, ctx:m2_Parser.ObjectTypeContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#objectType.
+    def exitObjectType(self, ctx:m2_Parser.ObjectTypeContext):
         pass
 
 
@@ -881,6 +944,15 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by m2_Parser#procExpr.
+    def enterProcExpr(self, ctx:m2_Parser.ProcExprContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#procExpr.
+    def exitProcExpr(self, ctx:m2_Parser.ProcExprContext):
+        pass
+
+
     # Enter a parse tree produced by m2_Parser#variable.
     def enterVariable(self, ctx:m2_Parser.VariableContext):
         pass
@@ -953,30 +1025,30 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#sectionTypeDef.
-    def enterSectionTypeDef(self, ctx:m2_Parser.SectionTypeDefContext):
+    # Enter a parse tree produced by m2_Parser#typeDefSection.
+    def enterTypeDefSection(self, ctx:m2_Parser.TypeDefSectionContext):
         pass
 
-    # Exit a parse tree produced by m2_Parser#sectionTypeDef.
-    def exitSectionTypeDef(self, ctx:m2_Parser.SectionTypeDefContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#sectionConstant.
-    def enterSectionConstant(self, ctx:m2_Parser.SectionConstantContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#sectionConstant.
-    def exitSectionConstant(self, ctx:m2_Parser.SectionConstantContext):
+    # Exit a parse tree produced by m2_Parser#typeDefSection.
+    def exitTypeDefSection(self, ctx:m2_Parser.TypeDefSectionContext):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#sectionVariable.
-    def enterSectionVariable(self, ctx:m2_Parser.SectionVariableContext):
+    # Enter a parse tree produced by m2_Parser#constantSection.
+    def enterConstantSection(self, ctx:m2_Parser.ConstantSectionContext):
         pass
 
-    # Exit a parse tree produced by m2_Parser#sectionVariable.
-    def exitSectionVariable(self, ctx:m2_Parser.SectionVariableContext):
+    # Exit a parse tree produced by m2_Parser#constantSection.
+    def exitConstantSection(self, ctx:m2_Parser.ConstantSectionContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#variableSection.
+    def enterVariableSection(self, ctx:m2_Parser.VariableSectionContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#variableSection.
+    def exitVariableSection(self, ctx:m2_Parser.VariableSectionContext):
         pass
 
 

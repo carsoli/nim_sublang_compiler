@@ -1,0 +1,101 @@
+StmtList
+  ImportStmt
+    Ident "re"
+    Ident "macros"
+  MacroDef
+    Ident "multiMatch"
+    Empty
+    Empty
+    FormalParams
+      Ident "untyped"
+      IdentDefs
+        Ident "inp"
+        Ident "string"
+        Empty
+      IdentDefs
+        Ident "sections"
+        Ident "untyped"
+        Empty
+    Empty
+    Empty
+    StmtList
+      CommentStmt
+      TemplateDef
+        Ident "branch"
+        Empty
+        Empty
+        FormalParams
+          Empty
+          IdentDefs
+            Ident "inp"
+            Ident "p"
+            Ident "action"
+            Empty
+            Empty
+        Empty
+        Empty
+        StmtList
+          VarSection
+            IdentDefs
+              Ident "mmlen"
+              Empty
+              Call
+                Ident "matchLen"
+                Ident "inp"
+                BracketExpr
+                  Ident "mmpatterns"
+                  Ident "p"
+                Ident "matches"
+                Ident "mmpos"
+          IfStmt
+            ElifBranch
+              Infix
+                Ident ">"
+                Ident "mmlen"
+                IntLit 0
+              StmtList
+                Ident "action"
+                Call
+                  Ident "inc"
+                  Ident "mmpos"
+                  Ident "mmlen"
+                BreakStmt
+                  Ident "searchSubs"
+      TemplateDef
+        Ident "searchLoop"
+        Empty
+        Empty
+        FormalParams
+          Empty
+          IdentDefs
+            Ident "inp"
+            Ident "actions"
+            Empty
+            Empty
+        Pragma
+          Ident "dirty"
+        Empty
+        StmtList
+          VarSection
+            IdentDefs
+              Ident "mmpos"
+              Empty
+              IntLit 0
+          WhileStmt
+            Infix
+              Ident "<"
+              Ident "mmpos"
+              DotExpr
+                Ident "inp"
+                Ident "len"
+            StmtList
+              BlockStmt
+                Ident "searchSubs"
+                StmtList
+                  Ident "actions"
+                  Call
+                    Ident "inc"
+                    Ident "mmpos"
+  Command
+    Ident "echo"
+    StrLit "hi"

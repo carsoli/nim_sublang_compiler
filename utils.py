@@ -37,19 +37,19 @@ def recognize_file(filename):
     parser = m2_Parser(stream)
     errHandler = BailErrorStrategy()
     visitor = ParseTreeVisitor
-    parser._errHandler = errHandler
-    try:
-        st_ctx = parser.start()
-        visitor = PVisitor()
-        visitor.visit(st_ctx)
-        pprint(Trees.toStringTree(st_ctx, None, m2_Parser), indent=1, width=1)
-        print(visitor.terminalCount)
-        print(terminalCnt)
-        if abs(visitor.terminalCount - terminalCnt) != 0:
-            return False
-    except Exception as e:
-        print(e)
+    # parser._errHandler = errHandler
+    # try:
+    st_ctx = parser.start()
+    visitor = PVisitor()
+    visitor.visit(st_ctx)
+    pprint(Trees.toStringTree(st_ctx, None, m2_Parser), indent=1, width=1)
+    print(visitor.terminalCount)
+    print(terminalCnt)
+    if abs(visitor.terminalCount - terminalCnt) != 0:
         return False
+    # except Exception as e:
+        # print(e)
+        # return False
     return True
 
 def tokenize_file(filename):

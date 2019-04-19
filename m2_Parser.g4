@@ -69,7 +69,7 @@ identOrLiteral: generalizedLit | symbol | literal
 indexExpr: expr;
 indexExprList: indexExpr (COMMA indexExpr)*; 
 primarySuffix: 
-        // (exprColonEqExpr COMMA?)+ //TODO : REMOVE
+        (exprColonEqExpr COMMA?)+ //TODO : REMOVE
       | OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN
       | DOT optInd symbol generalizedLit?
       | OPEN_BRACK optInd indexExprList optPar CLOSE_BRACK
@@ -113,10 +113,10 @@ symbolBody:(
                 // keyw | 
                 IDENTIFIER | literal | 
                 (operator | OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
-                CLOSE_BRACK | OPEN_BRACE | CLOSE_BRACE | EQUALS) //TODO MISSING + 
+                CLOSE_BRACK | OPEN_BRACE | CLOSE_BRACE | EQUALS) 
         );  
 
-symbol: ( SYM_HEADER symbolBody+ SYM_HEADER ) 
+symbol: ( SYM_HEADER symbolBody+ SYM_HEADER )
         // | keyw
         | IDENTIFIER;
 
@@ -186,7 +186,7 @@ condStmt: expr COLON stmt
            (ELSE COLON stmt)?;
 
 identVis: symbol operator?; //TODO: speculation: opr is the postfix operator
-identVisDot: symbol DOT optInd symbol operator?;
+identVisDot: symbol DOT? optInd symbol operator?;//testcase
 identWithPragma: identVis pragma?;
 
 ifStmt: IF condStmt;
@@ -227,9 +227,8 @@ objectPart: (ind objectPart+ ded)
            | DISCARD 
            | declColonEquals;
 
-object: OBJECT pragma? (OF typeDesc)? objectPart;
+objectType: OBJECT pragma? (OF typeDesc)? objectPart;
 //==
-
 typeClassParam: (VARIABLE | OUT)? symbol;
 typeClass: (typeClassParam (COMMA typeClassParam)*)? (pragma)? (OF (typeDesc (COMMA typeDesc)*)?)?
               {self._input.LT(1).type == self.INDENT}? stmt;
