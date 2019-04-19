@@ -1,5 +1,6 @@
 .vscode
 .antlr
+nimcaches
 __pycache__
 Milestone1_TestCases
 **.nim
