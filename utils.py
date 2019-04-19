@@ -14,7 +14,8 @@ class PVisitor(ParseTreeVisitor):
         super().__init__()
         self.terminalCount = 0
     def visitTerminal(self, node):
-        self.terminalCount += 1
+        if str(node) != '<EOF>':
+            self.terminalCount += 1
 
 def read_file(filename):
     file = open(filename, 'r')
@@ -44,7 +45,7 @@ def recognize_file(filename):
         pprint(Trees.toStringTree(st_ctx, None, m2_Parser), indent=1, width=1)
         print(visitor.terminalCount)
         print(terminalCnt)
-        if abs(visitor.terminalCount - terminalCnt) == 0:
+        if abs(visitor.terminalCount - terminalCnt) != 0:
             return False
     except Exception as e:
         print(e)
