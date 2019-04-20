@@ -251,15 +251,6 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#castExpr.
-    def enterCastExpr(self, ctx:m2_Parser.CastExprContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#castExpr.
-    def exitCastExpr(self, ctx:m2_Parser.CastExprContext):
-        pass
-
-
     # Enter a parse tree produced by m2_Parser#identOrLiteral.
     def enterIdentOrLiteral(self, ctx:m2_Parser.IdentOrLiteralContext):
         pass
@@ -530,15 +521,6 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#tryExpr.
-    def enterTryExpr(self, ctx:m2_Parser.TryExprContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#tryExpr.
-    def exitTryExpr(self, ctx:m2_Parser.TryExprContext):
-        pass
-
-
     # Enter a parse tree produced by m2_Parser#expr.
     def enterExpr(self, ctx:m2_Parser.ExprContext):
         pass
@@ -572,24 +554,6 @@ class m2_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_Parser#returnStmt.
     def exitReturnStmt(self, ctx:m2_Parser.ReturnStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#raiseStmt.
-    def enterRaiseStmt(self, ctx:m2_Parser.RaiseStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#raiseStmt.
-    def exitRaiseStmt(self, ctx:m2_Parser.RaiseStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#yieldStmt.
-    def enterYieldStmt(self, ctx:m2_Parser.YieldStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#yieldStmt.
-    def exitYieldStmt(self, ctx:m2_Parser.YieldStmtContext):
         pass
 
 
@@ -674,15 +638,6 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#includeStmt.
-    def enterIncludeStmt(self, ctx:m2_Parser.IncludeStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#includeStmt.
-    def exitIncludeStmt(self, ctx:m2_Parser.IncludeStmtContext):
-        pass
-
-
     # Enter a parse tree produced by m2_Parser#exprStmt.
     def enterExprStmt(self, ctx:m2_Parser.ExprStmtContext):
         pass
@@ -761,15 +716,6 @@ class m2_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_Parser#whileStmt.
     def exitWhileStmt(self, ctx:m2_Parser.WhileStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#tryStmt.
-    def enterTryStmt(self, ctx:m2_Parser.TryStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#tryStmt.
-    def exitTryStmt(self, ctx:m2_Parser.TryStmtContext):
         pass
 
 
@@ -998,33 +944,6 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#staticStmt.
-    def enterStaticStmt(self, ctx:m2_Parser.StaticStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#staticStmt.
-    def exitStaticStmt(self, ctx:m2_Parser.StaticStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#deferStmt.
-    def enterDeferStmt(self, ctx:m2_Parser.DeferStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#deferStmt.
-    def exitDeferStmt(self, ctx:m2_Parser.DeferStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#asmStmt.
-    def enterAsmStmt(self, ctx:m2_Parser.AsmStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#asmStmt.
-    def exitAsmStmt(self, ctx:m2_Parser.AsmStmtContext):
-        pass
-
-
     # Enter a parse tree produced by m2_Parser#routine.
     def enterRoutine(self, ctx:m2_Parser.RoutineContext):
         pass
@@ -1058,24 +977,6 @@ class m2_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_Parser#variableSection.
     def exitVariableSection(self, ctx:m2_Parser.VariableSectionContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#bindStmt.
-    def enterBindStmt(self, ctx:m2_Parser.BindStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#bindStmt.
-    def exitBindStmt(self, ctx:m2_Parser.BindStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#mixinStmt.
-    def enterMixinStmt(self, ctx:m2_Parser.MixinStmtContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#mixinStmt.
-    def exitMixinStmt(self, ctx:m2_Parser.MixinStmtContext):
         pass
 
 

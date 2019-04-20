@@ -14,7 +14,7 @@ op2: OP2 | COLON | (COLON COLON);
 op3: OP3;
 op4: OP4;
 op5: OP5 | IN | OF | NOT;
-op6: OP6 | DOT;
+op6: OP6 | DOT | (DOT DOT);
 op7: OP7;
 op8: OP8;
 op9: OP9;
@@ -29,8 +29,7 @@ optPar: ind?;
 ded: DEDENT | EOF;
 
 
-typeKeyw: VARIABLE | OUT | REF | TUPLE
-         | PROC | ITERATOR;
+typeKeyw: VARIABLE | OUT | REF | TUPLE | PROC | ITERATOR;
 
 parKeyw: DISCARD | IF | WHILE | CASE
         | FOR | BLOCK | CONST | LET
@@ -224,7 +223,7 @@ declColonEquals: identWithPragma (COMMA identWithPragma)* COMMA?
                 (COLON optInd typeDesc)? (EQUALS optInd expr)?;
 
 identColonEquals: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
-                (COLON optInd typeDesc)? (EQUALS optInd expr)?;
+        ( (COLON optInd typeDesc)? | (EQUALS optInd expr)? );
 
 //TODO: think the parantheses should be optional instead of primsuffix
 paramList: OPEN_PAREN (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*)? CLOSE_PAREN
