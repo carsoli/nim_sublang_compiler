@@ -217,7 +217,7 @@ declColonEquals: identWithPragma (COMMA identWithPragma)* COMMA?
                 (COLON optInd typeDesc)? (EQUALS optInd expr)?;
 
 identColonEquals: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
-        ( (COLON optInd typeDesc)? | (EQUALS optInd expr)? );
+        ( (COLON optInd typeDesc) | (EQUALS optInd expr) );
 
 //TODO: think the parantheses should be optional instead of primsuffix
 paramList: OPEN_PAREN (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*)? CLOSE_PAREN
