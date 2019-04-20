@@ -28,7 +28,7 @@ optInd: ind?;
 optPar: ind?;
 ded: DEDENT | EOF;
 
-typeKeyw: VARIABLE | REF | TUPLE | PROC | ITERATOR;
+typeKeyw: VARIABLE | REF | TUPLE | PROC;
 
 parKeyw: DISCARD | IF | WHILE | CASE
         | FOR | BLOCK | CONST | LET
@@ -247,7 +247,6 @@ complexStmt: (
         | forStmt
         | blockStmt 
         | PROC routine //TODO: procStmt?
-        | ITERATOR routine
         | MACRO routine
         | TEMPLATE routine
         | TYPE typeDefSection
