@@ -139,9 +139,9 @@ importStmt: IMPORT optInd expr (COMMA expr)* ;
 fromStmt: FROM moduleName IMPORT optInd expr (COMMA expr)*;
 
 caseExpr: CASE IDENTIFIER ofBranches;
-// caseStmt: CASE IDENTIFIER COLON?
-        // (ind ofBranches ded | ofBranches);
-caseStmt: CASE expr COLON? ((ind ofBranches ded) | ofBranches);//TODO:
+caseStmt: CASE IDENTIFIER COLON?
+         (ind ofBranches ded | ofBranches);
+//caseStmt: CASE expr COLON? ((ind ofBranches ded) | ofBranches);//TODO:
 
 ofBranch: OF exprList COLON stmt;
 ofBranches: ofBranch+
@@ -150,6 +150,7 @@ ofBranches: ofBranch+
 
 exprStmt: simpleExpr (EQUALS optInd expr colonBody?)?;
 
+command: IDENTIFIER (expr COMMA?)*;//added based on generated trees
 simpleStmt: (
         returnStmt 
         | discardStmt 
@@ -159,6 +160,7 @@ simpleStmt: (
         | importStmt 
         | fromStmt
         | exprStmt
+        | command
         );
 
 condStmt: expr COLON stmt
@@ -243,6 +245,7 @@ complexStmt: (
         | whenStmt 
         | whileStmt
         | forStmt
+        | caseStmt
         | blockStmt 
         | PROC routine //TODO: procStmt?
         | MACRO routine
