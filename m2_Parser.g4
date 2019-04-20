@@ -221,7 +221,7 @@ identColonEquals: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
 paramList: OPEN_PAREN (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*)? CLOSE_PAREN
                 | (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*);
 
-paramListColon: paramList? (COLON optInd typeDesc)?;
+paramListColon: paramList (COLON optInd typeDesc)?;
 //TODO: compare to routine 
 procExpr: PROC paramListColon pragma? (EQUALS stmt)? optInd;
 
@@ -244,7 +244,7 @@ complexStmt: (
         | whileStmt
         | forStmt
         | blockStmt 
-        | PROC routine //TODO: procStmt?
+        | PROC routine //TODO: procExpr
         | MACRO routine
         | TEMPLATE routine
         | TYPE typeDefSection
