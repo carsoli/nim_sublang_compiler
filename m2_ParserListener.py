@@ -242,15 +242,6 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#identOrLiteral.
-    def enterIdentOrLiteral(self, ctx:m2_Parser.IdentOrLiteralContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#identOrLiteral.
-    def exitIdentOrLiteral(self, ctx:m2_Parser.IdentOrLiteralContext):
-        pass
-
-
     # Enter a parse tree produced by m2_Parser#indexExpr.
     def enterIndexExpr(self, ctx:m2_Parser.IndexExprContext):
         pass
@@ -275,6 +266,24 @@ class m2_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_Parser#primarySuffix.
     def exitPrimarySuffix(self, ctx:m2_Parser.PrimarySuffixContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#identOrLiteral.
+    def enterIdentOrLiteral(self, ctx:m2_Parser.IdentOrLiteralContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#identOrLiteral.
+    def exitIdentOrLiteral(self, ctx:m2_Parser.IdentOrLiteralContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#identGeneral.
+    def enterIdentGeneral(self, ctx:m2_Parser.IdentGeneralContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#identGeneral.
+    def exitIdentGeneral(self, ctx:m2_Parser.IdentGeneralContext):
         pass
 
 
@@ -827,15 +836,6 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#constant.
-    def enterConstant(self, ctx:m2_Parser.ConstantContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#constant.
-    def exitConstant(self, ctx:m2_Parser.ConstantContext):
-        pass
-
-
     # Enter a parse tree produced by m2_Parser#varTuple.
     def enterVarTuple(self, ctx:m2_Parser.VarTupleContext):
         pass
@@ -887,6 +887,15 @@ class m2_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_Parser#procExpr.
     def exitProcExpr(self, ctx:m2_Parser.ProcExprContext):
+        pass
+
+
+    # Enter a parse tree produced by m2_Parser#constant.
+    def enterConstant(self, ctx:m2_Parser.ConstantContext):
+        pass
+
+    # Exit a parse tree produced by m2_Parser#constant.
+    def exitConstant(self, ctx:m2_Parser.ConstantContext):
         pass
 
 

@@ -5,7 +5,7 @@ options {language='Python3'; tokenVocab=m2_Lexer;}
 parKeyWList = [DISCARD, IF, WHILE, CASE, FOR, BLOCK, CONST, LET, WHEN, VARIABLE]
 literals = [INT_LIT, INT8_LIT, INT16_LIT , INT32_LIT , INT64_LIT, UINT_LIT , UINT8_LIT , UINT16_LIT , UINT32_LIT , UINT64_LIT, 
 FLOAT_LIT , FLOAT32_LIT , FLOAT64_LIT, STR_LIT , RSTR_LIT , TRIPLESTR_LIT, CHAR_LIT, NIL ]
-primarySuffixList = [SYM_HEADER, IDENTIFIER, literals, TYPE]
+primarySuffixList = [SYM_HEADER, IDENTIFIER, TYPE] + literals
 }
 
 op0: OP0;
@@ -55,7 +55,6 @@ arrayConstr: OPEN_BRACK optInd (exprColonEqExpr COMMA?)* optPar CLOSE_BRACK;
 
 typeDesc: simpleExpr;
 
-identOrLiteral: generalizedLit | symbol | literal | par | arrayConstr;
 
 indexExpr: expr;
 indexExprList: indexExpr (COMMA indexExpr)*; 
@@ -65,8 +64,11 @@ primarySuffix: OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN
       | {self._input.LT(1).type in self.primarySuffixList}? expr;
         //| (exprColonEqExpr COMMA?)+ //TODO : REMOVE
 
+identOrLiteral: generalizedLit | symbol | literal | par | arrayConstr;
+identGeneral: generalizedLit | symbol | par | arrayConstr;
+
 primary: typeKeyw typeDesc
-        | prefixOperator* identOrLiteral primarySuffix* ;
+        | prefixOperator* (identGeneral primarySuffix* | identOrLiteral);
 
 //TODO: 
 pragma: OPEN_BRACE DOT optInd (exprColonExpr COMMA?)* optPar (DOT? CLOSE_BRACE);
@@ -208,7 +210,6 @@ typeClass: (typeClassParam (COMMA typeClassParam)*)? (pragma)? (OF (typeDesc (CO
 
 typeDef: identWithPragmaDot genericParamList? EQUALS optInd typeDefAux optInd;
 
-constant: identWithPragma (COLON typeDesc)? EQUALS optInd expr optInd;
 varTuple: OPEN_PAREN optInd identWithPragma (COMMA identWithPragma)* optPar CLOSE_PAREN EQUALS optInd expr;
 
 declColonEquals: identWithPragma (COMMA identWithPragma)* COMMA?
@@ -216,7 +217,6 @@ declColonEquals: identWithPragma (COMMA identWithPragma)* COMMA?
 
 identColonEquals: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
         ( (COLON optInd typeDesc) | (EQUALS optInd expr) );
-
 //TODO: think the parantheses should be optional instead of primsuffix
 paramList: OPEN_PAREN (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*)? CLOSE_PAREN
                 | (declColonEquals ((COMMA | SEMI_COLON) declColonEquals)*);
@@ -225,6 +225,7 @@ paramListColon: paramList? (COLON optInd typeDesc)?;
 //TODO: compare to routine 
 procExpr: PROC paramListColon pragma? (EQUALS stmt)? optInd;
 
+constant: identWithPragma (COLON typeDesc)? EQUALS optInd expr optInd;
 variable: (varTuple | identColonEquals) colonBody? optInd;
 
 qualifiedIdent: symbol (DOT optInd symbol)?;
@@ -250,7 +251,6 @@ complexStmt: (
         | CONST constantSection
         | (LET | VARIABLE) variableSection
         );
-
 
 stmt:
       (complexStmt | simpleStmt) (SEMI_COLON? (complexStmt | simpleStmt))* 
