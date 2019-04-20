@@ -55,17 +55,15 @@ arrayConstr: OPEN_BRACK optInd (exprColonEqExpr COMMA?)* optPar CLOSE_BRACK;
 
 typeDesc: simpleExpr;
 
-identOrLiteral: generalizedLit | symbol | literal
-               | par | arrayConstr;
+identOrLiteral: generalizedLit | symbol | literal | par | arrayConstr;
 
 indexExpr: expr;
 indexExprList: indexExpr (COMMA indexExpr)*; 
-primarySuffix: 
-        (exprColonEqExpr COMMA?)+ //TODO : REMOVE
-      | OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN
+primarySuffix: OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN
       | DOT optInd symbol generalizedLit?
       | OPEN_BRACK optInd indexExprList optPar CLOSE_BRACK
       | {self._input.LT(1).type in self.primarySuffixList}? expr;
+        //| (exprColonEqExpr COMMA?)+ //TODO : REMOVE
 
 primary: typeKeyw typeDesc
         | prefixOperator* identOrLiteral primarySuffix* ;
@@ -233,8 +231,7 @@ qualifiedIdent: symbol (DOT optInd symbol)?;
 
 forStmt: FOR (identWithPragma (COMMA identWithPragma)*) IN expr COLON stmt;
 blockStmt: BLOCK symbol? COLON stmt;
-routine: optInd identVis genericParamList?
-        paramListColon pragma? (EQUALS stmt)? optInd;
+routine: optInd identVis genericParamList? paramListColon pragma? (EQUALS stmt)? optInd;
 
 typeDefSection: typeDef | (ind typeDef+ ded);
 constantSection: constant | (ind constant+ ded);
