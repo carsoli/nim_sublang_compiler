@@ -28,8 +28,7 @@ optInd: ind?;
 optPar: ind?;
 ded: DEDENT | EOF;
 
-
-typeKeyw: VARIABLE | OUT | REF | TUPLE | PROC | ITERATOR;
+typeKeyw: VARIABLE | REF | TUPLE | PROC | ITERATOR;
 
 parKeyw: DISCARD | IF | WHILE | CASE
         | FOR | BLOCK | CONST | LET
@@ -56,10 +55,8 @@ arrayConstr: OPEN_BRACK optInd (exprColonEqExpr COMMA?)* optPar CLOSE_BRACK;
 
 typeDesc: simpleExpr;
 
-setOrTableConstr: OPEN_BRACE ((exprColonEqExpr COMMA)* | COLON ) CLOSE_BRACE;
-
 identOrLiteral: generalizedLit | symbol | literal
-               | par | arrayConstr | setOrTableConstr;
+               | par | arrayConstr;
 
 indexExpr: expr;
 indexExprList: indexExpr (COMMA indexExpr)*; 
@@ -68,7 +65,6 @@ primarySuffix:
       | OPEN_PAREN (exprColonEqExpr COMMA?)* CLOSE_PAREN
       | DOT optInd symbol generalizedLit?
       | OPEN_BRACK optInd indexExprList optPar CLOSE_BRACK
-      | OPEN_BRACE optInd indexExprList optPar CLOSE_BRACE
       | {self._input.LT(1).type in self.primarySuffixList}? expr;
 
 primary: typeKeyw typeDesc
@@ -107,7 +103,7 @@ symbolBody:(
                 keyw | 
                 IDENTIFIER | literal | 
                 (operator | OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
-                CLOSE_BRACK | OPEN_BRACE | CLOSE_BRACE | EQUALS) 
+                CLOSE_BRACK | EQUALS) 
         );  
 
 symbol: ( SYM_HEADER symbolBody+ SYM_HEADER )
@@ -177,8 +173,6 @@ ifStmt: IF condStmt;
 whenStmt: WHEN condStmt;
 whileStmt: WHILE expr COLON stmt;
 
-pattern: OPEN_BRACE stmt CLOSE_BRACE;
-
 genericParam: symbol (COMMA symbol)* (COLON expr)? (EQUALS optInd expr)?;
 genericParamList: OPEN_BRACK optInd (genericParam ((COMMA|SEMI_COLON) genericParam)*)?  optPar CLOSE_BRACK;
 
@@ -210,7 +204,7 @@ objectPart: (ind objectPart+ ded)
 
 objectType: OBJECT pragma? (OF typeDesc)? objectPart;
 //==
-typeClassParam: (VARIABLE | OUT)? symbol;
+typeClassParam: VARIABLE? symbol;
 typeClass: (typeClassParam (COMMA typeClassParam)*)? (pragma)? (OF (typeDesc (COMMA typeDesc)*)?)?
               {self._input.LT(1).type == self.INDENT}? stmt;
 
@@ -239,7 +233,7 @@ qualifiedIdent: symbol (DOT optInd symbol)?;
 
 forStmt: FOR (identWithPragma (COMMA identWithPragma)*) IN expr COLON stmt;
 blockStmt: BLOCK symbol? COLON stmt;
-routine: optInd identVis pattern? genericParamList?
+routine: optInd identVis genericParamList?
         paramListColon pragma? (EQUALS stmt)? optInd;
 
 typeDefSection: typeDef | (ind typeDef+ ded);

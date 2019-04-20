@@ -242,15 +242,6 @@ class m2_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by m2_Parser#setOrTableConstr.
-    def enterSetOrTableConstr(self, ctx:m2_Parser.SetOrTableConstrContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#setOrTableConstr.
-    def exitSetOrTableConstr(self, ctx:m2_Parser.SetOrTableConstrContext):
-        pass
-
-
     # Enter a parse tree produced by m2_Parser#identOrLiteral.
     def enterIdentOrLiteral(self, ctx:m2_Parser.IdentOrLiteralContext):
         pass
@@ -716,15 +707,6 @@ class m2_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by m2_Parser#whileStmt.
     def exitWhileStmt(self, ctx:m2_Parser.WhileStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by m2_Parser#pattern.
-    def enterPattern(self, ctx:m2_Parser.PatternContext):
-        pass
-
-    # Exit a parse tree produced by m2_Parser#pattern.
-    def exitPattern(self, ctx:m2_Parser.PatternContext):
         pass
 
 
