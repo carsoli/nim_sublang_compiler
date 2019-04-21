@@ -1,0 +1,15 @@
+{"compile":[
+["/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/test.c", "gcc -c  -w  -I/usr/lib/nim -o '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/test.o' '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/test.c'"],
+["/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_strutils.c", "gcc -c  -w  -I/usr/lib/nim -o '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_strutils.o' '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_strutils.c'"],
+["/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_math.c", "gcc -c  -w  -I/usr/lib/nim -o '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_math.o' '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_math.c'"],
+],
+"link":[
+"'/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/test.o'",
+"'/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_system.o'",
+"'/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_strutils.o'",
+"'/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_parseutils.o'",
+"'/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_math.o'",
+"'/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_algorithm.o'"
+],
+"linkcmd": "gcc   -o '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/test'  '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/test.o' '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_system.o' '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_strutils.o' '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_parseutils.o' '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_math.o' '/home/carol/Desktop/Semester 10/Core/Compilers Lab/M2/NumberTwo/nimcache/stdlib_algorithm.o'  -lm   -ldl"
+}
