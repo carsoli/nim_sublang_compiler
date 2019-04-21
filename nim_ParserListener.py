@@ -1,4 +1,4 @@
-# Generated from nim_Parser.g4 by ANTLR 4.7.2
+# Generated from nim_Parser.g4 by ANTLR 4.7.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .nim_Parser import nim_Parser

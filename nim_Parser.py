@@ -1,10 +1,9 @@
-# Generated from nim_Parser.g4 by ANTLR 4.7.2
+# Generated from nim_Parser.g4 by ANTLR 4.7.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
 import sys
-
 
 def serializedATN():
     with StringIO() as buf:
@@ -629,7 +628,7 @@ class nim_Parser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.2")
+        self.checkVersion("4.7.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -640,7 +639,6 @@ class nim_Parser ( Parser ):
     UINT16_LIT , UINT32_LIT , UINT64_LIT, FLOAT_LIT , FLOAT32_LIT , FLOAT64_LIT, STR_LIT, 
     RSTR_LIT , TRIPLESTR_LIT, CHAR_LIT, NIL ]
     primarySuffixList = [SYM_HEADER, IDENTIFIER, TYPE] + literals
-
 
 
     class IndContext(ParserRuleContext):
@@ -681,7 +679,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class OptIndContext(ParserRuleContext):
 
@@ -728,7 +725,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class DedContext(ParserRuleContext):
 
@@ -777,7 +773,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class TypeKeywContext(ParserRuleContext):
 
@@ -832,7 +827,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ParKeywContext(ParserRuleContext):
 
@@ -906,7 +900,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Op0Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -945,7 +938,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Op1Context(ParserRuleContext):
 
@@ -994,7 +986,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Op2Context(ParserRuleContext):
 
@@ -1062,7 +1053,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Op3Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1102,7 +1092,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Op4Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1141,7 +1130,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Op5Context(ParserRuleContext):
 
@@ -1196,7 +1184,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Op6Context(ParserRuleContext):
 
@@ -1264,7 +1251,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Op7Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1303,7 +1289,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Op8Context(ParserRuleContext):
 
@@ -1344,7 +1329,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Op9Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1384,7 +1368,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Op10Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1423,7 +1406,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class OperatorContext(ParserRuleContext):
 
@@ -1563,7 +1545,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class PrefixOperatorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1603,7 +1584,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class SimpleExprContext(ParserRuleContext):
 
@@ -1667,7 +1647,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class AssignExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1729,7 +1708,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class OrExprContext(ParserRuleContext):
 
@@ -1793,7 +1771,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class AndExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1855,7 +1832,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class CmpExprContext(ParserRuleContext):
 
@@ -1919,7 +1895,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class SliceExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1981,7 +1956,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class AmpExprContext(ParserRuleContext):
 
@@ -2045,7 +2019,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class PlusExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2107,7 +2080,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class MulExprContext(ParserRuleContext):
 
@@ -2171,7 +2143,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class DollarExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2233,7 +2204,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class LiteralContext(ParserRuleContext):
 
@@ -2331,7 +2301,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class GeneralizedLitContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2379,7 +2348,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class SymbolContext(ParserRuleContext):
 
@@ -2452,7 +2420,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class SymbolBodyContext(ParserRuleContext):
 
@@ -2592,7 +2559,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ExprColonEqExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2687,7 +2653,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ArrayConstrContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2760,7 +2725,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class TupleConstrContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2832,7 +2796,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class IdentOrLiteralContext(ParserRuleContext):
 
@@ -2921,7 +2884,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class IdentGeneralContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2998,7 +2960,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class PrimarySuffixContext(ParserRuleContext):
 
@@ -3188,7 +3149,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class PrimaryContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3310,7 +3270,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ParBodyContext(ParserRuleContext):
 
@@ -3469,7 +3428,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ParContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3532,7 +3490,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ImportStmtContext(ParserRuleContext):
 
@@ -3623,7 +3580,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class FromStmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3697,7 +3653,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ForExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3737,7 +3692,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class CondExprContext(ParserRuleContext):
 
@@ -3935,7 +3889,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class CaseExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3974,7 +3927,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class WhenExprContext(ParserRuleContext):
 
@@ -4020,7 +3972,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class IfExprContext(ParserRuleContext):
 
@@ -4078,7 +4029,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class CaseStmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4117,7 +4067,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class IfStmtContext(ParserRuleContext):
 
@@ -4175,7 +4124,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class WhenStmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4215,7 +4163,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ForStmtContext(ParserRuleContext):
 
@@ -4345,7 +4292,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class CondStmtContext(ParserRuleContext):
 
@@ -4599,7 +4545,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class WhileStmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4639,7 +4584,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class BlockStmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4678,7 +4622,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class DiscardStmtContext(ParserRuleContext):
 
@@ -4732,7 +4675,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ReturnStmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4785,7 +4727,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class BreakStmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4824,7 +4765,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class PragmaStmtContext(ParserRuleContext):
 
@@ -4865,7 +4805,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ExprContext(ParserRuleContext):
 
@@ -4933,7 +4872,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class PragmaContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4999,7 +4937,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class RoutineContext(ParserRuleContext):
 
@@ -5067,7 +5004,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class TypeSectionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5106,7 +5042,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class VariableSectionContext(ParserRuleContext):
 
@@ -5147,7 +5082,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ConstantSectionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5186,7 +5120,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Simple_complexStmtContext(ParserRuleContext):
 
@@ -5244,7 +5177,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class SimpleStmtContext(ParserRuleContext):
 
@@ -5338,7 +5270,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ComplexStmtContext(ParserRuleContext):
 
@@ -5500,7 +5431,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ColonBodyContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5545,7 +5475,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ExprStmtContext(ParserRuleContext):
 
@@ -5625,7 +5554,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class StmtContext(ParserRuleContext):
 
@@ -5761,7 +5689,6 @@ class nim_Parser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ModuleContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5815,7 +5742,6 @@ class nim_Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class StartContext(ParserRuleContext):
 

@@ -1,9 +1,8 @@
-# Generated from m2_Lexer.g4 by ANTLR 4.7.2
+# Generated from m2_Lexer.g4 by ANTLR 4.7.1
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
 import sys
-
 
 
 def serializedATN():
@@ -963,7 +962,7 @@ class m2_Lexer(Lexer):
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.2")
+        self.checkVersion("4.7.1")
         self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None
@@ -1010,7 +1009,6 @@ class m2_Lexer(Lexer):
             action(localctx, actionIndex)
         else:
             raise Exception("No registered action for:" + str(ruleIndex))
-
 
     def UNCONDITIONAL_NEWLINE_action(self, localctx:RuleContext , actionIndex:int):
         if actionIndex == 0:
