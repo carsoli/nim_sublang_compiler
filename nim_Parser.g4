@@ -13,7 +13,7 @@ ind: INDENT;
 optInd: ind?;
 ded: DEDENT | EOF;
 
-typeKeyw: VARIABLE | REF | TUPLE | PROC;
+typeKeyw: VARIABLE | REF | PROC;
 parKeyw: DISCARD | IF | WHILE | CASE
         | FOR | BLOCK | CONST | LET
         | WHEN | VARIABLE;
@@ -29,7 +29,8 @@ op7: OP7;
 op8: OP8;
 op9: OP9;
 op10: OP10;
-operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 | op10;
+operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 
+        | op7 | op8 | op9 | op10;
 prefixOperator: operator;
 
 simpleExpr: assignExpr (OP1 assignExpr)*;
@@ -98,7 +99,6 @@ par: OPEN_PAREN parBody CLOSE_PAREN | parBody;
 //NB: no need for ident with pragma
 //NB: identvis was symbol optInd operator? 
 // operator was a part of it, no need for it
-
 blockExpr: BLOCK symbol? COLON stmt; 
 forExpr: forStmt;
 condExpr: (simpleExpr | expr) COLON optInd (simpleExpr |expr) ded? 
@@ -150,8 +150,8 @@ expr:
 pragma: OPEN_BRACE DOT IDENTIFIER DOT? CLOSE_BRACE;
 routine: par (COLON stmt)*; //TODO
 typeSection: OPEN_BRACE;//TODO
-variableSection: ( variable | (ind (variable)+ ded) );
-constantSection: (CONST | (ind CONST+ ded) );
+variableSection: ( variable+ | (ind (variable)+ ded) );
+constantSection: (constant+ | (ind constant+ ded) );
 
 identVis: symbol operator?;
 varTuple: OPEN_BRACE identVis 
@@ -159,9 +159,12 @@ varTuple: OPEN_BRACE identVis
         optInd CLOSE_BRACE ded? 
         EQUALS ded? 
         optInd (simpleExpr | expr); 
-variable: (varTuple | idColonEq) colonBody? optInd;
+
+constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS optInd expr ded?;
+// variable: (varTuple | idColonEq) colonBody? optInd;
+variable: idColonEq colonBody? optInd; //this colon is for declarations
 idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
-        (COLON optInd simpleExpr)? ( EQUALS optInd (expr| simpleExpr) )? ;
+        (COLON optInd simpleExpr ded?)? ( EQUALS optInd (expr| simpleExpr) ded?)? ; //this colon is for type inference
 
 simple_complexStmt: simpleStmt | complexStmt;
 simpleStmt: 
@@ -188,8 +191,9 @@ colonBody: COLON stmt;
 exprStmt: simpleExpr ( EQUALS (expr |simpleExpr) colonBody?);
 
 
-stmt: (ind simple_complexStmt (SEMI_COLON? simple_complexStmt)* ded)
-    | ( simple_complexStmt )
+stmt: 
+     ( simple_complexStmt ) (SEMI_COLON? simple_complexStmt)* 
+//     | (ind simple_complexStmt (SEMI_COLON? simple_complexStmt)* ded)
     | ( ind simpleStmt (SEMI_COLON? simpleStmt)* ded)
     | ( simpleStmt) ;
 
