@@ -638,6 +638,15 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#substmt.
+    def enterSubstmt(self, ctx:nim_Parser.SubstmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#substmt.
+    def exitSubstmt(self, ctx:nim_Parser.SubstmtContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#stmt.
     def enterStmt(self, ctx:nim_Parser.StmtContext):
         pass

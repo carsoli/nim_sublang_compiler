@@ -117,9 +117,9 @@ ifStmt: IF NOT? condStmt;
 whenStmt: whenExpr; //TODO
 forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON optInd (stmt | exprStmt)+;
 
-condStmt: ( (simpleExpr | expr) COLON optInd (exprStmt | stmt)+ ded?)   
-          ( ELIF ( simpleExpr | expr ) COLON optInd (exprStmt | stmt)+ ded?)*
-          ( ELSE COLON optInd ( exprStmt | stmt )+ ded?)?;
+condStmt: ( (simpleExpr | expr) COLON optInd (exprStmt | substmt))   
+          ( ELIF ( simpleExpr | expr ) COLON optInd (exprStmt | substmt)+)*
+          ( ELSE COLON optInd ( exprStmt | substmt )+)?;
 
 whileStmt: WHILE; //TODO
 blockStmt: BLOCK; //TODO
@@ -133,7 +133,7 @@ expr: ifExpr
       | caseExpr; 
 
 pragma: OPEN_BRACE DOT IDENTIFIER DOT? CLOSE_BRACE;
-routine: par (COLON stmt)*; //TODO
+routine: par (COLON substmt)*; //TODO
 typeSection: OPEN_BRACE;//TODO
 variableSection: VARIABLE;//TODO
 constantSection: CONST;//TODO
@@ -159,14 +159,14 @@ complexStmt:
         | CONST constantSection
         | (LET | VARIABLE) variableSection;
 
-colonBody: COLON stmt;
+colonBody: COLON substmt;
 exprStmt: simpleExpr ( EQUALS (expr |simpleExpr) colonBody?);
 
 
-stmt: (ind simple_complexStmt (SEMI_COLON? simple_complexStmt)* ded)
-    | ( simple_complexStmt )
-    | ( ind simpleStmt (SEMI_COLON? simpleStmt)* ded)
-    | ( simpleStmt) ;
+substmt: ind simple_complexStmt (SEMI_COLON? simple_complexStmt)* ded
+    | ( simple_complexStmt );
+
+stmt: (simple_complexStmt (SEMI_COLON? simple_complexStmt)*);
 
 module: stmt+; 
 

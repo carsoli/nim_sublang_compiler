@@ -1,15 +1,11 @@
 IF  if
-IDENTIFIER  yes
-OPEN_PAREN  (
-STR_LIT  "Should I delete all your important files?"
-CLOSE_PAREN  )
+IDENTIFIER  inr
+OP5  >=
+INT_LIT  0
 COLON  :
-INDENT      
-IDENTIFIER  echo
-STR_LIT  "I'm sorry Dave, I'm afraid I can't do that."
-DEDENT  
+IMPORT  import
+IDENTIFIER  a
 ELSE  else
 COLON  :
-INDENT      
-IDENTIFIER  echo
-STR_LIT  "I think you know what the problem is just as well as I do."
+IMPORT  import
+IDENTIFIER  a
