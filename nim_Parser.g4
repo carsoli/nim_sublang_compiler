@@ -13,7 +13,7 @@ ind: INDENT;
 optInd: ind?;
 ded: DEDENT | EOF;
 
-typeKeyw: VARIABLE | REF | TUPLE | PROC;
+typeKeyw: VARIABLE | REF | PROC;
 parKeyw: DISCARD | IF | WHILE | CASE
         | FOR | BLOCK | CONST | LET
         | WHEN | VARIABLE;
@@ -29,7 +29,8 @@ op7: OP7;
 op8: OP8;
 op9: OP9;
 op10: OP10;
-operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 | op7 | op8 | op9 | op10;
+operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 
+        | op7 | op8 | op9 | op10;
 prefixOperator: operator;
 
 simpleExpr: assignExpr (OP1 assignExpr)*;
@@ -103,6 +104,7 @@ par: OPEN_PAREN parBody CLOSE_PAREN | parBody;
 importStmt: IMPORT IDENTIFIER (COMMA IDENTIFIER)*;
 fromStmt: FROM IDENTIFIER importStmt;
 
+blockExpr: BLOCK symbol? COLON stmt; 
 forExpr: forStmt;
 
 anyExpr: simpleExpr | expr;
@@ -112,14 +114,22 @@ condExprBody :
         (ELSE COLON (ind andExpr ded | anyExpr));
 condExpr: (simpleExpr | expr) COLON (ind condExprBody ded | condExprBody);
 
-caseExpr: CASE; //TODO
+caseExpr: CASE ( simpleExpr | expr ) 
+        ( (ind ofBranches ded) |  ofBranches); 
 whenExpr: WHEN condExpr; 
 ifExpr: IF NOT? condExpr;
 
-caseStmt: CASE; //TODO
-ifStmt: IF NOT? condStmt;
-whenStmt: whenExpr; //TODO
+exprList: (simpleExpr | expr) (COMMA (simpleExpr | expr))*;
 
+ofBranch: OF exprList COLON optInd (exprStmt | stmt)+ ded?;
+ofBranches: ofBranch+
+        ( ELSE COLON optInd ( exprStmt | stmt )+ ded?)?;
+
+caseStmt: CASE ( simpleExpr | expr ) 
+        ( (ind ofBranches ded) |  ofBranches); 
+
+ifStmt: IF NOT? condStmt;
+whenStmt: WHEN NOT? condStmt;
 
 forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  (ind (stmt | exprStmt)+ ded | (stmt | exprStmt) );
 
@@ -129,38 +139,50 @@ condStmtBody: (exprStmt | substmt)
 
 condStmt:  (simpleExpr | expr) COLON (ind condStmtBody ded | condStmtBody); 
 
-whileStmt: WHILE; //TODO
-blockStmt: BLOCK; //TODO
-discardStmt: DISCARD (expr); 
-returnStmt: RETURN (expr); 
-breakStmt: BREAK;//TODO
+blockStmt: BLOCK symbol? COLON (optInd stmt ded?);
+
 pragmaStmt: pragma ; //TODO
 
-expr: ifExpr
-      | whenExpr
-      | caseExpr; 
+expr: 
+        blockExpr
+        | forExpr
+        | ifExpr
+        | whenExpr;
 
 pragma: OPEN_BRACE DOT IDENTIFIER DOT? CLOSE_BRACE;
 routine: par (COLON substmt)*; //TODO
 typeSection: OPEN_BRACE;//TODO
-variableSection: VARIABLE;//TODO
-constantSection: CONST;//TODO
+variableSection: ( variable+ | (ind (variable)+ ded) );
+constantSection: (constant+ | (ind constant+ ded) );
+
+identVis: symbol operator?;
+varTuple: OPEN_BRACE identVis 
+        (COMMA identVis)* 
+        optInd CLOSE_BRACE ded? 
+        EQUALS ded? 
+        optInd (simpleExpr | expr); 
+
+constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS optInd expr ded?;
+// variable: (varTuple | idColonEq) colonBody? optInd;
+variable: idColonEq colonBody? optInd; //this colon is for declarations
+idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
+        (COLON optInd simpleExpr ded?)? ( EQUALS optInd (expr| simpleExpr) ded?)? ; //this colon is for type inference
 
 simple_complexStmt: simpleStmt | complexStmt;
 simpleStmt: 
         importStmt 
         | fromStmt 
-        | discardStmt 
-        | returnStmt
+        // | discardStmt 
+        // | returnStmt
+        // | breakStmt
         | pragmaStmt
-        | breakStmt
         ;
 
 complexStmt: 
         forStmt
         | ifStmt        
         | blockStmt
-        | whileStmt
+        // | whileStmt
         | whenStmt
         | (TEMPLATE | PROC | MACRO) routine
         | TYPE typeSection 
