@@ -76,7 +76,7 @@ identGeneral: generalizedLit | symbol | par | arrayConstr;
 
 primarySuffix: 
         OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN
-      | DOT optInd symbol generalizedLit?
+      | DOT symbol generalizedLit?
       | OPEN_BRACK (simpleExpr | expr) (COMMA (simpleExpr | expr) )* CLOSE_BRACK
       | {self._input.LT(1).type in self.primarySuffixList}? expr
       ;
@@ -100,13 +100,17 @@ par: OPEN_PAREN parBody CLOSE_PAREN | parBody;
 // operator was a part of it, no need for it
 
 
-importStmt: IMPORT optInd IDENTIFIER (COMMA optInd IDENTIFIER)* ded?;
-fromStmt: FROM optInd IDENTIFIER optInd importStmt ded?;
+importStmt: IMPORT IDENTIFIER (COMMA IDENTIFIER)*;
+fromStmt: FROM IDENTIFIER importStmt;
 
 forExpr: forStmt;
-condExpr: (simpleExpr | expr) COLON optInd (simpleExpr |expr) ded? 
-        (ELIF ( expr | simpleExpr) COLON optInd (simpleExpr | expr) ded?)*
-        (ELSE COLON optInd (simpleExpr|expr) ded?);
+
+anyExpr: simpleExpr | expr;
+condExprBody : 
+        (simpleExpr |expr) 
+        (ELIF ( expr | simpleExpr) COLON (ind anyExpr ded | anyExpr))*
+        (ELSE COLON (ind andExpr ded | anyExpr));
+condExpr: (simpleExpr | expr) COLON (ind condExprBody ded | condExprBody);
 
 caseExpr: CASE; //TODO
 whenExpr: WHEN condExpr; 
@@ -115,16 +119,20 @@ ifExpr: IF NOT? condExpr;
 caseStmt: CASE; //TODO
 ifStmt: IF NOT? condStmt;
 whenStmt: whenExpr; //TODO
-forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON optInd (stmt | exprStmt)+;
 
-condStmt: ( (simpleExpr | expr) COLON optInd (exprStmt | substmt))   
-          ( ELIF ( simpleExpr | expr ) COLON optInd (exprStmt | substmt)+)*
-          ( ELSE COLON optInd ( exprStmt | substmt )+)?;
+
+forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  (ind (stmt | exprStmt)+ ded | (stmt | exprStmt) );
+
+condStmtBody: (exprStmt | substmt)   
+          ( ELIF ( simpleExpr | expr ) COLON (ind (exprStmt+ | substmt) ded | (exprStmt+ | substmt)))*
+          ( ELSE COLON (ind ( exprStmt+ | substmt ) ded | ( exprStmt+ | substmt )))?;
+
+condStmt:  (simpleExpr | expr) COLON (ind condStmtBody ded | condStmtBody); 
 
 whileStmt: WHILE; //TODO
 blockStmt: BLOCK; //TODO
-discardStmt: DISCARD (optInd expr); 
-returnStmt: RETURN (optInd expr); 
+discardStmt: DISCARD (expr); 
+returnStmt: RETURN (expr); 
 breakStmt: BREAK;//TODO
 pragmaStmt: pragma ; //TODO
 

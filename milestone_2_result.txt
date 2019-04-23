@@ -1,11 +1,288 @@
 IF  if
+IDENTIFIER  name
+OP5  ==
+STR_LIT  ""
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELIF  elif
+IDENTIFIER  name
+OP5  ==
+STR_LIT  "name"
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELSE  else
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  x4
+COLON  :
+IMPORT  import
+IDENTIFIER  omak
+IF  if
+NOT  not
+IDENTIFIER  x4
+COLON  :
+INDENT      
+IF  if
+IDENTIFIER  y4
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELSE  else
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+DEDENT  
+IF  if
+NOT  not
+IDENTIFIER  x4
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  yes
+OPEN_PAREN  (
+STR_LIT  "Should I delete all your important files?"
+CLOSE_PAREN  )
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELSE  else
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  i
+OP8  +
+IDENTIFIER  j
+OP5  ==
+INT_LIT  3145
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  n
+OP5  <
+INT_LIT  2
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELSE  else
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  n
+OP5  ==
+INT_LIT  0
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELIF  elif
+IDENTIFIER  n
+OP5  ==
+INT_LIT  1
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELSE  else
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
 IDENTIFIER  inr
 OP5  >=
 INT_LIT  0
 COLON  :
-IMPORT  import
-IDENTIFIER  a
+IDENTIFIER  inr
 ELSE  else
 COLON  :
+IDENTIFIER  inr
+IF  if
+IDENTIFIER  n
+OP5  <
+INT_LIT  2
+COLON  :
 IMPORT  import
+IDENTIFIER  omak
+IF  if
 IDENTIFIER  a
+OPEN_BRACK  [
+IDENTIFIER  l
+CLOSE_BRACK  ]
+OP5  <
+IDENTIFIER  p
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  a
+OPEN_BRACK  [
+IDENTIFIER  r
+CLOSE_BRACK  ]
+OP5  >
+IDENTIFIER  p
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+CONTINUE  continue
+DEDENT  
+IF  if
+IDENTIFIER  l
+OP5  <=
+IDENTIFIER  r
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  decode
+COLON  :
+INT_LIT  26
+OP8  -
+IDENTIFIER  k
+ELSE  else
+COLON  :
+IDENTIFIER  k
+IF  if
+IDENTIFIER  ord
+OPEN_PAREN  (
+IDENTIFIER  i
+CLOSE_PAREN  )
+OP5  >=
+INT_LIT  65
+OP4  and
+IDENTIFIER  ord
+OPEN_PAREN  (
+IDENTIFIER  i
+CLOSE_PAREN  )
+OP5  <=
+INT_LIT  90
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  b
+OP5  <
+INT_LIT  0
+COLON  :
+IMPORT  import
+IDENTIFIER  omak
+IF  if
+IDENTIFIER  balanced
+OPEN_PAREN  (
+IDENTIFIER  s
+CLOSE_PAREN  )
+COLON  :
+IMPORT  import
+IDENTIFIER  omak
+IF  if
+IDENTIFIER  n
+DOT  .
+IDENTIFIER  isLeaf
+COLON  :
+IMPORT  import
+IDENTIFIER  omak
+INDENT      
+ELSE  else
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+DEDENT  
+IF  if
+IDENTIFIER  n
+DOT  .
+IDENTIFIER  isLeaf
+COLON  :
+IDENTIFIER  result
+EQUALS  =
+OP2  @
+OPEN_BRACK  [
+IDENTIFIER  n
+DOT  .
+IDENTIFIER  data
+CLOSE_BRACK  ]
+INDENT      
+ELSE  else
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+DEDENT  
+IF  if
+IDENTIFIER  mmlen
+OP5  >
+INT_LIT  0
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+IF  if
+IDENTIFIER  guess
+OP5  <
+IDENTIFIER  answer
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELIF  elif
+IDENTIFIER  guess
+OP5  >
+IDENTIFIER  answer
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+DEDENT  
+ELSE  else
+COLON  :
+INDENT      
+IMPORT  import
+IDENTIFIER  omak
+BREAK  break
