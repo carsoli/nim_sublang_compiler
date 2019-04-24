@@ -99,7 +99,7 @@ par: OPEN_PAREN parBody CLOSE_PAREN | parBody;
 //NB: no need for ident with pragma
 //NB: identvis was symbol optInd operator? 
 // operator was a part of it, no need for it
-blockExpr: BLOCK symbol? COLON stmt; 
+blockExpr: BLOCK symbol? COLON ( stmt | (ind stmt ded)); 
 forExpr: forStmt;
 condExpr: (simpleExpr | expr) COLON optInd (simpleExpr |expr) ded? 
         (ELIF ( expr | simpleExpr) COLON optInd (simpleExpr | expr) ded?)*
@@ -112,23 +112,23 @@ ifExpr: IF NOT? condExpr;
 
 exprList: (simpleExpr | expr) (COMMA (simpleExpr | expr))*;
 
-ofBranch: OF exprList COLON optInd (exprStmt | stmt)+ ded?;
+ofBranch: OF exprList COLON optInd (exprStmt | ( stmt | (ind stmt ded)) )+ ded?;
 ofBranches: ofBranch+
-        ( ELSE COLON optInd ( exprStmt | stmt )+ ded?)?;
+        ( ELSE COLON optInd ( exprStmt | ( stmt | (ind stmt ded)) )+ ded?)?;
 
 caseStmt: CASE ( simpleExpr | expr ) 
         ( (ind ofBranches ded) |  ofBranches); 
 
 ifStmt: IF NOT? condStmt;
 whenStmt: WHEN NOT? condStmt;
-forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON optInd (stmt | exprStmt)+;
+forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON optInd (( stmt | (ind stmt ded)) | exprStmt)+;
 
-condStmt: ( (simpleExpr | expr) COLON optInd (exprStmt | stmt)+ ded?)   
-          ( ELIF ( simpleExpr | expr ) COLON optInd (exprStmt | stmt)+ ded?)*
-          ( ELSE COLON optInd ( exprStmt | stmt )+ ded?)?;
+condStmt: ( (simpleExpr | expr) COLON optInd (exprStmt | ( stmt | (ind stmt ded)))+ ded?)   
+          ( ELIF ( simpleExpr | expr ) COLON optInd (exprStmt | ( stmt | (ind stmt ded)))+ ded?)*
+          ( ELSE COLON optInd ( exprStmt | ( stmt | (ind stmt ded)) )+ ded?)?;
 
 whileStmt: WHILE (simpleExpr | expr) COLON 
-        optInd (exprStmt | stmt) ded?;
+        optInd (exprStmt | ( stmt | (ind stmt ded))) ded?;
 
 importStmt: IMPORT optInd IDENTIFIER (COMMA optInd IDENTIFIER)* ded?;
 fromStmt: FROM optInd IDENTIFIER optInd importStmt ded?;
@@ -136,7 +136,7 @@ fromStmt: FROM optInd IDENTIFIER optInd importStmt ded?;
 discardStmt: DISCARD simpleExpr?;
 returnStmt: RETURN simpleExpr?; 
 breakStmt: BREAK simpleExpr?;
-blockStmt: BLOCK symbol? COLON (optInd stmt ded?);
+blockStmt: BLOCK symbol? COLON (optInd ( stmt | (ind stmt ded)) ded?);
 
 pragmaStmt: pragma ; //TODO
 
@@ -150,7 +150,7 @@ expr:
 pragma: OPEN_BRACE DOT IDENTIFIER DOT? CLOSE_BRACE;
 routine: par (COLON stmt)*; //TODO
 typeSection: OPEN_BRACE;//TODO
-variableSection: ( variable+ | (ind (variable)+ ded) );
+variableSection: ( variable+ | (ind variable+ ded) );
 constantSection: (constant+ | (ind constant+ ded) );
 
 identVis: symbol operator?;
@@ -162,7 +162,8 @@ varTuple: OPEN_BRACE identVis
 
 constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS optInd expr ded?;
 // variable: (varTuple | idColonEq) colonBody? optInd;
-variable: idColonEq colonBody? optInd; //this colon is for declarations
+variable: idColonEq ;
+// variable: idColonEq colonBody?; //this colon is for declarations
 idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
         (COLON optInd simpleExpr ded?)? ( EQUALS optInd (expr| simpleExpr) ded?)? ; //this colon is for type inference
 
