@@ -35,15 +35,6 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#parKeyw.
-    def enterParKeyw(self, ctx:nim_Parser.ParKeywContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#parKeyw.
-    def exitParKeyw(self, ctx:nim_Parser.ParKeywContext):
-        pass
-
-
     # Enter a parse tree produced by nim_Parser#op0.
     def enterOp0(self, ctx:nim_Parser.Op0Context):
         pass
@@ -359,24 +350,6 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#parBody.
-    def enterParBody(self, ctx:nim_Parser.ParBodyContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#parBody.
-    def exitParBody(self, ctx:nim_Parser.ParBodyContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#par.
-    def enterPar(self, ctx:nim_Parser.ParContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#par.
-    def exitPar(self, ctx:nim_Parser.ParContext):
-        pass
-
-
     # Enter a parse tree produced by nim_Parser#importStmt.
     def enterImportStmt(self, ctx:nim_Parser.ImportStmtContext):
         pass
@@ -458,6 +431,24 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#ofBranchExpr.
+    def enterOfBranchExpr(self, ctx:nim_Parser.OfBranchExprContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#ofBranchExpr.
+    def exitOfBranchExpr(self, ctx:nim_Parser.OfBranchExprContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#ofBranchesExpr.
+    def enterOfBranchesExpr(self, ctx:nim_Parser.OfBranchesExprContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#ofBranchesExpr.
+    def exitOfBranchesExpr(self, ctx:nim_Parser.OfBranchesExprContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#whenExpr.
     def enterWhenExpr(self, ctx:nim_Parser.WhenExprContext):
         pass
@@ -485,30 +476,30 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#ofBranch.
-    def enterOfBranch(self, ctx:nim_Parser.OfBranchContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#ofBranch.
-    def exitOfBranch(self, ctx:nim_Parser.OfBranchContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#ofBranches.
-    def enterOfBranches(self, ctx:nim_Parser.OfBranchesContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#ofBranches.
-    def exitOfBranches(self, ctx:nim_Parser.OfBranchesContext):
-        pass
-
-
     # Enter a parse tree produced by nim_Parser#caseStmt.
     def enterCaseStmt(self, ctx:nim_Parser.CaseStmtContext):
         pass
 
     # Exit a parse tree produced by nim_Parser#caseStmt.
     def exitCaseStmt(self, ctx:nim_Parser.CaseStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#ofBranchesStmt.
+    def enterOfBranchesStmt(self, ctx:nim_Parser.OfBranchesStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#ofBranchesStmt.
+    def exitOfBranchesStmt(self, ctx:nim_Parser.OfBranchesStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#ofBranchStmt.
+    def enterOfBranchStmt(self, ctx:nim_Parser.OfBranchStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#ofBranchStmt.
+    def exitOfBranchStmt(self, ctx:nim_Parser.OfBranchStmtContext):
         pass
 
 
@@ -815,6 +806,42 @@ class nim_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by nim_Parser#macroRoutine.
     def exitMacroRoutine(self, ctx:nim_Parser.MacroRoutineContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#typeSectionBodyExpr.
+    def enterTypeSectionBodyExpr(self, ctx:nim_Parser.TypeSectionBodyExprContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#typeSectionBodyExpr.
+    def exitTypeSectionBodyExpr(self, ctx:nim_Parser.TypeSectionBodyExprContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#typeSectionBodyHeader.
+    def enterTypeSectionBodyHeader(self, ctx:nim_Parser.TypeSectionBodyHeaderContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#typeSectionBodyHeader.
+    def exitTypeSectionBodyHeader(self, ctx:nim_Parser.TypeSectionBodyHeaderContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#typeSectionBody.
+    def enterTypeSectionBody(self, ctx:nim_Parser.TypeSectionBodyContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#typeSectionBody.
+    def exitTypeSectionBody(self, ctx:nim_Parser.TypeSectionBodyContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#typeSectionBodyList.
+    def enterTypeSectionBodyList(self, ctx:nim_Parser.TypeSectionBodyListContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#typeSectionBodyList.
+    def exitTypeSectionBodyList(self, ctx:nim_Parser.TypeSectionBodyListContext):
         pass
 
 

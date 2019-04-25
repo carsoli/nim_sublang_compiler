@@ -10,4 +10,10 @@ block busyloops:
         while true:
             break busyloops
 
-    
+
+template searchLoop(inp, actions) {.dirty} =
+    var mmpos = 0
+    while mmpos < inp.len:
+        block searchSubs:
+            actions
+            inc(mmpos)

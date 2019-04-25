@@ -23,6 +23,7 @@ of ']':
     if b < 0: return false
 else: discard
 
+##case expr
 case isLeaf: bool
 of true:  data: T
 of false: list: seq[TreeList[T]]

@@ -2,7 +2,7 @@ parser grammar nim_Parser;
 options {language='Python3'; tokenVocab=m2_Lexer;}
 
 @parser::members{
-parKeyWList = [IF, WHILE, CASE, FOR, BLOCK, CONST, LET, WHEN, VARIABLE]
+# parKeyWList = [IF, WHILE, CASE, FOR, BLOCK, CONST, LET, WHEN, VARIABLE]
 literals = [INT_LIT, INT8_LIT, INT16_LIT , INT32_LIT , INT64_LIT, UINT_LIT , UINT8_LIT , 
 UINT16_LIT , UINT32_LIT , UINT64_LIT, FLOAT_LIT , FLOAT32_LIT , FLOAT64_LIT, STR_LIT, 
 RSTR_LIT , TRIPLESTR_LIT, CHAR_LIT, NIL ]
@@ -12,36 +12,33 @@ primarySuffixList = [SYM_HEADER, IDENTIFIER, TYPE] + literals
 ind: INDENT;
 ded: DEDENT | EOF;
 
-typeKeyw: VARIABLE | REF | PROC;
-parKeyw: DISCARD | IF | WHILE | CASE
-        | FOR | BLOCK | CONST | LET
-        | WHEN | VARIABLE;
+typeKeyw: REF | OBJECT ; //|PROC | VARIABLE | 
 
 op0: OP0;
 op1: OP1 | EQUALS;
-op2: OP2 | (COLON COLON) | COLON ;
+op2: ( OP2 | COLON | (COLON COLON) );
 op3: OP3;
 op4: OP4;
-op5: OP5 | IN | OF | NOT ;
-op6: OP6 | (DOT DOT) | DOT;
+op5: ( OP5 | IN | OF | NOT );
+op6: ( OP6 | DOT | (DOT DOT));
 op7: OP7;
 op8: OP8;
 op9: OP9;
-op10: OP10 | DOLLAR_SIGN;
+op10: (OP10 | DOLLAR_SIGN);
 operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 
         | op7 | op8 | op9 | op10;
 prefixOperator: operator;
 
-simpleExpr: assignExpr (OP1 assignExpr)*;
-assignExpr: orExpr (OP2 orExpr)*;
-orExpr : andExpr (OP3 andExpr)*;
-andExpr : cmpExpr (OP4 cmpExpr)*;
-cmpExpr : sliceExpr (OP5 sliceExpr)*;
-sliceExpr : ampExpr (OP6 ampExpr)*;
-ampExpr : plusExpr (OP7 plusExpr)*;
-plusExpr : mulExpr (OP8 mulExpr)*;
-mulExpr : dollarExpr (OP9 dollarExpr)*;
-dollarExpr : primary (OP10 primary)*;
+simpleExpr: assignExpr (op1 assignExpr)*;
+assignExpr: orExpr (op2 orExpr)*;
+orExpr : andExpr (op3 andExpr)*;
+andExpr : cmpExpr (op4 cmpExpr)*;
+cmpExpr : sliceExpr (op5 sliceExpr)*;
+sliceExpr : ampExpr (op6 ampExpr)*;
+ampExpr : plusExpr (op7 plusExpr)*;
+plusExpr : mulExpr (op8 mulExpr)*;
+mulExpr : dollarExpr (op9 dollarExpr)*;
+dollarExpr : primary (op10 primary)*;
 
 literal: INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
         | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
@@ -51,8 +48,7 @@ literal: INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
         | NIL;
 
 generalizedLit: GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT;
-symbol: symbolBody
-        | SYM_HEADER symbolBody SYM_HEADER;
+symbol: (symbolBody | (SYM_HEADER symbolBody SYM_HEADER));
         // | keyw
 
 // symbolWHeader: SYM_HEADER symbolBody SYM_HEADER | symbolBody;
@@ -60,7 +56,7 @@ symbolBody:(
                 // keyw | 
                 IDENTIFIER | literal | 
                 (operator | OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
-                CLOSE_BRACK | EQUALS )* 
+                CLOSE_BRACK | EQUALS )+ 
         );  
 
 
@@ -86,27 +82,28 @@ primarySuffix:
          OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN
         | DOT symbol generalizedLit?
         | OPEN_BRACK exprList CLOSE_BRACK
-        | {self._input.LT(1).type in self.primarySuffixList}? expr
+        // | {self._input.LT(1).type in self.primarySuffixList}? expr
+        // | expr
       ;
 
 primary:
 (
-        ( typeKeyw simpleExpr ) 
+        ( typeKeyw ( simpleExpr | (ind expr ded) ) ) 
         | ( prefixOperator* ( (identOrLiteral primarySuffix*) | primarySuffix+ ) )
 );
 
-parBody:( {self._input.LT(1).type in self.parKeyWList}? simple_complexStmt (SEMI_COLON simple_complexStmt)?
-        | 
-          expr | ((COLON | EQUALS) expr ) ( ((COMMA exprColonEqExpr)+) | ((SEMI_COLON (simple_complexStmt)+ ) ) )
-        );
+// parBody:( {self._input.LT(1).type in self.parKeyWList}? simple_complexStmt (SEMI_COLON simple_complexStmt)?
+//         | 
+//           expr | ((COLON | EQUALS) expr ) ( ((COMMA exprColonEqExpr)+) | ((SEMI_COLON (simple_complexStmt)+ ) ) )
+//         );
 
 //TODO:
-par: OPEN_PAREN parBody CLOSE_PAREN;// | parBody;
+// par: OPEN_PAREN parBody CLOSE_PAREN;// | parBody;
 
 importStmt: IMPORT IDENTIFIER (COMMA IDENTIFIER)*;
 fromStmt: FROM IDENTIFIER importStmt;
 
-blockExpr: BLOCK symbol COLON ( stmt | (ind stmt ded)); 
+blockExpr: BLOCK IDENTIFIER COLON ind simpleExpr+ ded; 
 forExpr: forStmt;
 
 anyExpr: simpleExpr | expr;
@@ -118,22 +115,26 @@ condExprBody :
         (ELSE COLON (ind anyExpr ded | anyExpr));
 condExpr: anyExpr COLON (ind condExprBody ded | condExprBody);
 
-caseExpr: CASE anyExpr  
-        ( (ind ofBranches ded) |  ofBranches); 
+caseExpr: CASE simpleExpr (COLON simpleExpr)? 
+        ( (ind ofBranchesExpr ded) |  ofBranchesExpr); 
+
+ofBranchExpr: OF exprList COLON simpleExpr;
+
+ofBranchesExpr: ofBranchExpr+;
 
 whenExpr: WHEN condExpr; 
 
 ifExpr: IF NOT? condExpr;
 
-exprList: anyExpr (COMMA anyExpr)*;
+exprList: simpleExpr (COMMA simpleExpr)*;
 
-ofBranch: OF exprList COLON (ind anyStmt+ ded | anyStmt);
+caseStmt: CASE simpleExpr ofBranchesStmt; 
 
-ofBranches: ofBranch+
+ofBranchesStmt: ofBranchStmt+
         ( ELSE COLON ( (ind anyStmt+ ded) | anyStmt ))?;
+         
+ofBranchStmt: OF exprList COLON ( (ind anyStmt+ ded) | anyStmt);
 
-caseStmt: CASE anyExpr 
-        ( (ind ofBranches ded) |  ofBranches); 
 
 whileStmt: WHILE anyExpr COLON 
         ((ind ( exprStmt+ | stmt ) ded) | ( exprStmt+ | stmt ));
@@ -153,7 +154,7 @@ condStmtBody: ( (ind stmt ded) | stmt )
 
 condStmt:  anyExpr COLON condStmtBody; 
 
-blockStmt: BLOCK symbol COLON ((ind stmt ded) | stmt);
+blockStmt: BLOCK IDENTIFIER COLON ((ind anyStmt+ ded) | anyStmt);
 discardStmt: DISCARD; //Empty discard Statement
 returnStmt: (RETURN simpleExpr) | RETURN; 
 breakStmt: (BREAK simpleExpr) | BREAK;
@@ -161,9 +162,11 @@ continueStmt: CONTINUE;
 
 expr: 
         blockExpr
+        | caseExpr
         | forExpr
         | ifExpr
-        | whenExpr;
+        | whenExpr
+        ;
 
 pragma: OPEN_BRACE DOT IDENTIFIER DOT? CLOSE_BRACE;
 
@@ -190,9 +193,17 @@ macroRoutineBodyList: OPEN_PAREN macroRoutineBody (( COLON | SEMI_COLON ) macroR
 macroRoutineTail: (COLON macroRoutineType)? EQUALS ( anyStmt | (ind anyStmt+ ded) ); 
 macroRoutine: macroRoutineHeader macroRoutineBodyList macroRoutineTail;
 
-typeSection: OPEN_BRACE;//TODO
-variableSection: ( variable+ | (ind variable+ ded) );
-constantSection: ( constant+ | (ind constant+ ded) );
+
+typeSectionBodyExpr: simpleExpr; 
+typeSectionBodyHeader: IDENTIFIER arrayConstr? EQUALS ;
+typeSectionBody: typeSectionBodyHeader typeSectionBodyExpr;
+typeSectionBodyList: (ind typeSectionBody+ ded);
+typeSection: typeSectionBodyList;
+
+variableSection: ( variable+ | (ind variable+ ded) ); //TODO
+
+constantSection: ( constant+ | (ind constant+ ded) );//TODO
+
 letSection: (IDENTIFIER EQUALS simpleExpr) | (ind (IDENTIFIER EQUALS simpleExpr)+ ded); 
 
 identVis: symbol operator?;
