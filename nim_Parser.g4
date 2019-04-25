@@ -121,9 +121,9 @@ ifExpr: IF NOT? condExpr;
 
 exprList: (simpleExpr | expr) (COMMA (simpleExpr | expr))*;
 
-ofBranch: OF exprList COLON optInd (exprStmt | stmt)+ ded?;
+ofBranch: OF exprList COLON (ind (exprStmt | stmt)+ ded | (exprStmt | stmt));
 ofBranches: ofBranch+
-        ( ELSE COLON optInd ( exprStmt | stmt )+ ded?)?;
+        ( ELSE COLON (ind ( exprStmt | stmt )+ ded | (exprStmt | stmt)))?;
 
 caseStmt: CASE ( simpleExpr | expr ) 
         ( (ind ofBranches ded) |  ofBranches); 
@@ -139,7 +139,7 @@ condStmtBody: (exprStmt | substmt)
 
 condStmt:  (simpleExpr | expr) COLON (ind condStmtBody ded | condStmtBody); 
 
-blockStmt: BLOCK symbol? COLON (optInd stmt ded?);
+blockStmt: BLOCK symbol? COLON (ind stmt ded | stmt);
 
 pragmaStmt: pragma ; //TODO
 
@@ -158,15 +158,15 @@ constantSection: (constant+ | (ind constant+ ded) );
 identVis: symbol operator?;
 varTuple: OPEN_BRACE identVis 
         (COMMA identVis)* 
-        optInd CLOSE_BRACE ded? 
+        (ind CLOSE_BRACE ded | CLOSE_BRACE)
         EQUALS ded? 
-        optInd (simpleExpr | expr); 
+        (ind (simpleExpr | expr) | (simpleExpr | expr)); 
 
-constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS optInd expr ded?;
+constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS (ind expr ded | expr);
 // variable: (varTuple | idColonEq) colonBody? optInd;
 variable: idColonEq colonBody? optInd; //this colon is for declarations
 idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
-        (COLON optInd simpleExpr ded?)? ( EQUALS optInd (expr| simpleExpr) ded?)? ; //this colon is for type inference
+        (COLON (ind simpleExpr ded| simpleExpr))? ( EQUALS ( ind (expr| simpleExpr) ded | anyExpr))? ; //this colon is for type inference
 
 simple_complexStmt: simpleStmt | complexStmt;
 simpleStmt: 
