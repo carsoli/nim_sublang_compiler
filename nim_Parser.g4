@@ -100,12 +100,8 @@ parBody:( {self._input.LT(1).type in self.parKeyWList}? simple_complexStmt (SEMI
           expr | ((COLON | EQUALS) expr ) ( ((COMMA exprColonEqExpr)+) | ((SEMI_COLON (simple_complexStmt)+ ) ) )
         );
 
-//TODO: completely wrong
+//TODO:
 par: OPEN_PAREN parBody CLOSE_PAREN;// | parBody;
-
-//NB: no need for ident with pragma
-//NB: identvis was symbol optInd operator? 
-// operator was a part of it, no need for it
 
 importStmt: IMPORT IDENTIFIER (COMMA IDENTIFIER)*;
 fromStmt: FROM IDENTIFIER importStmt;
@@ -162,8 +158,6 @@ returnStmt: (RETURN simpleExpr) | RETURN;
 breakStmt: (BREAK simpleExpr) | BREAK;
 continueStmt: CONTINUE; 
 
-pragmaStmt: pragma ; //TODO
-
 expr: 
         blockExpr
         | forExpr
@@ -182,8 +176,19 @@ procRoutineTail: (COLON procRoutineType)? EQUALS ( anyStmt | (ind anyStmt+ ded) 
 procRoutineBodyList: OPEN_PAREN procRoutineBody (COMMA procRoutineBody)* CLOSE_PAREN; 
 procRoutine: procRoutineHeader procRoutineBodyList procRoutineTail; 
 
-templateRoutine: COLON; //TODO
-macroRoutine: COLON; //TODO
+templateRoutineHeader: IDENTIFIER;
+templateRoutineBodyList: OPEN_PAREN templateRoutineBody (COMMA templateRoutineBody)* CLOSE_PAREN;
+templateRoutineBody: IDENTIFIER;
+templateRoutineTail: pragma? EQUALS ( anyStmt | (ind anyStmt+ ded) ); 
+templateRoutine: templateRoutineHeader templateRoutineBodyList templateRoutineTail; 
+
+
+macroRoutineHeader: IDENTIFIER;
+macroRoutineType: IDENTIFIER;
+macroRoutineBody:IDENTIFIER (COLON macroRoutineType);
+macroRoutineBodyList: OPEN_PAREN macroRoutineBody (( COLON | SEMI_COLON ) macroRoutineBody)* CLOSE_PAREN;
+macroRoutineTail: (COLON macroRoutineType)? EQUALS ( anyStmt | (ind anyStmt+ ded) ); 
+macroRoutine: macroRoutineHeader macroRoutineBodyList macroRoutineTail;
 
 typeSection: OPEN_BRACE;//TODO
 variableSection: ( variable+ | (ind variable+ ded) );
@@ -210,7 +215,6 @@ simpleStmt:
         | returnStmt
         | breakStmt
         | continueStmt
-        | pragmaStmt
         ;
 
 complexStmt: 

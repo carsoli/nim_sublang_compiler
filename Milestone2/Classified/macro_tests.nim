@@ -6,4 +6,8 @@ macro multiMatch(inp: string; sections: untyped): untyped =
     ## of pattern2:
     ##   ...
     template branch(inp, p, action) =
-        import xlen
+        var mmlen = matchLen(inp, mmpatterns[p], matches, mmpos)
+        if mmlen > 0:
+            action
+            inc(mmpos, mmlen)
+            break searchSubs
