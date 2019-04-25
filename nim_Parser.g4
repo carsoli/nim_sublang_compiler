@@ -104,7 +104,7 @@ par: OPEN_PAREN parBody CLOSE_PAREN | parBody;
 importStmt: IMPORT IDENTIFIER (COMMA IDENTIFIER)*;
 fromStmt: FROM IDENTIFIER importStmt;
 
-blockExpr: BLOCK symbol? COLON stmt; 
+blockExpr: BLOCK symbol? COLON ( stmt | (ind stmt ded)); 
 forExpr: forStmt;
 
 anyExpr: simpleExpr | expr;
@@ -131,15 +131,21 @@ caseStmt: CASE ( simpleExpr | expr )
 ifStmt: IF NOT? condStmt;
 whenStmt: WHEN NOT? condStmt;
 
-forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  (ind (stmt | exprStmt)+ ded | (stmt | exprStmt) );
+forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  (ind (stmt)+ ded | (stmt | exprStmt) );
 
 condStmtBody: (exprStmt | substmt)   
           ( ELIF ( simpleExpr | expr ) COLON (ind (exprStmt+ | substmt) ded | (exprStmt+ | substmt)))*
           ( ELSE COLON (ind ( exprStmt+ | substmt ) ded | ( exprStmt+ | substmt )))?;
 
+whileStmt: WHILE (simpleExpr | expr) COLON 
+        optInd (exprStmt | ( stmt | (ind stmt ded))) ded?;
+
 condStmt:  (simpleExpr | expr) COLON (ind condStmtBody ded | condStmtBody); 
 
 blockStmt: BLOCK symbol? COLON (ind stmt ded | stmt);
+discardStmt: DISCARD simpleExpr?;
+returnStmt: RETURN simpleExpr?; 
+breakStmt: BREAK simpleExpr?;
 
 pragmaStmt: pragma ; //TODO
 
@@ -152,7 +158,7 @@ expr:
 pragma: OPEN_BRACE DOT IDENTIFIER DOT? CLOSE_BRACE;
 routine: par (COLON substmt)*; //TODO
 typeSection: OPEN_BRACE;//TODO
-variableSection: ( variable+ | (ind (variable)+ ded) );
+variableSection: ( variable+ | (ind variable+ ded) );
 constantSection: (constant+ | (ind constant+ ded) );
 
 identVis: symbol operator?;
@@ -164,7 +170,8 @@ varTuple: OPEN_BRACE identVis
 
 constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS (ind expr ded | expr);
 // variable: (varTuple | idColonEq) colonBody? optInd;
-variable: idColonEq colonBody? optInd; //this colon is for declarations
+variable: idColonEq ;
+// variable: idColonEq colonBody?; //this colon is for declarations
 idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
         (COLON (ind simpleExpr ded| simpleExpr))? ( EQUALS ( ind (expr| simpleExpr) ded | anyExpr))? ; //this colon is for type inference
 

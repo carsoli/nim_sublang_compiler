@@ -377,21 +377,12 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#importStmt.
-    def enterImportStmt(self, ctx:nim_Parser.ImportStmtContext):
+    # Enter a parse tree produced by nim_Parser#blockExpr.
+    def enterBlockExpr(self, ctx:nim_Parser.BlockExprContext):
         pass
 
-    # Exit a parse tree produced by nim_Parser#importStmt.
-    def exitImportStmt(self, ctx:nim_Parser.ImportStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#fromStmt.
-    def enterFromStmt(self, ctx:nim_Parser.FromStmtContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#fromStmt.
-    def exitFromStmt(self, ctx:nim_Parser.FromStmtContext):
+    # Exit a parse tree produced by nim_Parser#blockExpr.
+    def exitBlockExpr(self, ctx:nim_Parser.BlockExprContext):
         pass
 
 
@@ -548,6 +539,53 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#importStmt.
+    def enterImportStmt(self, ctx:nim_Parser.ImportStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#importStmt.
+    def exitImportStmt(self, ctx:nim_Parser.ImportStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#fromStmt.
+    def enterFromStmt(self, ctx:nim_Parser.FromStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#fromStmt.
+    def exitFromStmt(self, ctx:nim_Parser.FromStmtContext):
+        pass
+
+
+<<<<<<< HEAD
+=======
+    # Enter a parse tree produced by nim_Parser#discardStmt.
+    def enterDiscardStmt(self, ctx:nim_Parser.DiscardStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#discardStmt.
+    def exitDiscardStmt(self, ctx:nim_Parser.DiscardStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#returnStmt.
+    def enterReturnStmt(self, ctx:nim_Parser.ReturnStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#returnStmt.
+    def exitReturnStmt(self, ctx:nim_Parser.ReturnStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#breakStmt.
+    def enterBreakStmt(self, ctx:nim_Parser.BreakStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#breakStmt.
+    def exitBreakStmt(self, ctx:nim_Parser.BreakStmtContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#blockStmt.
     def enterBlockStmt(self, ctx:nim_Parser.BlockStmtContext):
         pass
@@ -557,6 +595,7 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+>>>>>>> rev1
     # Enter a parse tree produced by nim_Parser#pragmaStmt.
     def enterPragmaStmt(self, ctx:nim_Parser.PragmaStmtContext):
         pass
