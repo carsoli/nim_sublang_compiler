@@ -219,7 +219,6 @@ complexStmt:
         | caseStmt        
         | blockStmt
         | whileStmt
-        | exprStmt
         | whenStmt
         | TEMPLATE templateRoutine
         | PROC procRoutine
