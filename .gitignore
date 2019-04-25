@@ -3,8 +3,6 @@
 nimcaches
 __pycache__
 Milestone1_TestCases
-**.nim
 Milestone2/Input
 Milestone2/Output
 Milestone2/.antlr
-

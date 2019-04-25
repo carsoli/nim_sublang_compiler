@@ -1,4 +1,4 @@
-# Generated from nim_Parser.g4 by ANTLR 4.7.1
+# Generated from nim_Parser.g4 by ANTLR 4.7.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .nim_Parser import nim_Parser
@@ -14,15 +14,6 @@ class nim_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by nim_Parser#ind.
     def exitInd(self, ctx:nim_Parser.IndContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#optInd.
-    def enterOptInd(self, ctx:nim_Parser.OptIndContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#optInd.
-    def exitOptInd(self, ctx:nim_Parser.OptIndContext):
         pass
 
 
@@ -332,15 +323,6 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#identGeneral.
-    def enterIdentGeneral(self, ctx:nim_Parser.IdentGeneralContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#identGeneral.
-    def exitIdentGeneral(self, ctx:nim_Parser.IdentGeneralContext):
-        pass
-
-
     # Enter a parse tree produced by nim_Parser#addressLiteral.
     def enterAddressLiteral(self, ctx:nim_Parser.AddressLiteralContext):
         pass
@@ -437,6 +419,15 @@ class nim_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by nim_Parser#anyExpr.
     def exitAnyExpr(self, ctx:nim_Parser.AnyExprContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#anyStmt.
+    def enterAnyStmt(self, ctx:nim_Parser.AnyStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#anyStmt.
+    def exitAnyStmt(self, ctx:nim_Parser.AnyStmtContext):
         pass
 
 
@@ -629,6 +620,15 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#continueStmt.
+    def enterContinueStmt(self, ctx:nim_Parser.ContinueStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#continueStmt.
+    def exitContinueStmt(self, ctx:nim_Parser.ContinueStmtContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#pragmaStmt.
     def enterPragmaStmt(self, ctx:nim_Parser.PragmaStmtContext):
         pass
@@ -656,12 +656,84 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#routine.
-    def enterRoutine(self, ctx:nim_Parser.RoutineContext):
+    # Enter a parse tree produced by nim_Parser#procRoutineHeader.
+    def enterProcRoutineHeader(self, ctx:nim_Parser.ProcRoutineHeaderContext):
         pass
 
-    # Exit a parse tree produced by nim_Parser#routine.
-    def exitRoutine(self, ctx:nim_Parser.RoutineContext):
+    # Exit a parse tree produced by nim_Parser#procRoutineHeader.
+    def exitProcRoutineHeader(self, ctx:nim_Parser.ProcRoutineHeaderContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#procRoutineVariableType.
+    def enterProcRoutineVariableType(self, ctx:nim_Parser.ProcRoutineVariableTypeContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#procRoutineVariableType.
+    def exitProcRoutineVariableType(self, ctx:nim_Parser.ProcRoutineVariableTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#procRoutineType.
+    def enterProcRoutineType(self, ctx:nim_Parser.ProcRoutineTypeContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#procRoutineType.
+    def exitProcRoutineType(self, ctx:nim_Parser.ProcRoutineTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#procRoutineBody.
+    def enterProcRoutineBody(self, ctx:nim_Parser.ProcRoutineBodyContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#procRoutineBody.
+    def exitProcRoutineBody(self, ctx:nim_Parser.ProcRoutineBodyContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#procRoutineTail.
+    def enterProcRoutineTail(self, ctx:nim_Parser.ProcRoutineTailContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#procRoutineTail.
+    def exitProcRoutineTail(self, ctx:nim_Parser.ProcRoutineTailContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#procRoutineBodyList.
+    def enterProcRoutineBodyList(self, ctx:nim_Parser.ProcRoutineBodyListContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#procRoutineBodyList.
+    def exitProcRoutineBodyList(self, ctx:nim_Parser.ProcRoutineBodyListContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#procRoutine.
+    def enterProcRoutine(self, ctx:nim_Parser.ProcRoutineContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#procRoutine.
+    def exitProcRoutine(self, ctx:nim_Parser.ProcRoutineContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#templateRoutine.
+    def enterTemplateRoutine(self, ctx:nim_Parser.TemplateRoutineContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#templateRoutine.
+    def exitTemplateRoutine(self, ctx:nim_Parser.TemplateRoutineContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#macroRoutine.
+    def enterMacroRoutine(self, ctx:nim_Parser.MacroRoutineContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#macroRoutine.
+    def exitMacroRoutine(self, ctx:nim_Parser.MacroRoutineContext):
         pass
 
 
