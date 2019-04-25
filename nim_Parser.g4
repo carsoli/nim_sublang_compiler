@@ -84,8 +84,8 @@ primarySuffix:
 
 primary:
         (
-                (typeKeyw) simpleExpr 
-         |      ( prefixOperator* ( (identOrLiteral primarySuffix*) | primarySuffix+ ) )
+                  (typeKeyw) simpleExpr 
+                | ( prefixOperator* ( (identOrLiteral primarySuffix*) | primarySuffix+ ) )
         );
 
 parBody:( {self._input.LT(1).type in self.parKeyWList}? simple_complexStmt (SEMI_COLON simple_complexStmt)?
@@ -93,7 +93,7 @@ parBody:( {self._input.LT(1).type in self.parKeyWList}? simple_complexStmt (SEMI
           expr | (COLON|EQUALS (expr) ) ( ((COMMA exprColonEqExpr)+) | ((SEMI_COLON (simple_complexStmt)+ ) ) )
         );
 
-par: OPEN_PAREN parBody CLOSE_PAREN | parBody;
+par: OPEN_PAREN parBody CLOSE_PAREN;// | parBody;
 
 
 //NB: no need for ident with pragma
@@ -128,17 +128,19 @@ ofBranches: ofBranch+
 caseStmt: CASE ( simpleExpr | expr ) 
         ( (ind ofBranches ded) |  ofBranches); 
 
-ifStmt: IF NOT? condStmt;
+whileStmt: WHILE (simpleExpr | expr) COLON 
+        (ind (exprStmt | ( stmt | (ind stmt ded))) ded) | ((exprStmt | ( stmt | (ind stmt ded))));
+
 whenStmt: WHEN NOT? condStmt;
 
 forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  (ind (stmt)+ ded | (stmt | exprStmt) );
 
-condStmtBody: (exprStmt | substmt)   
-          ( ELIF ( simpleExpr | expr ) COLON (ind (exprStmt+ | substmt) ded | (exprStmt+ | substmt)))*
-          ( ELSE COLON (ind ( exprStmt+ | substmt ) ded | ( exprStmt+ | substmt )))?;
+ifStmt: IF NOT? condStmt;
 
-whileStmt: WHILE (simpleExpr | expr) COLON 
-        optInd (exprStmt | ( stmt | (ind stmt ded))) ded?;
+condStmtElif:  ELIF (( simpleExpr | expr )) COLON ((ind (exprStmt+ | substmt) ded) | (exprStmt+ | substmt));
+condStmtElse:  ELSE COLON ((ind ( exprStmt+ | substmt ) ded) | ( exprStmt+ | substmt ));
+condStmtBody: (exprStmt | substmt)   
+          ((ind condStmtElif* condStmtElse? ded) | (condStmtElif* ind condStmtElse? ded) | (condStmtElif* condStmtElse?));
 
 condStmt:  (simpleExpr | expr) COLON (ind condStmtBody ded | condStmtBody); 
 
@@ -189,7 +191,7 @@ complexStmt:
         forStmt
         | ifStmt        
         | blockStmt
-        // | whileStmt
+        //| whileStmt
         | whenStmt
         | (TEMPLATE | PROC | MACRO) routine
         | TYPE typeSection 
@@ -198,7 +200,6 @@ complexStmt:
 
 colonBody: COLON substmt;
 exprStmt: simpleExpr ( EQUALS (expr |simpleExpr) colonBody?);
-
 
 substmt: ind simple_complexStmt (SEMI_COLON? simple_complexStmt)* ded
     | ( simple_complexStmt );

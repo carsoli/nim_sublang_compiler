@@ -377,12 +377,21 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#blockExpr.
-    def enterBlockExpr(self, ctx:nim_Parser.BlockExprContext):
+    # Enter a parse tree produced by nim_Parser#importStmt.
+    def enterImportStmt(self, ctx:nim_Parser.ImportStmtContext):
         pass
 
-    # Exit a parse tree produced by nim_Parser#blockExpr.
-    def exitBlockExpr(self, ctx:nim_Parser.BlockExprContext):
+    # Exit a parse tree produced by nim_Parser#importStmt.
+    def exitImportStmt(self, ctx:nim_Parser.ImportStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#fromStmt.
+    def enterFromStmt(self, ctx:nim_Parser.FromStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#fromStmt.
+    def exitFromStmt(self, ctx:nim_Parser.FromStmtContext):
         pass
 
 
@@ -494,12 +503,12 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#ifStmt.
-    def enterIfStmt(self, ctx:nim_Parser.IfStmtContext):
+    # Enter a parse tree produced by nim_Parser#whileStmt.
+    def enterWhileStmt(self, ctx:nim_Parser.WhileStmtContext):
         pass
 
-    # Exit a parse tree produced by nim_Parser#ifStmt.
-    def exitIfStmt(self, ctx:nim_Parser.IfStmtContext):
+    # Exit a parse tree produced by nim_Parser#whileStmt.
+    def exitWhileStmt(self, ctx:nim_Parser.WhileStmtContext):
         pass
 
 
@@ -521,6 +530,33 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#ifStmt.
+    def enterIfStmt(self, ctx:nim_Parser.IfStmtContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#ifStmt.
+    def exitIfStmt(self, ctx:nim_Parser.IfStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#condStmtElif.
+    def enterCondStmtElif(self, ctx:nim_Parser.CondStmtElifContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#condStmtElif.
+    def exitCondStmtElif(self, ctx:nim_Parser.CondStmtElifContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#condStmtElse.
+    def enterCondStmtElse(self, ctx:nim_Parser.CondStmtElseContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#condStmtElse.
+    def exitCondStmtElse(self, ctx:nim_Parser.CondStmtElseContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#condStmtBody.
     def enterCondStmtBody(self, ctx:nim_Parser.CondStmtBodyContext):
         pass
@@ -539,26 +575,15 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#importStmt.
-    def enterImportStmt(self, ctx:nim_Parser.ImportStmtContext):
+    # Enter a parse tree produced by nim_Parser#blockStmt.
+    def enterBlockStmt(self, ctx:nim_Parser.BlockStmtContext):
         pass
 
-    # Exit a parse tree produced by nim_Parser#importStmt.
-    def exitImportStmt(self, ctx:nim_Parser.ImportStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#fromStmt.
-    def enterFromStmt(self, ctx:nim_Parser.FromStmtContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#fromStmt.
-    def exitFromStmt(self, ctx:nim_Parser.FromStmtContext):
+    # Exit a parse tree produced by nim_Parser#blockStmt.
+    def exitBlockStmt(self, ctx:nim_Parser.BlockStmtContext):
         pass
 
 
-<<<<<<< HEAD
-=======
     # Enter a parse tree produced by nim_Parser#discardStmt.
     def enterDiscardStmt(self, ctx:nim_Parser.DiscardStmtContext):
         pass
@@ -586,16 +611,6 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#blockStmt.
-    def enterBlockStmt(self, ctx:nim_Parser.BlockStmtContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#blockStmt.
-    def exitBlockStmt(self, ctx:nim_Parser.BlockStmtContext):
-        pass
-
-
->>>>>>> rev1
     # Enter a parse tree produced by nim_Parser#pragmaStmt.
     def enterPragmaStmt(self, ctx:nim_Parser.PragmaStmtContext):
         pass
