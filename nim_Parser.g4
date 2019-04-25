@@ -28,7 +28,7 @@ op6: OP6 | (DOT DOT) | DOT;
 op7: OP7;
 op8: OP8;
 op9: OP9;
-op10: OP10;
+op10: OP10 | DOLLAR_SIGN;
 operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 
         | op7 | op8 | op9 | op10;
 prefixOperator: operator;
@@ -74,9 +74,12 @@ tupleConstr: OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN;
 identOrLiteral: generalizedLit | symbol | literal | par | arrayConstr;
 identGeneral: generalizedLit | symbol | par | arrayConstr;
 
+addressLiteral: DOLLAR_SIGN identGeneral;
 
-primarySuffix: 
-        OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN
+primarySuffixSimpleBody: IDENTIFIER | literal | generalizedLit | IDENTIFIER (arrayConstr | tupleConstr) | addressLiteral;
+primarySuffix:
+        primarySuffixSimpleBody (COMMA primarySuffixSimpleBody)*
+      | OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN
       | DOT symbol generalizedLit?
       | OPEN_BRACK (simpleExpr | expr) (COMMA (simpleExpr | expr) )* CLOSE_BRACK
       | {self._input.LT(1).type in self.primarySuffixList}? expr
@@ -121,7 +124,10 @@ ifExpr: IF NOT? condExpr;
 
 exprList: (simpleExpr | expr) (COMMA (simpleExpr | expr))*;
 
+
+
 ofBranch: OF exprList COLON (ind (exprStmt | stmt)+ ded | (exprStmt | stmt));
+
 ofBranches: ofBranch+
         ( ELSE COLON (ind ( exprStmt | stmt )+ ded | (exprStmt | stmt)))?;
 
@@ -129,7 +135,7 @@ caseStmt: CASE ( simpleExpr | expr )
         ( (ind ofBranches ded) |  ofBranches); 
 
 whileStmt: WHILE (simpleExpr | expr) COLON 
-        (ind (exprStmt | ( stmt | (ind stmt ded))) ded) | ((exprStmt | ( stmt | (ind stmt ded))));
+        ((ind ( exprStmt+ | stmt ) ded) | ( exprStmt+ | stmt ));
 
 whenStmt: WHEN NOT? condStmt;
 
@@ -137,12 +143,11 @@ forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  (ind (stmt)+ 
 
 ifStmt: IF NOT? condStmt;
 
-condStmtElif:  ELIF (( simpleExpr | expr )) COLON ((ind (exprStmt+ | substmt) ded) | (exprStmt+ | substmt));
-condStmtElse:  ELSE COLON ((ind ( exprStmt+ | substmt ) ded) | ( exprStmt+ | substmt ));
-condStmtBody: (exprStmt | substmt)   
-          ((ind condStmtElif* condStmtElse? ded) | (condStmtElif* ind condStmtElse? ded) | (condStmtElif* condStmtElse?));
-
-condStmt:  (simpleExpr | expr) COLON (ind condStmtBody ded | condStmtBody); 
+condStmtElif:  ELIF (( simpleExpr | expr )) COLON ((ind (exprStmt+ | stmt) ded) | (exprStmt+ | stmt));
+condStmtElse:  ELSE COLON ((ind ( exprStmt+ | stmt ) ded) | ( exprStmt+ | stmt ));
+condStmtBody: (ind stmt ded | stmt )
+           ((ind condStmtElif* condStmtElse? ded) | (condStmtElif* ind condStmtElse? ded) | (condStmtElif* condStmtElse?));
+condStmt:  (simpleExpr | expr) COLON condStmtBody; 
 
 blockStmt: BLOCK symbol? COLON (ind stmt ded | stmt);
 discardStmt: DISCARD simpleExpr?;
@@ -158,24 +163,24 @@ expr:
         | whenExpr;
 
 pragma: OPEN_BRACE DOT IDENTIFIER DOT? CLOSE_BRACE;
-routine: par (COLON substmt)*; //TODO
+routine: par (COLON stmt)*; //TODO
 typeSection: OPEN_BRACE;//TODO
 variableSection: ( variable+ | (ind variable+ ded) );
-constantSection: (constant+ | (ind constant+ ded) );
+constantSection: ( constant+ | (ind constant+ ded) );
 
 identVis: symbol operator?;
 varTuple: OPEN_BRACE identVis 
         (COMMA identVis)* 
         (ind CLOSE_BRACE ded | CLOSE_BRACE)
         EQUALS ded? 
-        (ind (simpleExpr | expr) | (simpleExpr | expr)); 
+        (ind (simpleExpr | expr) ded | (simpleExpr | expr)); 
 
-constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS (ind expr ded | expr);
+constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS (ind anyExpr ded | anyExpr);
 // variable: (varTuple | idColonEq) colonBody? optInd;
 variable: idColonEq ;
 // variable: idColonEq colonBody?; //this colon is for declarations
 idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
-        (COLON (ind simpleExpr ded| simpleExpr))? ( EQUALS ( ind (expr| simpleExpr) ded | anyExpr))? ; //this colon is for type inference
+        (COLON (ind simpleExpr ded | simpleExpr))? ( EQUALS ( ind anyExpr ded | anyExpr))? ; //this colon is for type inference
 
 simple_complexStmt: simpleStmt | complexStmt;
 simpleStmt: 
@@ -183,26 +188,25 @@ simpleStmt:
         | fromStmt 
         // | discardStmt 
         // | returnStmt
-        // | breakStmt
+        | breakStmt
         | pragmaStmt
         ;
 
 complexStmt: 
         forStmt
-        | ifStmt        
+        | ifStmt
+        | caseStmt        
         | blockStmt
-        //| whileStmt
+        | whileStmt
+        | exprStmt
         | whenStmt
         | (TEMPLATE | PROC | MACRO) routine
         | TYPE typeSection 
         | CONST constantSection
         | (LET | VARIABLE) variableSection;
 
-colonBody: COLON substmt;
-exprStmt: simpleExpr ( EQUALS (expr |simpleExpr) colonBody?);
-
-substmt: ind simple_complexStmt (SEMI_COLON? simple_complexStmt)* ded
-    | ( simple_complexStmt );
+colonBody: COLON stmt;
+exprStmt: (simpleExpr ( EQUALS (expr | simpleExpr) colonBody?)) | (IDENTIFIER primarySuffix);
 
 stmt: (simple_complexStmt (SEMI_COLON? simple_complexStmt)*);
 
