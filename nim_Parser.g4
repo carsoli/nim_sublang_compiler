@@ -180,8 +180,7 @@ procRoutineType: (IDENTIFIER arrayConstr?)
 procRoutineBody: IDENTIFIER ( (COLON procRoutineType) | (EQUALS simpleExpr) );
 procRoutineTail: (COLON procRoutineType)? EQUALS ( (ind stmt ded) | stmt ); 
 procRoutineBodyList: OPEN_PAREN procRoutineBody (COMMA procRoutineBody)* CLOSE_PAREN; 
-procRoutine: procRoutineHeader procRoutineBodyList; //TODO
-
+procRoutine: procRoutineHeader procRoutineBodyList procRoutineTail; 
 templateRoutine: COLON; //TODO
 macroRoutine: COLON; //TODO
 
