@@ -135,12 +135,13 @@ ofBranches: ofBranch+
 caseStmt: CASE anyExpr 
         ( (ind ofBranches ded) |  ofBranches); 
 
-whileStmt: WHILE (simpleExpr | expr) COLON 
+whileStmt: WHILE anyExpr COLON 
         ((ind ( exprStmt+ | stmt ) ded) | ( exprStmt+ | stmt ));
 
 whenStmt: WHEN condStmt;
 
-forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  ( (ind (stmt)+ ded) | anyStmt );
+idList: (IDENTIFIER (COMMA IDENTIFIER)*);
+forStmt: FOR idList IN simpleExpr COLON  ( (ind (stmt)+ ded) | anyStmt );
 
 ifStmt: IF NOT? condStmt;
 
@@ -153,7 +154,7 @@ condStmtBody: ( (ind stmt ded) | stmt )
 condStmt:  anyExpr COLON condStmtBody; 
 
 blockStmt: BLOCK symbol COLON ((ind stmt ded) | stmt);
-discardStmt: DISCARD; //Empty discard stmt
+discardStmt: DISCARD; //Empty discard Statement
 returnStmt: (RETURN simpleExpr) | RETURN; 
 breakStmt: (BREAK simpleExpr) | BREAK;
 continueStmt: CONTINUE; 
@@ -182,7 +183,6 @@ templateRoutineBody: IDENTIFIER;
 templateRoutineTail: pragma? EQUALS ( anyStmt | (ind anyStmt+ ded) ); 
 templateRoutine: templateRoutineHeader templateRoutineBodyList templateRoutineTail; 
 
-
 macroRoutineHeader: IDENTIFIER;
 macroRoutineType: IDENTIFIER;
 macroRoutineBody:IDENTIFIER (COLON macroRoutineType);
@@ -193,6 +193,7 @@ macroRoutine: macroRoutineHeader macroRoutineBodyList macroRoutineTail;
 typeSection: OPEN_BRACE;//TODO
 variableSection: ( variable+ | (ind variable+ ded) );
 constantSection: ( constant+ | (ind constant+ ded) );
+letSection: (IDENTIFIER EQUALS simpleExpr) | (ind (IDENTIFIER EQUALS simpleExpr)+ ded); 
 
 identVis: symbol operator?;
 varTuple: 
@@ -200,7 +201,6 @@ varTuple:
         EQUALS ded? ( (ind andExpr ded) | anyExpr); 
 
 constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS (ind anyExpr ded | anyExpr);
-// variable: (varTuple | idColonEq) colonBody? optInd;
 // variable: idColonEq;
 variable: idColonEq colonBody?; //this colon is for declarations
 idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
@@ -229,8 +229,8 @@ complexStmt:
         | MACRO macroRoutine
         | TYPE typeSection 
         | CONST constantSection
-        | (VARIABLE) variableSection
-        | LET (IDENTIFIER EQUALS simpleExpr);
+        | VARIABLE variableSection
+        | LET letSection;
 
 colonBody: COLON stmt;
 exprStmt: (simpleExpr EQUALS anyExpr);// | (IDENTIFIER primarySuffix); //CHECK WHEN TESTING

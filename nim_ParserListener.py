@@ -530,6 +530,15 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#idList.
+    def enterIdList(self, ctx:nim_Parser.IdListContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#idList.
+    def exitIdList(self, ctx:nim_Parser.IdListContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#forStmt.
     def enterForStmt(self, ctx:nim_Parser.ForStmtContext):
         pass
@@ -833,6 +842,15 @@ class nim_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by nim_Parser#constantSection.
     def exitConstantSection(self, ctx:nim_Parser.ConstantSectionContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#letSection.
+    def enterLetSection(self, ctx:nim_Parser.LetSectionContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#letSection.
+    def exitLetSection(self, ctx:nim_Parser.LetSectionContext):
         pass
 
 

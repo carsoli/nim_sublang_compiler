@@ -11,7 +11,6 @@ let
 let n = r - l + 1
 let p = a[l + 3 * n div 4]
 
-
 #4
 let msg = "The quick brown fox jumped over the lazy dogs"
 let enc = caesar(msg, 11)
@@ -21,6 +20,4 @@ let s = gen(n)
 
 #9
 let answer = random(10) + 1
-while true:
-    echo "I have a number from 1 to 10, what is it? "
-    let guess = parseInt(stdin.readLine)
+let guess = parseInt(stdin.readLine)
