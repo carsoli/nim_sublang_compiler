@@ -82,7 +82,7 @@ proc fibonacci(n: int): int =
     else:
         result = fibonacci(n - 1) + (n - 2).fibonacci
 
-proc echoItem(x: string) = echo x
+proc echoItem(x: string) = import x
 
 proc forEach(action: proc (x: string)) =
     const

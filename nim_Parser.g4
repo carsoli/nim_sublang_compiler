@@ -144,7 +144,7 @@ whileStmt: WHILE (simpleExpr | expr) COLON
 
 whenStmt: WHEN condStmt;
 
-forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  (ind (stmt)+ ded | anyStmt );
+forStmt: FOR (IDENTIFIER (COMMA IDENTIFIER)*) IN simpleExpr COLON  ( (ind (stmt)+ ded) | anyStmt );
 
 ifStmt: IF NOT? condStmt;
 
@@ -175,12 +175,13 @@ pragma: OPEN_BRACE DOT IDENTIFIER DOT? CLOSE_BRACE;
 procRoutineHeader: symbol arrayConstr?;
 procRoutineVariableType: IDENTIFIER arrayConstr; 
 procRoutineType: (IDENTIFIER arrayConstr?) 
-        | (PROC procRoutineBody) 
+        | (PROC procRoutineBodyList) 
         | (VARIABLE procRoutineVariableType) ;
 procRoutineBody: IDENTIFIER ( (COLON procRoutineType) | (EQUALS simpleExpr) );
-procRoutineTail: (COLON procRoutineType)? EQUALS ( (ind stmt ded) | stmt ); 
+procRoutineTail: (COLON procRoutineType)? EQUALS ( stmt | (ind stmt+ ded) ); 
 procRoutineBodyList: OPEN_PAREN procRoutineBody (COMMA procRoutineBody)* CLOSE_PAREN; 
 procRoutine: procRoutineHeader procRoutineBodyList procRoutineTail; 
+
 templateRoutine: COLON; //TODO
 macroRoutine: COLON; //TODO
 
@@ -229,10 +230,10 @@ complexStmt:
         | LET (IDENTIFIER EQUALS simpleExpr);
 
 colonBody: COLON stmt;
-exprStmt: (simpleExpr ( EQUALS anyExpr colonBody?));// | (IDENTIFIER primarySuffix); //CHECK WHEN TESTING
+exprStmt: (simpleExpr EQUALS anyExpr);// | (IDENTIFIER primarySuffix); //CHECK WHEN TESTING
 
-stmt: (simple_complexStmt (SEMI_COLON? simple_complexStmt)*);
+stmt: simple_complexStmt;
 
-module: stmt+; 
+module: stmt (SEMI_COLON? stmt)*; 
 
 start: module;
