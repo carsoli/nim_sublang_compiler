@@ -90,7 +90,6 @@ forExpr: forStmt;
 
 anyExpr: simpleExpr | expr;
 anyStmt: stmt | exprStmt;
-anyStmtOrFuncCall: anyStmt;
 
 
 condExprElif: (ELIF simpleExpr COLON ( (ind anyExpr+ ded) | anyExpr));
@@ -116,26 +115,26 @@ exprList: simpleExpr (COMMA simpleExpr)*;
 caseStmt: CASE simpleExpr ofBranchesStmt; 
 
 ofBranchesStmt: ofBranchStmt+
-        ( ELSE COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall ))?;
+        ( ELSE COLON ( (ind anyStmt+ ded) | anyStmt ))?;
          
-ofBranchStmt: OF exprList COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall);
+ofBranchStmt: OF exprList COLON ( (ind anyStmt+ ded) | anyStmt);
 
 
 whileStmt: WHILE simpleExpr COLON 
-        ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall );
+        ( (ind anyStmt+ ded) | anyStmt );
 
 whenStmt: WHEN condStmt;
 
 idList: (IDENTIFIER (COMMA IDENTIFIER)*);
-forStmt: FOR idList IN simpleExpr COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall );
+forStmt: FOR idList IN simpleExpr COLON ( (ind anyStmt+ ded) | anyStmt );
 
 ifStmt: IF NOT? condStmt;
 
-condStmtElif:  ELIF simpleExpr COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall );
+condStmtElif:  ELIF simpleExpr COLON ( (ind anyStmt+ ded) | anyStmt );
 
-condStmtElse:  ELSE COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall );
+condStmtElse:  ELSE COLON ( (ind anyStmt+ ded) | anyStmt );
 
-condStmtBody: ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall )
+condStmtBody: ( (ind anyStmt+ ded) | anyStmt )
         (
                 (ind condStmtElif* condStmtElse? ded) 
                 | (condStmtElif* (ind condStmtElse? ded)) 
@@ -144,7 +143,7 @@ condStmtBody: ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall )
 
 condStmt: simpleExpr COLON condStmtBody; 
 
-blockStmt: BLOCK IDENTIFIER COLON ((ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall);
+blockStmt: BLOCK IDENTIFIER COLON ((ind anyStmt+ ded) | anyStmt);
 discardStmt: DISCARD; //Empty discard Statement
 returnStmt: (RETURN simpleExpr) | RETURN; 
 breakStmt: (BREAK simpleExpr) | BREAK;
