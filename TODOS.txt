@@ -1,1 +1,1 @@
-var
+proc call wo parentheses

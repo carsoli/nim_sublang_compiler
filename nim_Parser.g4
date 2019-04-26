@@ -1,18 +1,10 @@
 parser grammar nim_Parser;
 options {language='Python3'; tokenVocab=m2_Lexer;}
 
-@parser::members{
-# parKeyWList = [IF, WHILE, CASE, FOR, BLOCK, CONST, LET, WHEN, VARIABLE]
-literals = [INT_LIT, INT8_LIT, INT16_LIT , INT32_LIT , INT64_LIT, UINT_LIT , UINT8_LIT , 
-UINT16_LIT , UINT32_LIT , UINT64_LIT, FLOAT_LIT , FLOAT32_LIT , FLOAT64_LIT, STR_LIT, 
-RSTR_LIT , TRIPLESTR_LIT, CHAR_LIT, NIL ]
-primarySuffixList = [SYM_HEADER, IDENTIFIER, TYPE] + literals
-}
-
 ind: INDENT;
 ded: DEDENT | EOF;
 
-typeKeyw: REF | OBJECT ; //|PROC | VARIABLE | 
+typeKeyw: REF | OBJECT ; 
 
 op0: OP0;
 op1: OP1 | EQUALS;
@@ -49,11 +41,8 @@ literal: INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
 
 generalizedLit: GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT;
 symbol: (symbolBody | (SYM_HEADER symbolBody SYM_HEADER));
-        // | keyw
 
-// symbolWHeader: SYM_HEADER symbolBody SYM_HEADER | symbolBody;
 symbolBody:( 
-                // keyw | 
                 IDENTIFIER | literal | 
                 (operator | OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
                 CLOSE_BRACK | EQUALS )+ 
@@ -69,11 +58,11 @@ identOrLiteral: generalizedLit | symbol | arrayConstr;//| par
 
 addressLiteral: DOLLAR_SIGN identOrLiteral;
 
-primarySuffix:  
-         OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN
-        | DOT symbol generalizedLit?
-        | OPEN_BRACK exprList CLOSE_BRACK
-        // | {self._input.LT(1).type in self.primarySuffixList}? expr
+primarySuffix:          
+        (OPEN_PAREN CLOSE_PAREN)
+        | (OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN)
+        | (DOT symbol generalizedLit?)
+        | (OPEN_BRACK exprList CLOSE_BRACK)
         // | expr
       ;
 
@@ -192,23 +181,13 @@ typeSectionBody: typeSectionBodyHeader typeSectionBodyExpr;
 typeSectionBodyList: (ind typeSectionBody+ ded);
 typeSection: typeSectionBodyList;
 
-variableSection: ( variable | (ind variable+ ded) ); //TODO
-
+variableSection: ( variable | (ind variable+ ded) ); 
 constantSection: ( constant | (ind constant+ ded) );
 
 letSection: (IDENTIFIER EQUALS simpleExpr) | (ind (IDENTIFIER EQUALS simpleExpr)+ ded); 
 
-identVis: symbol operator?;
-varTuple: 
-        (OPEN_BRACE identVis (COMMA identVis)* (ind CLOSE_BRACE ded | CLOSE_BRACE) )
-        EQUALS ded? ( (ind andExpr ded) | anyExpr); 
-
 constant: IDENTIFIER EQUALS simpleExpr;
-// variable: idColonEq;
-variable: idColonEq colonBody?; //this colon is for declarations
-idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?
-        //this colon is for type inference
-        (COLON (ind simpleExpr ded | simpleExpr))? ( EQUALS ( ind anyExpr ded | anyExpr))? ; 
+variable: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? ( EQUALS simpleExpr)?; 
 
 simple_complexStmt: simpleStmt | complexStmt;
 simpleStmt: 
@@ -236,10 +215,10 @@ complexStmt:
         | LET letSection;
 
 colonBody: COLON stmt;
-exprStmt: (simpleExpr EQUALS anyExpr);// | (IDENTIFIER primarySuffix); //CHECK WHEN TESTING
+exprStmt: (simpleExpr EQUALS anyExpr);
 
 stmt: simple_complexStmt;
 
-module: stmt (SEMI_COLON? stmt)* EOF; 
+module: anyStmt (SEMI_COLON? anyStmt)* EOF; 
 
 start: module;

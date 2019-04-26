@@ -899,24 +899,6 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#identVis.
-    def enterIdentVis(self, ctx:nim_Parser.IdentVisContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#identVis.
-    def exitIdentVis(self, ctx:nim_Parser.IdentVisContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#varTuple.
-    def enterVarTuple(self, ctx:nim_Parser.VarTupleContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#varTuple.
-    def exitVarTuple(self, ctx:nim_Parser.VarTupleContext):
-        pass
-
-
     # Enter a parse tree produced by nim_Parser#constant.
     def enterConstant(self, ctx:nim_Parser.ConstantContext):
         pass
@@ -932,15 +914,6 @@ class nim_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by nim_Parser#variable.
     def exitVariable(self, ctx:nim_Parser.VariableContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#idColonEq.
-    def enterIdColonEq(self, ctx:nim_Parser.IdColonEqContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#idColonEq.
-    def exitIdColonEq(self, ctx:nim_Parser.IdColonEqContext):
         pass
 
 
