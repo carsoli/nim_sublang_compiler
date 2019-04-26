@@ -90,6 +90,7 @@ OF: 'of';
 NOT: 'not';
 DOLLAR_SIGN: '$';
 AT: '@';
+MINUS_OPERATOR: '-';
 
 OP0: ARROW_OPERATOR;
 OP1: ASSIGNMENT_OPERATOR;
@@ -129,7 +130,6 @@ fragment ISNOT: 'isnot';
 fragment CONCAT_OPERATOR: '&';
 fragment OR_OPERATOR: '|';
 fragment ADD_OPERATOR: '+';
-fragment MINUS_OPERATOR: '-';
 fragment DIV_OPERATOR: '/';
 fragment LESS_THAN: '<';
 fragment GREATER_THAN: '>';

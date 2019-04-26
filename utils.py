@@ -4,8 +4,6 @@ from antlr4.error.ErrorStrategy import DefaultErrorStrategy, ErrorStrategy, Bail
 from antlr4.tree.Tree import ParseTreeVisitor
 from antlr4.Utils import escapeWhitespace
 from m2_Lexer import m2_Lexer
-# from m2_ParserListener import m2_ParserListener
-# from m2_Parser import m2_Parser 
 from nim_ParserListener import nim_ParserListener
 from nim_Parser import nim_Parser
 from antlr4.tree.Trees import Trees
@@ -39,7 +37,6 @@ def recognize_file(filename):
     input_stream = InputStream(prog)
     lexer = m2_Lexer(input_stream)
     stream = CommonTokenStream(lexer)
-    # parser = m2_Parser(stream)
     parser = nim_Parser(stream)
     errHandler = BailErrorStrategy()
     visitor = ParseTreeVisitor

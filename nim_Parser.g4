@@ -14,7 +14,7 @@ op4: OP4;
 op5: ( OP5 | IN | OF | NOT );
 op6: ( OP6 | DOT | (DOT DOT));
 op7: OP7;
-op8: OP8;
+op8: OP8 | MINUS_OPERATOR;
 op9: OP9;
 op10: (OP10 | DOLLAR_SIGN);
 operator: op0 | op1 | op2 | op3 | op4 | op5 | op6 
@@ -42,7 +42,7 @@ plusExpr : mulExpr (op8 mulExpr)*;
 mulExpr : dollarExpr (op9 dollarExpr)*;
 dollarExpr : primary (op10 primary)*;
 
-symbol: (symbolBody | (SYM_HEADER symbolBody SYM_HEADER));
+symbol: (symbolBody | (SYM_HEADER (symbolBody | operator+) SYM_HEADER));
 
 symbolBody:( 
                 IDENTIFIER | literal | 
@@ -63,14 +63,14 @@ primarySuffix:
         (OPEN_PAREN CLOSE_PAREN)
         | (OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN)
         | (OPEN_PAREN exprColonEqExprExtended (COMMA exprColonEqExprExtended)* CLOSE_PAREN)
-        | (DOT symbol generalizedLit?)
+        // | (DOT symbol generalizedLit?)
         | (OPEN_BRACK exprList CLOSE_BRACK)
       ;
 
 primary:
 (
         ( typeKeyw ( simpleExpr | (ind expr ded) ) ) 
-        | ( (DOLLAR_SIGN | AT)? ( ( identOrLiteral primarySuffix* ) | primarySuffix+  ) )
+        | ( (DOLLAR_SIGN | AT | MINUS_OPERATOR)? ( ( identOrLiteral primarySuffix* ) | primarySuffix+  ) )
 );
 
 paranthesesless: (
@@ -90,7 +90,7 @@ forExpr: forStmt;
 
 anyExpr: simpleExpr | expr;
 anyStmt: stmt | exprStmt;
-anyStmtOrFuncCall: (anyStmt | primary);
+anyStmtOrFuncCall: anyStmt;
 
 
 condExprElif: (ELIF simpleExpr COLON ( (ind anyExpr+ ded) | anyExpr));
@@ -197,8 +197,8 @@ letSection: (IDENTIFIER EQUALS simpleExpr) | (ind (IDENTIFIER EQUALS simpleExpr)
 
 constant: IDENTIFIER EQUALS simpleExpr;
 variable: (IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr))
-| (IDENTIFIER (COMMA IDENTIFIER)* (EQUALS simpleExpr))
-| (IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr) ( EQUALS simpleExpr));
+| (IDENTIFIER (COMMA IDENTIFIER)* (EQUALS anyExpr))
+| (IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr) ( EQUALS anyExpr));
 
 simple_complexStmt: simpleStmt | complexStmt;
 simpleStmt: 
@@ -228,6 +228,7 @@ complexStmt:
 colonBody: COLON stmt;
 exprStmt: (
         (simpleExpr EQUALS anyExpr) 
+        | identOrLiteral primarySuffix+
         | (IDENTIFIER primaryParanthelessSuffix) 
         | (simpleExpr primaryParanthelessSuffix)
         | simpleExpr (IDENTIFIER primaryParanthelessSuffix)
