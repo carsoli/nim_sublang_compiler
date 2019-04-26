@@ -7,9 +7,7 @@ def main():
     tokens = tokenize_file(testfile_path)
     recognized = recognize_file(testfile_path)
     res_filename = sys.modules[__name__].__file__.rpartition(".")[0] + "_result.txt" 
-    write_to_file(res_filename, "\n".join(tokens) )
-    print(recognized)
-
+    write_to_file(res_filename, "valid" if recognized else "invalid")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(add_help=True, description='command-line args parser')
