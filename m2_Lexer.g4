@@ -89,6 +89,7 @@ IN: 'in';
 OF: 'of';
 NOT: 'not';
 DOLLAR_SIGN: '$';
+AT: '@';
 
 OP0: ARROW_OPERATOR;
 OP1: ASSIGNMENT_OPERATOR;
@@ -125,7 +126,6 @@ fragment NOTIN: 'notin';
 fragment IS: 'is';
 fragment ISNOT: 'isnot';
 
-fragment AT: '@';
 fragment CONCAT_OPERATOR: '&';
 fragment OR_OPERATOR: '|';
 fragment ADD_OPERATOR: '+';

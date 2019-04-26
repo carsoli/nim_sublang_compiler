@@ -152,6 +152,24 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#literal.
+    def enterLiteral(self, ctx:nim_Parser.LiteralContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#literal.
+    def exitLiteral(self, ctx:nim_Parser.LiteralContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#generalizedLit.
+    def enterGeneralizedLit(self, ctx:nim_Parser.GeneralizedLitContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#generalizedLit.
+    def exitGeneralizedLit(self, ctx:nim_Parser.GeneralizedLitContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#simpleExpr.
     def enterSimpleExpr(self, ctx:nim_Parser.SimpleExprContext):
         pass
@@ -242,24 +260,6 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#literal.
-    def enterLiteral(self, ctx:nim_Parser.LiteralContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#literal.
-    def exitLiteral(self, ctx:nim_Parser.LiteralContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#generalizedLit.
-    def enterGeneralizedLit(self, ctx:nim_Parser.GeneralizedLitContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#generalizedLit.
-    def exitGeneralizedLit(self, ctx:nim_Parser.GeneralizedLitContext):
-        pass
-
-
     # Enter a parse tree produced by nim_Parser#symbol.
     def enterSymbol(self, ctx:nim_Parser.SymbolContext):
         pass
@@ -305,21 +305,21 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#exprColonEqExprExtended.
+    def enterExprColonEqExprExtended(self, ctx:nim_Parser.ExprColonEqExprExtendedContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#exprColonEqExprExtended.
+    def exitExprColonEqExprExtended(self, ctx:nim_Parser.ExprColonEqExprExtendedContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#identOrLiteral.
     def enterIdentOrLiteral(self, ctx:nim_Parser.IdentOrLiteralContext):
         pass
 
     # Exit a parse tree produced by nim_Parser#identOrLiteral.
     def exitIdentOrLiteral(self, ctx:nim_Parser.IdentOrLiteralContext):
-        pass
-
-
-    # Enter a parse tree produced by nim_Parser#addressLiteral.
-    def enterAddressLiteral(self, ctx:nim_Parser.AddressLiteralContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#addressLiteral.
-    def exitAddressLiteral(self, ctx:nim_Parser.AddressLiteralContext):
         pass
 
 
@@ -338,6 +338,24 @@ class nim_ParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by nim_Parser#primary.
     def exitPrimary(self, ctx:nim_Parser.PrimaryContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#paranthesesless.
+    def enterParanthesesless(self, ctx:nim_Parser.ParantheseslessContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#paranthesesless.
+    def exitParanthesesless(self, ctx:nim_Parser.ParantheseslessContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#primaryParanthelessSuffix.
+    def enterPrimaryParanthelessSuffix(self, ctx:nim_Parser.PrimaryParanthelessSuffixContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#primaryParanthelessSuffix.
+    def exitPrimaryParanthelessSuffix(self, ctx:nim_Parser.PrimaryParanthelessSuffixContext):
         pass
 
 

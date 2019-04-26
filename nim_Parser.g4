@@ -8,7 +8,7 @@ typeKeyw: REF | OBJECT ;
 
 op0: OP0;
 op1: OP1 | EQUALS;
-op2: ( OP2 | COLON | (COLON COLON) );
+op2: ( OP2 | COLON | (COLON COLON) | AT );
 op3: OP3;
 op4: OP4;
 op5: ( OP5 | IN | OF | NOT );
@@ -21,6 +21,16 @@ operator: op0 | op1 | op2 | op3 | op4 | op5 | op6
         | op7 | op8 | op9 | op10;
 prefixOperator: operator;
 
+
+literal: INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
+        | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
+        | FLOAT_LIT | FLOAT32_LIT | FLOAT64_LIT
+        | STR_LIT | RSTR_LIT | TRIPLESTR_LIT
+        | CHAR_LIT
+        | NIL;
+
+generalizedLit: GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT;
+
 simpleExpr: assignExpr (op1 assignExpr)*;
 assignExpr: orExpr (op2 orExpr)*;
 orExpr : andExpr (op3 andExpr)*;
@@ -32,46 +42,45 @@ plusExpr : mulExpr (op8 mulExpr)*;
 mulExpr : dollarExpr (op9 dollarExpr)*;
 dollarExpr : primary (op10 primary)*;
 
-literal: INT_LIT | INT8_LIT | INT16_LIT | INT32_LIT | INT64_LIT
-        | UINT_LIT | UINT8_LIT | UINT16_LIT | UINT32_LIT | UINT64_LIT
-        | FLOAT_LIT | FLOAT32_LIT | FLOAT64_LIT
-        | STR_LIT | RSTR_LIT | TRIPLESTR_LIT
-        | CHAR_LIT
-        | NIL;
-
-generalizedLit: GENERALIZED_STR_LIT | GENERALIZED_TRIPLESTR_LIT;
 symbol: (symbolBody | (SYM_HEADER symbolBody SYM_HEADER));
 
 symbolBody:( 
                 IDENTIFIER | literal | 
-                (operator | OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
-                CLOSE_BRACK | EQUALS )+ 
+                ( OPEN_PAREN | CLOSE_PAREN | OPEN_BRACK |
+                CLOSE_BRACK )+ 
         );  
 
 
 exprColonEqExpr: anyExpr ( (COLON | EQUALS) anyExpr )?;
 arrayConstr: OPEN_BRACK exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_BRACK;
 tupleConstr: OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN;
+exprColonEqExprExtended: (anyExpr | (IDENTIFIER primaryParanthelessSuffix) ) 
+        ( (COLON | EQUALS) (anyExpr | (IDENTIFIER primaryParanthelessSuffix) )  )?;
 
-
-identOrLiteral: generalizedLit | symbol | arrayConstr;//| par 
-
-addressLiteral: DOLLAR_SIGN identOrLiteral;
+identOrLiteral: generalizedLit | symbol | arrayConstr;
 
 primarySuffix:          
         (OPEN_PAREN CLOSE_PAREN)
         | (OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN)
+        | (OPEN_PAREN exprColonEqExprExtended (COMMA exprColonEqExprExtended)* CLOSE_PAREN)
         | (DOT symbol generalizedLit?)
         | (OPEN_BRACK exprList CLOSE_BRACK)
-        // | expr
       ;
 
 primary:
 (
         ( typeKeyw ( simpleExpr | (ind expr ded) ) ) 
-        | ( prefixOperator* ( (identOrLiteral primarySuffix*) | primarySuffix+ ) )
+        | ( (DOLLAR_SIGN | AT)? ( ( identOrLiteral primarySuffix* ) | primarySuffix+  ) )
 );
 
+paranthesesless: (
+        literal 
+        | (DOLLAR_SIGN? IDENTIFIER arrayConstr? (OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN)?)
+        | (OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN)
+        | (identOrLiteral operator identOrLiteral)
+);
+
+primaryParanthelessSuffix: paranthesesless (COMMA paranthesesless)*;
 
 importStmt: IMPORT IDENTIFIER (COMMA IDENTIFIER)*;
 fromStmt: FROM IDENTIFIER importStmt;
@@ -215,7 +224,13 @@ complexStmt:
         | LET letSection;
 
 colonBody: COLON stmt;
-exprStmt: (simpleExpr EQUALS anyExpr);
+exprStmt: (
+        (simpleExpr EQUALS anyExpr) 
+        | (IDENTIFIER primaryParanthelessSuffix) 
+        | (simpleExpr primaryParanthelessSuffix)
+        | simpleExpr (IDENTIFIER primaryParanthelessSuffix)
+);
+
 
 stmt: simple_complexStmt;
 

@@ -15,11 +15,14 @@ echo "'", s, "' is ", (if balanced(s): "balanced" else: "not balanced")
 s.add x
 result.add ", "
 echo flatten(x)
-x = @[1,2]
 result.add flatten x
+
 var x = L(L(N 1), N 2, L(L(N 3, N 4), N 5), L(L(L[int]())), L(L(L(N 6))), N 7, N 8, L[int]())
 assert 1_999_999 == 1999999
 assert 0o377 == 255
 assert 0xff == 255
 assert 0b0_10001110100_0000101001000111101011101111111011000101001101001001'f64 == 1.7282561e+35
 assert 1_999_999 == 1999999
+
+
+
