@@ -1,9 +1,26 @@
-BLOCK  block
-IDENTIFIER  searchSubs
+TEMPLATE  template
+IDENTIFIER  branch
+OPEN_PAREN  (
+IDENTIFIER  inp
+COMMA  ,
+IDENTIFIER  p
+COMMA  ,
+IDENTIFIER  action
+CLOSE_PAREN  )
+EQUALS  =
+INDENT      
+IF  if
+IDENTIFIER  mmlen
+OP5  >
+INT_LIT  0
 COLON  :
 INDENT      
-IDENTIFIER  actions
+IDENTIFIER  action
 IDENTIFIER  inc
 OPEN_PAREN  (
 IDENTIFIER  mmpos
+COMMA  ,
+IDENTIFIER  mmlen
 CLOSE_PAREN  )
+BREAK  break
+IDENTIFIER  searchSubs

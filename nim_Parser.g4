@@ -103,17 +103,20 @@ primary:
 importStmt: IMPORT IDENTIFIER (COMMA IDENTIFIER)*;
 fromStmt: FROM IDENTIFIER importStmt;
 
-blockExpr: BLOCK IDENTIFIER COLON ind simpleExpr+ ded; 
+blockExpr: BLOCK IDENTIFIER COLON ( (ind (simpleExpr)+ ded) | simpleExpr) ; 
 forExpr: forStmt;
 
 anyExpr: simpleExpr | expr;
 anyStmt: stmt | exprStmt;
+anyStmtOrFuncCall: (anyStmt | primary);
 
-condExprBody : 
-        (anyExpr) 
-        (ELIF ( anyExpr) COLON (ind anyExpr ded | anyExpr))*
-        (ELSE COLON (ind anyExpr ded | anyExpr));
-condExpr: anyExpr COLON (ind condExprBody ded | condExprBody);
+
+condExprElif: (ELIF simpleExpr COLON ( (ind anyExpr+ ded) | anyExpr));
+condExprElse: (ELSE COLON (ind anyExpr+ ded | anyExpr));
+
+condExprBody : ((ind anyExpr+ ded) | anyExpr) condExprElif* condExprElse?;
+        
+condExpr: simpleExpr COLON condExprBody;
 
 caseExpr: CASE simpleExpr (COLON simpleExpr)? 
         ( (ind ofBranchesExpr ded) |  ofBranchesExpr); 
@@ -146,13 +149,18 @@ forStmt: FOR idList IN simpleExpr COLON  ( (ind (stmt)+ ded) | anyStmt );
 
 ifStmt: IF NOT? condStmt;
 
-condStmtElif:  ELIF (anyExpr) COLON ((ind (exprStmt+ | stmt) ded) | (exprStmt+ | stmt));
-condStmtElse:  ELSE COLON ((ind ( exprStmt+ | stmt ) ded) | ( exprStmt+ | stmt ));
+condStmtElif:  ELIF simpleExpr COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall );
 
-condStmtBody: ( (ind stmt ded) | stmt )
-           ((ind condStmtElif* condStmtElse? ded) | (condStmtElif* ind condStmtElse? ded) | (condStmtElif* condStmtElse?));
+condStmtElse:  ELSE COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall );
 
-condStmt:  anyExpr COLON condStmtBody; 
+condStmtBody: ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall )
+        (
+                (ind condStmtElif* condStmtElse? ded) 
+                | (condStmtElif* (ind condStmtElse? ded)) 
+                | (condStmtElif* condStmtElse?)
+        );
+
+condStmt: simpleExpr COLON condStmtBody; 
 
 blockStmt: BLOCK IDENTIFIER COLON ((ind anyStmt+ ded) | anyStmt);
 discardStmt: DISCARD; //Empty discard Statement
@@ -183,7 +191,7 @@ procRoutine: procRoutineHeader procRoutineBodyList procRoutineTail;
 templateRoutineHeader: IDENTIFIER;
 templateRoutineBodyList: OPEN_PAREN templateRoutineBody (COMMA templateRoutineBody)* CLOSE_PAREN;
 templateRoutineBody: IDENTIFIER;
-templateRoutineTail: pragma? EQUALS ( anyStmt | (ind anyStmt+ ded) ); 
+templateRoutineTail: pragma? EQUALS ( (anyStmt | expr) | (ind (anyStmt | expr)+ ded) ); 
 templateRoutine: templateRoutineHeader templateRoutineBodyList templateRoutineTail; 
 
 macroRoutineHeader: IDENTIFIER;
@@ -248,6 +256,6 @@ exprStmt: (simpleExpr EQUALS anyExpr);// | (IDENTIFIER primarySuffix); //CHECK W
 
 stmt: simple_complexStmt;
 
-module: stmt (SEMI_COLON? stmt)*; 
+module: stmt (SEMI_COLON? stmt)* EOF; 
 
 start: module;

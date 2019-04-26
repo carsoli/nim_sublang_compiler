@@ -71,7 +71,6 @@ if l <= r:
     dec r
 
 ## input 4
-#WRONG
 var k = if decode: 26 - k else: k
 #matches all tokens but is wrong
 if ord(i) >= 65 and ord(i) <= 90:

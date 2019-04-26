@@ -404,6 +404,33 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by nim_Parser#anyStmtOrFuncCall.
+    def enterAnyStmtOrFuncCall(self, ctx:nim_Parser.AnyStmtOrFuncCallContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#anyStmtOrFuncCall.
+    def exitAnyStmtOrFuncCall(self, ctx:nim_Parser.AnyStmtOrFuncCallContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#condExprElif.
+    def enterCondExprElif(self, ctx:nim_Parser.CondExprElifContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#condExprElif.
+    def exitCondExprElif(self, ctx:nim_Parser.CondExprElifContext):
+        pass
+
+
+    # Enter a parse tree produced by nim_Parser#condExprElse.
+    def enterCondExprElse(self, ctx:nim_Parser.CondExprElseContext):
+        pass
+
+    # Exit a parse tree produced by nim_Parser#condExprElse.
+    def exitCondExprElse(self, ctx:nim_Parser.CondExprElseContext):
+        pass
+
+
     # Enter a parse tree produced by nim_Parser#condExprBody.
     def enterCondExprBody(self, ctx:nim_Parser.CondExprBodyContext):
         pass
