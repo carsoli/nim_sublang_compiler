@@ -192,9 +192,9 @@ typeSectionBody: typeSectionBodyHeader typeSectionBodyExpr;
 typeSectionBodyList: (ind typeSectionBody+ ded);
 typeSection: typeSectionBodyList;
 
-variableSection: ( variable+ | (ind variable+ ded) ); //TODO
+variableSection: ( variable | (ind variable+ ded) ); //TODO
 
-constantSection: ( constant+ | (ind constant+ ded) );//TODO
+constantSection: ( constant | (ind constant+ ded) );
 
 letSection: (IDENTIFIER EQUALS simpleExpr) | (ind (IDENTIFIER EQUALS simpleExpr)+ ded); 
 
@@ -203,7 +203,7 @@ varTuple:
         (OPEN_BRACE identVis (COMMA identVis)* (ind CLOSE_BRACE ded | CLOSE_BRACE) )
         EQUALS ded? ( (ind andExpr ded) | anyExpr); 
 
-constant: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? EQUALS (ind anyExpr ded | anyExpr);
+constant: IDENTIFIER EQUALS simpleExpr;
 // variable: idColonEq;
 variable: idColonEq colonBody?; //this colon is for declarations
 idColonEq: IDENTIFIER (COMMA IDENTIFIER)* COMMA?

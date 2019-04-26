@@ -9,7 +9,7 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3s")
-        buf.write("\u0486\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\u046e\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
@@ -90,69 +90,67 @@ def serializedATN():
         buf.write("Z\u039a\nZ\fZ\16Z\u039d\13Z\3Z\3Z\3[\3[\5[\u03a3\n[\3")
         buf.write("[\3[\3[\3[\6[\u03a9\n[\r[\16[\u03aa\3[\3[\5[\u03af\n[")
         buf.write("\3\\\3\\\3\\\3\\\3]\3]\3^\3^\5^\u03b9\n^\3^\3^\3_\3_\3")
-        buf.write("_\3`\3`\6`\u03c2\n`\r`\16`\u03c3\3`\3`\3a\3a\3b\6b\u03cb")
-        buf.write("\nb\rb\16b\u03cc\3b\3b\6b\u03d1\nb\rb\16b\u03d2\3b\3b")
-        buf.write("\5b\u03d7\nb\3c\6c\u03da\nc\rc\16c\u03db\3c\3c\6c\u03e0")
-        buf.write("\nc\rc\16c\u03e1\3c\3c\5c\u03e6\nc\3d\3d\3d\3d\3d\3d\3")
-        buf.write("d\6d\u03ef\nd\rd\16d\u03f0\3d\3d\5d\u03f5\nd\3e\3e\5e")
-        buf.write("\u03f9\ne\3f\3f\3f\3f\7f\u03ff\nf\ff\16f\u0402\13f\3f")
-        buf.write("\3f\3f\3f\3f\5f\u0409\nf\3f\3f\5f\u040d\nf\3f\3f\3f\3")
-        buf.write("f\3f\5f\u0414\nf\3g\3g\3g\7g\u0419\ng\fg\16g\u041c\13")
-        buf.write("g\3g\3g\5g\u0420\ng\3g\3g\3g\3g\3g\3g\5g\u0428\ng\3h\3")
-        buf.write("h\5h\u042c\nh\3i\3i\3i\7i\u0431\ni\fi\16i\u0434\13i\3")
-        buf.write("i\5i\u0437\ni\3i\3i\3i\3i\3i\3i\5i\u043f\ni\5i\u0441\n")
-        buf.write("i\3i\3i\3i\3i\3i\3i\5i\u0449\ni\5i\u044b\ni\3j\3j\5j\u044f")
-        buf.write("\nj\3k\3k\3k\3k\3k\3k\5k\u0457\nk\3l\3l\3l\3l\3l\3l\3")
-        buf.write("l\3l\3l\3l\3l\3l\3l\3l\3l\3l\3l\3l\3l\3l\5l\u046d\nl\3")
-        buf.write("m\3m\3m\3n\3n\3n\3n\3o\3o\3p\3p\5p\u047a\np\3p\7p\u047d")
-        buf.write("\np\fp\16p\u0480\13p\3p\3p\3q\3q\3q\2\2r\2\4\6\b\n\f\16")
-        buf.write("\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDF")
-        buf.write("HJLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086")
-        buf.write("\u0088\u008a\u008c\u008e\u0090\u0092\u0094\u0096\u0098")
-        buf.write("\u009a\u009c\u009e\u00a0\u00a2\u00a4\u00a6\u00a8\u00aa")
-        buf.write("\u00ac\u00ae\u00b0\u00b2\u00b4\u00b6\u00b8\u00ba\u00bc")
-        buf.write("\u00be\u00c0\u00c2\u00c4\u00c6\u00c8\u00ca\u00cc\u00ce")
-        buf.write("\u00d0\u00d2\u00d4\u00d6\u00d8\u00da\u00dc\u00de\u00e0")
-        buf.write("\2\13\3\3mm\4\2\22\22KK\4\2\27\27\35\35\4\2\30\32!!\4")
-        buf.write("\2\33\33&&\5\2QQYbdj\3\2kl\4\2\25\25\27\27\4\2\t\t\25")
-        buf.write("\25\2\u04bb\2\u00e2\3\2\2\2\4\u00e4\3\2\2\2\6\u00e6\3")
-        buf.write("\2\2\2\b\u00e8\3\2\2\2\n\u00ea\3\2\2\2\f\u00f0\3\2\2\2")
-        buf.write("\16\u00f2\3\2\2\2\20\u00f4\3\2\2\2\22\u00f6\3\2\2\2\24")
-        buf.write("\u00fc\3\2\2\2\26\u00fe\3\2\2\2\30\u0100\3\2\2\2\32\u0102")
-        buf.write("\3\2\2\2\34\u0104\3\2\2\2\36\u0111\3\2\2\2 \u0113\3\2")
-        buf.write("\2\2\"\u0115\3\2\2\2$\u011e\3\2\2\2&\u0127\3\2\2\2(\u0130")
-        buf.write("\3\2\2\2*\u0139\3\2\2\2,\u0142\3\2\2\2.\u014b\3\2\2\2")
-        buf.write("\60\u0154\3\2\2\2\62\u015d\3\2\2\2\64\u0166\3\2\2\2\66")
-        buf.write("\u016f\3\2\2\28\u0171\3\2\2\2:\u0178\3\2\2\2<\u0186\3")
-        buf.write("\2\2\2>\u0188\3\2\2\2@\u018d\3\2\2\2B\u0198\3\2\2\2D\u01a6")
-        buf.write("\3\2\2\2F\u01a8\3\2\2\2H\u01bf\3\2\2\2J\u01dd\3\2\2\2")
-        buf.write("L\u01df\3\2\2\2N\u01e8\3\2\2\2P\u01ec\3\2\2\2R\u01fa\3")
-        buf.write("\2\2\2T\u01fe\3\2\2\2V\u0202\3\2\2\2X\u0206\3\2\2\2Z\u0208")
-        buf.write("\3\2\2\2\\\u0216\3\2\2\2^\u022c\3\2\2\2`\u0237\3\2\2\2")
-        buf.write("b\u023b\3\2\2\2d\u0248\3\2\2\2f\u024e\3\2\2\2h\u0252\3")
-        buf.write("\2\2\2j\u0255\3\2\2\2l\u025b\3\2\2\2n\u0263\3\2\2\2p\u0268")
-        buf.write("\3\2\2\2r\u027b\3\2\2\2t\u0289\3\2\2\2v\u0297\3\2\2\2")
-        buf.write("x\u029a\3\2\2\2z\u02a2\3\2\2\2|\u02b2\3\2\2\2~\u02b8\3")
-        buf.write("\2\2\2\u0080\u02c6\3\2\2\2\u0082\u02dc\3\2\2\2\u0084\u0301")
-        buf.write("\3\2\2\2\u0086\u0305\3\2\2\2\u0088\u0313\3\2\2\2\u008a")
-        buf.write("\u0318\3\2\2\2\u008c\u031d\3\2\2\2\u008e\u031f\3\2\2\2")
-        buf.write("\u0090\u0326\3\2\2\2\u0092\u0328\3\2\2\2\u0094\u0330\3")
-        buf.write("\2\2\2\u0096\u0334\3\2\2\2\u0098\u033f\3\2\2\2\u009a\u0341")
-        buf.write("\3\2\2\2\u009c\u034a\3\2\2\2\u009e\u035c\3\2\2\2\u00a0")
-        buf.write("\u0367\3\2\2\2\u00a2\u036b\3\2\2\2\u00a4\u036d\3\2\2\2")
-        buf.write("\u00a6\u0378\3\2\2\2\u00a8\u037b\3\2\2\2\u00aa\u0389\3")
-        buf.write("\2\2\2\u00ac\u038d\3\2\2\2\u00ae\u038f\3\2\2\2\u00b0\u0391")
-        buf.write("\3\2\2\2\u00b2\u0395\3\2\2\2\u00b4\u03a2\3\2\2\2\u00b6")
-        buf.write("\u03b0\3\2\2\2\u00b8\u03b4\3\2\2\2\u00ba\u03b6\3\2\2\2")
-        buf.write("\u00bc\u03bc\3\2\2\2\u00be\u03bf\3\2\2\2\u00c0\u03c7\3")
-        buf.write("\2\2\2\u00c2\u03d6\3\2\2\2\u00c4\u03e5\3\2\2\2\u00c6\u03f4")
-        buf.write("\3\2\2\2\u00c8\u03f6\3\2\2\2\u00ca\u03fa\3\2\2\2\u00cc")
-        buf.write("\u0415\3\2\2\2\u00ce\u0429\3\2\2\2\u00d0\u042d\3\2\2\2")
-        buf.write("\u00d2\u044e\3\2\2\2\u00d4\u0456\3\2\2\2\u00d6\u046c\3")
-        buf.write("\2\2\2\u00d8\u046e\3\2\2\2\u00da\u0471\3\2\2\2\u00dc\u0475")
-        buf.write("\3\2\2\2\u00de\u0477\3\2\2\2\u00e0\u0483\3\2\2\2\u00e2")
-        buf.write("\u00e3\7q\2\2\u00e3\3\3\2\2\2\u00e4\u00e5\t\2\2\2\u00e5")
-        buf.write("\5\3\2\2\2\u00e6\u00e7\t\3\2\2\u00e7\7\3\2\2\2\u00e8\u00e9")
+        buf.write("_\3`\3`\6`\u03c2\n`\r`\16`\u03c3\3`\3`\3a\3a\3b\3b\3b")
+        buf.write("\6b\u03cd\nb\rb\16b\u03ce\3b\3b\5b\u03d3\nb\3c\3c\3c\6")
+        buf.write("c\u03d8\nc\rc\16c\u03d9\3c\3c\5c\u03de\nc\3d\3d\3d\3d")
+        buf.write("\3d\3d\3d\6d\u03e7\nd\rd\16d\u03e8\3d\3d\5d\u03ed\nd\3")
+        buf.write("e\3e\5e\u03f1\ne\3f\3f\3f\3f\7f\u03f7\nf\ff\16f\u03fa")
+        buf.write("\13f\3f\3f\3f\3f\3f\5f\u0401\nf\3f\3f\5f\u0405\nf\3f\3")
+        buf.write("f\3f\3f\3f\5f\u040c\nf\3g\3g\3g\3g\3h\3h\5h\u0414\nh\3")
+        buf.write("i\3i\3i\7i\u0419\ni\fi\16i\u041c\13i\3i\5i\u041f\ni\3")
+        buf.write("i\3i\3i\3i\3i\3i\5i\u0427\ni\5i\u0429\ni\3i\3i\3i\3i\3")
+        buf.write("i\3i\5i\u0431\ni\5i\u0433\ni\3j\3j\5j\u0437\nj\3k\3k\3")
+        buf.write("k\3k\3k\3k\5k\u043f\nk\3l\3l\3l\3l\3l\3l\3l\3l\3l\3l\3")
+        buf.write("l\3l\3l\3l\3l\3l\3l\3l\3l\3l\5l\u0455\nl\3m\3m\3m\3n\3")
+        buf.write("n\3n\3n\3o\3o\3p\3p\5p\u0462\np\3p\7p\u0465\np\fp\16p")
+        buf.write("\u0468\13p\3p\3p\3q\3q\3q\2\2r\2\4\6\b\n\f\16\20\22\24")
+        buf.write("\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVX")
+        buf.write("Z\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086\u0088\u008a")
+        buf.write("\u008c\u008e\u0090\u0092\u0094\u0096\u0098\u009a\u009c")
+        buf.write("\u009e\u00a0\u00a2\u00a4\u00a6\u00a8\u00aa\u00ac\u00ae")
+        buf.write("\u00b0\u00b2\u00b4\u00b6\u00b8\u00ba\u00bc\u00be\u00c0")
+        buf.write("\u00c2\u00c4\u00c6\u00c8\u00ca\u00cc\u00ce\u00d0\u00d2")
+        buf.write("\u00d4\u00d6\u00d8\u00da\u00dc\u00de\u00e0\2\13\3\3mm")
+        buf.write("\4\2\22\22KK\4\2\27\27\35\35\4\2\30\32!!\4\2\33\33&&\5")
+        buf.write("\2QQYbdj\3\2kl\4\2\25\25\27\27\4\2\t\t\25\25\2\u049e\2")
+        buf.write("\u00e2\3\2\2\2\4\u00e4\3\2\2\2\6\u00e6\3\2\2\2\b\u00e8")
+        buf.write("\3\2\2\2\n\u00ea\3\2\2\2\f\u00f0\3\2\2\2\16\u00f2\3\2")
+        buf.write("\2\2\20\u00f4\3\2\2\2\22\u00f6\3\2\2\2\24\u00fc\3\2\2")
+        buf.write("\2\26\u00fe\3\2\2\2\30\u0100\3\2\2\2\32\u0102\3\2\2\2")
+        buf.write("\34\u0104\3\2\2\2\36\u0111\3\2\2\2 \u0113\3\2\2\2\"\u0115")
+        buf.write("\3\2\2\2$\u011e\3\2\2\2&\u0127\3\2\2\2(\u0130\3\2\2\2")
+        buf.write("*\u0139\3\2\2\2,\u0142\3\2\2\2.\u014b\3\2\2\2\60\u0154")
+        buf.write("\3\2\2\2\62\u015d\3\2\2\2\64\u0166\3\2\2\2\66\u016f\3")
+        buf.write("\2\2\28\u0171\3\2\2\2:\u0178\3\2\2\2<\u0186\3\2\2\2>\u0188")
+        buf.write("\3\2\2\2@\u018d\3\2\2\2B\u0198\3\2\2\2D\u01a6\3\2\2\2")
+        buf.write("F\u01a8\3\2\2\2H\u01bf\3\2\2\2J\u01dd\3\2\2\2L\u01df\3")
+        buf.write("\2\2\2N\u01e8\3\2\2\2P\u01ec\3\2\2\2R\u01fa\3\2\2\2T\u01fe")
+        buf.write("\3\2\2\2V\u0202\3\2\2\2X\u0206\3\2\2\2Z\u0208\3\2\2\2")
+        buf.write("\\\u0216\3\2\2\2^\u022c\3\2\2\2`\u0237\3\2\2\2b\u023b")
+        buf.write("\3\2\2\2d\u0248\3\2\2\2f\u024e\3\2\2\2h\u0252\3\2\2\2")
+        buf.write("j\u0255\3\2\2\2l\u025b\3\2\2\2n\u0263\3\2\2\2p\u0268\3")
+        buf.write("\2\2\2r\u027b\3\2\2\2t\u0289\3\2\2\2v\u0297\3\2\2\2x\u029a")
+        buf.write("\3\2\2\2z\u02a2\3\2\2\2|\u02b2\3\2\2\2~\u02b8\3\2\2\2")
+        buf.write("\u0080\u02c6\3\2\2\2\u0082\u02dc\3\2\2\2\u0084\u0301\3")
+        buf.write("\2\2\2\u0086\u0305\3\2\2\2\u0088\u0313\3\2\2\2\u008a\u0318")
+        buf.write("\3\2\2\2\u008c\u031d\3\2\2\2\u008e\u031f\3\2\2\2\u0090")
+        buf.write("\u0326\3\2\2\2\u0092\u0328\3\2\2\2\u0094\u0330\3\2\2\2")
+        buf.write("\u0096\u0334\3\2\2\2\u0098\u033f\3\2\2\2\u009a\u0341\3")
+        buf.write("\2\2\2\u009c\u034a\3\2\2\2\u009e\u035c\3\2\2\2\u00a0\u0367")
+        buf.write("\3\2\2\2\u00a2\u036b\3\2\2\2\u00a4\u036d\3\2\2\2\u00a6")
+        buf.write("\u0378\3\2\2\2\u00a8\u037b\3\2\2\2\u00aa\u0389\3\2\2\2")
+        buf.write("\u00ac\u038d\3\2\2\2\u00ae\u038f\3\2\2\2\u00b0\u0391\3")
+        buf.write("\2\2\2\u00b2\u0395\3\2\2\2\u00b4\u03a2\3\2\2\2\u00b6\u03b0")
+        buf.write("\3\2\2\2\u00b8\u03b4\3\2\2\2\u00ba\u03b6\3\2\2\2\u00bc")
+        buf.write("\u03bc\3\2\2\2\u00be\u03bf\3\2\2\2\u00c0\u03c7\3\2\2\2")
+        buf.write("\u00c2\u03d2\3\2\2\2\u00c4\u03dd\3\2\2\2\u00c6\u03ec\3")
+        buf.write("\2\2\2\u00c8\u03ee\3\2\2\2\u00ca\u03f2\3\2\2\2\u00cc\u040d")
+        buf.write("\3\2\2\2\u00ce\u0411\3\2\2\2\u00d0\u0415\3\2\2\2\u00d2")
+        buf.write("\u0436\3\2\2\2\u00d4\u043e\3\2\2\2\u00d6\u0454\3\2\2\2")
+        buf.write("\u00d8\u0456\3\2\2\2\u00da\u0459\3\2\2\2\u00dc\u045d\3")
+        buf.write("\2\2\2\u00de\u045f\3\2\2\2\u00e0\u046b\3\2\2\2\u00e2\u00e3")
+        buf.write("\7q\2\2\u00e3\3\3\2\2\2\u00e4\u00e5\t\2\2\2\u00e5\5\3")
+        buf.write("\2\2\2\u00e6\u00e7\t\3\2\2\u00e7\7\3\2\2\2\u00e8\u00e9")
         buf.write("\7\34\2\2\u00e9\t\3\2\2\2\u00ea\u00eb\t\4\2\2\u00eb\13")
         buf.write("\3\2\2\2\u00ec\u00f1\7\36\2\2\u00ed\u00f1\7\25\2\2\u00ee")
         buf.write("\u00ef\7\25\2\2\u00ef\u00f1\7\25\2\2\u00f0\u00ec\3\2\2")
@@ -462,107 +460,96 @@ def serializedATN():
         buf.write("\u03c2\5\u00bc_\2\u03c1\u03c0\3\2\2\2\u03c2\u03c3\3\2")
         buf.write("\2\2\u03c3\u03c1\3\2\2\2\u03c3\u03c4\3\2\2\2\u03c4\u03c5")
         buf.write("\3\2\2\2\u03c5\u03c6\5\4\3\2\u03c6\u00bf\3\2\2\2\u03c7")
-        buf.write("\u03c8\5\u00be`\2\u03c8\u00c1\3\2\2\2\u03c9\u03cb\5\u00ce")
-        buf.write("h\2\u03ca\u03c9\3\2\2\2\u03cb\u03cc\3\2\2\2\u03cc\u03ca")
-        buf.write("\3\2\2\2\u03cc\u03cd\3\2\2\2\u03cd\u03d7\3\2\2\2\u03ce")
-        buf.write("\u03d0\5\2\2\2\u03cf\u03d1\5\u00ceh\2\u03d0\u03cf\3\2")
-        buf.write("\2\2\u03d1\u03d2\3\2\2\2\u03d2\u03d0\3\2\2\2\u03d2\u03d3")
-        buf.write("\3\2\2\2\u03d3\u03d4\3\2\2\2\u03d4\u03d5\5\4\3\2\u03d5")
-        buf.write("\u03d7\3\2\2\2\u03d6\u03ca\3\2\2\2\u03d6\u03ce\3\2\2\2")
-        buf.write("\u03d7\u00c3\3\2\2\2\u03d8\u03da\5\u00ccg\2\u03d9\u03d8")
-        buf.write("\3\2\2\2\u03da\u03db\3\2\2\2\u03db\u03d9\3\2\2\2\u03db")
-        buf.write("\u03dc\3\2\2\2\u03dc\u03e6\3\2\2\2\u03dd\u03df\5\2\2\2")
-        buf.write("\u03de\u03e0\5\u00ccg\2\u03df\u03de\3\2\2\2\u03e0\u03e1")
-        buf.write("\3\2\2\2\u03e1\u03df\3\2\2\2\u03e1\u03e2\3\2\2\2\u03e2")
-        buf.write("\u03e3\3\2\2\2\u03e3\u03e4\5\4\3\2\u03e4\u03e6\3\2\2\2")
-        buf.write("\u03e5\u03d9\3\2\2\2\u03e5\u03dd\3\2\2\2\u03e6\u00c5\3")
-        buf.write("\2\2\2\u03e7\u03e8\7X\2\2\u03e8\u03e9\7\27\2\2\u03e9\u03f5")
-        buf.write("\5\"\22\2\u03ea\u03ee\5\2\2\2\u03eb\u03ec\7X\2\2\u03ec")
-        buf.write("\u03ed\7\27\2\2\u03ed\u03ef\5\"\22\2\u03ee\u03eb\3\2\2")
-        buf.write("\2\u03ef\u03f0\3\2\2\2\u03f0\u03ee\3\2\2\2\u03f0\u03f1")
-        buf.write("\3\2\2\2\u03f1\u03f2\3\2\2\2\u03f2\u03f3\5\4\3\2\u03f3")
-        buf.write("\u03f5\3\2\2\2\u03f4\u03e7\3\2\2\2\u03f4\u03ea\3\2\2\2")
-        buf.write("\u03f5\u00c7\3\2\2\2\u03f6\u03f8\5:\36\2\u03f7\u03f9\5")
-        buf.write("\36\20\2\u03f8\u03f7\3\2\2\2\u03f8\u03f9\3\2\2\2\u03f9")
-        buf.write("\u00c9\3\2\2\2\u03fa\u03fb\7\f\2\2\u03fb\u0400\5\u00c8")
-        buf.write("e\2\u03fc\u03fd\7\b\2\2\u03fd\u03ff\5\u00c8e\2\u03fe\u03fc")
-        buf.write("\3\2\2\2\u03ff\u0402\3\2\2\2\u0400\u03fe\3\2\2\2\u0400")
-        buf.write("\u0401\3\2\2\2\u0401\u0408\3\2\2\2\u0402\u0400\3\2\2\2")
-        buf.write("\u0403\u0404\5\2\2\2\u0404\u0405\7\r\2\2\u0405\u0406\5")
-        buf.write("\4\3\2\u0406\u0409\3\2\2\2\u0407\u0409\7\r\2\2\u0408\u0403")
-        buf.write("\3\2\2\2\u0408\u0407\3\2\2\2\u0409\u040a\3\2\2\2\u040a")
-        buf.write("\u040c\7\27\2\2\u040b\u040d\5\4\3\2\u040c\u040b\3\2\2")
-        buf.write("\2\u040c\u040d\3\2\2\2\u040d\u0413\3\2\2\2\u040e\u040f")
-        buf.write("\5\2\2\2\u040f\u0410\5(\25\2\u0410\u0411\5\4\3\2\u0411")
-        buf.write("\u0414\3\2\2\2\u0412\u0414\5T+\2\u0413\u040e\3\2\2\2\u0413")
-        buf.write("\u0412\3\2\2\2\u0414\u00cb\3\2\2\2\u0415\u041a\7X\2\2")
-        buf.write("\u0416\u0417\7\b\2\2\u0417\u0419\7X\2\2\u0418\u0416\3")
-        buf.write("\2\2\2\u0419\u041c\3\2\2\2\u041a\u0418\3\2\2\2\u041a\u041b")
-        buf.write("\3\2\2\2\u041b\u041f\3\2\2\2\u041c\u041a\3\2\2\2\u041d")
-        buf.write("\u041e\7\25\2\2\u041e\u0420\5\"\22\2\u041f\u041d\3\2\2")
-        buf.write("\2\u041f\u0420\3\2\2\2\u0420\u0421\3\2\2\2\u0421\u0427")
-        buf.write("\7\27\2\2\u0422\u0423\5\2\2\2\u0423\u0424\5T+\2\u0424")
-        buf.write("\u0425\5\4\3\2\u0425\u0428\3\2\2\2\u0426\u0428\5T+\2\u0427")
-        buf.write("\u0422\3\2\2\2\u0427\u0426\3\2\2\2\u0428\u00cd\3\2\2\2")
-        buf.write("\u0429\u042b\5\u00d0i\2\u042a\u042c\5\u00d8m\2\u042b\u042a")
-        buf.write("\3\2\2\2\u042b\u042c\3\2\2\2\u042c\u00cf\3\2\2\2\u042d")
-        buf.write("\u0432\7X\2\2\u042e\u042f\7\b\2\2\u042f\u0431\7X\2\2\u0430")
-        buf.write("\u042e\3\2\2\2\u0431\u0434\3\2\2\2\u0432\u0430\3\2\2\2")
-        buf.write("\u0432\u0433\3\2\2\2\u0433\u0436\3\2\2\2\u0434\u0432\3")
-        buf.write("\2\2\2\u0435\u0437\7\b\2\2\u0436\u0435\3\2\2\2\u0436\u0437")
-        buf.write("\3\2\2\2\u0437\u0440\3\2\2\2\u0438\u043e\7\25\2\2\u0439")
-        buf.write("\u043a\5\2\2\2\u043a\u043b\5\"\22\2\u043b\u043c\5\4\3")
-        buf.write("\2\u043c\u043f\3\2\2\2\u043d\u043f\5\"\22\2\u043e\u0439")
-        buf.write("\3\2\2\2\u043e\u043d\3\2\2\2\u043f\u0441\3\2\2\2\u0440")
-        buf.write("\u0438\3\2\2\2\u0440\u0441\3\2\2\2\u0441\u044a\3\2\2\2")
-        buf.write("\u0442\u0448\7\27\2\2\u0443\u0444\5\2\2\2\u0444\u0445")
-        buf.write("\5T+\2\u0445\u0446\5\4\3\2\u0446\u0449\3\2\2\2\u0447\u0449")
-        buf.write("\5T+\2\u0448\u0443\3\2\2\2\u0448\u0447\3\2\2\2\u0449\u044b")
-        buf.write("\3\2\2\2\u044a\u0442\3\2\2\2\u044a\u044b\3\2\2\2\u044b")
-        buf.write("\u00d1\3\2\2\2\u044c\u044f\5\u00d4k\2\u044d\u044f\5\u00d6")
-        buf.write("l\2\u044e\u044c\3\2\2\2\u044e\u044d\3\2\2\2\u044f\u00d3")
-        buf.write("\3\2\2\2\u0450\u0457\5L\'\2\u0451\u0457\5N(\2\u0452\u0457")
-        buf.write("\5\u0088E\2\u0453\u0457\5\u008aF\2\u0454\u0457\5\u008c")
-        buf.write("G\2\u0455\u0457\5\u008eH\2\u0456\u0450\3\2\2\2\u0456\u0451")
-        buf.write("\3\2\2\2\u0456\u0452\3\2\2\2\u0456\u0453\3\2\2\2\u0456")
-        buf.write("\u0454\3\2\2\2\u0456\u0455\3\2\2\2\u0457\u00d5\3\2\2\2")
-        buf.write("\u0458\u046d\5z>\2\u0459\u046d\5|?\2\u045a\u046d\5n8\2")
-        buf.write("\u045b\u046d\5\u0086D\2\u045c\u046d\5t;\2\u045d\u046d")
-        buf.write("\5v<\2\u045e\u045f\7A\2\2\u045f\u046d\5\u00aaV\2\u0460")
-        buf.write("\u0461\7+\2\2\u0461\u046d\5\u00a0Q\2\u0462\u0463\7P\2")
-        buf.write("\2\u0463\u046d\5\u00b6\\\2\u0464\u0465\7\24\2\2\u0465")
-        buf.write("\u046d\5\u00c0a\2\u0466\u0467\7)\2\2\u0467\u046d\5\u00c4")
-        buf.write("c\2\u0468\u0469\7\'\2\2\u0469\u046d\5\u00c2b\2\u046a\u046b")
-        buf.write("\7(\2\2\u046b\u046d\5\u00c6d\2\u046c\u0458\3\2\2\2\u046c")
-        buf.write("\u0459\3\2\2\2\u046c\u045a\3\2\2\2\u046c\u045b\3\2\2\2")
-        buf.write("\u046c\u045c\3\2\2\2\u046c\u045d\3\2\2\2\u046c\u045e\3")
-        buf.write("\2\2\2\u046c\u0460\3\2\2\2\u046c\u0462\3\2\2\2\u046c\u0464")
-        buf.write("\3\2\2\2\u046c\u0466\3\2\2\2\u046c\u0468\3\2\2\2\u046c")
-        buf.write("\u046a\3\2\2\2\u046d\u00d7\3\2\2\2\u046e\u046f\7\25\2")
-        buf.write("\2\u046f\u0470\5\u00dco\2\u0470\u00d9\3\2\2\2\u0471\u0472")
-        buf.write("\5\"\22\2\u0472\u0473\7\27\2\2\u0473\u0474\5T+\2\u0474")
-        buf.write("\u00db\3\2\2\2\u0475\u0476\5\u00d2j\2\u0476\u00dd\3\2")
-        buf.write("\2\2\u0477\u047e\5\u00dco\2\u0478\u047a\7\t\2\2\u0479")
-        buf.write("\u0478\3\2\2\2\u0479\u047a\3\2\2\2\u047a\u047b\3\2\2\2")
-        buf.write("\u047b\u047d\5\u00dco\2\u047c\u0479\3\2\2\2\u047d\u0480")
-        buf.write("\3\2\2\2\u047e\u047c\3\2\2\2\u047e\u047f\3\2\2\2\u047f")
-        buf.write("\u0481\3\2\2\2\u0480\u047e\3\2\2\2\u0481\u0482\7\2\2\3")
-        buf.write("\u0482\u00df\3\2\2\2\u0483\u0484\5\u00dep\2\u0484\u00e1")
-        buf.write("\3\2\2\2\u0082\u00f0\u00fc\u0111\u011b\u0124\u012d\u0136")
-        buf.write("\u013f\u0148\u0151\u015a\u0163\u016c\u0178\u0182\u0184")
-        buf.write("\u0186\u018b\u0193\u019e\u01a6\u01b1\u01b9\u01bf\u01c7")
-        buf.write("\u01cc\u01d3\u01d9\u01db\u01dd\u01e5\u01f3\u01f8\u01fe")
-        buf.write("\u0202\u0206\u020f\u0214\u021c\u0221\u0227\u022c\u0231")
-        buf.write("\u0235\u023f\u0246\u0250\u0257\u0260\u026a\u0272\u0277")
-        buf.write("\u0279\u0282\u0287\u0290\u0295\u029f\u02ab\u02b0\u02b4")
-        buf.write("\u02bf\u02c4\u02cc\u02d1\u02d7\u02dc\u02e2\u02e6\u02ed")
-        buf.write("\u02f2\u02f9\u02fd\u02ff\u030c\u0311\u0318\u031d\u0326")
-        buf.write("\u032c\u0332\u0339\u033f\u0346\u034a\u034f\u0354\u0356")
-        buf.write("\u035a\u0362\u0373\u037b\u0383\u0387\u039b\u03a2\u03aa")
-        buf.write("\u03ae\u03b8\u03c3\u03cc\u03d2\u03d6\u03db\u03e1\u03e5")
-        buf.write("\u03f0\u03f4\u03f8\u0400\u0408\u040c\u0413\u041a\u041f")
-        buf.write("\u0427\u042b\u0432\u0436\u043e\u0440\u0448\u044a\u044e")
-        buf.write("\u0456\u046c\u0479\u047e")
+        buf.write("\u03c8\5\u00be`\2\u03c8\u00c1\3\2\2\2\u03c9\u03d3\5\u00ce")
+        buf.write("h\2\u03ca\u03cc\5\2\2\2\u03cb\u03cd\5\u00ceh\2\u03cc\u03cb")
+        buf.write("\3\2\2\2\u03cd\u03ce\3\2\2\2\u03ce\u03cc\3\2\2\2\u03ce")
+        buf.write("\u03cf\3\2\2\2\u03cf\u03d0\3\2\2\2\u03d0\u03d1\5\4\3\2")
+        buf.write("\u03d1\u03d3\3\2\2\2\u03d2\u03c9\3\2\2\2\u03d2\u03ca\3")
+        buf.write("\2\2\2\u03d3\u00c3\3\2\2\2\u03d4\u03de\5\u00ccg\2\u03d5")
+        buf.write("\u03d7\5\2\2\2\u03d6\u03d8\5\u00ccg\2\u03d7\u03d6\3\2")
+        buf.write("\2\2\u03d8\u03d9\3\2\2\2\u03d9\u03d7\3\2\2\2\u03d9\u03da")
+        buf.write("\3\2\2\2\u03da\u03db\3\2\2\2\u03db\u03dc\5\4\3\2\u03dc")
+        buf.write("\u03de\3\2\2\2\u03dd\u03d4\3\2\2\2\u03dd\u03d5\3\2\2\2")
+        buf.write("\u03de\u00c5\3\2\2\2\u03df\u03e0\7X\2\2\u03e0\u03e1\7")
+        buf.write("\27\2\2\u03e1\u03ed\5\"\22\2\u03e2\u03e6\5\2\2\2\u03e3")
+        buf.write("\u03e4\7X\2\2\u03e4\u03e5\7\27\2\2\u03e5\u03e7\5\"\22")
+        buf.write("\2\u03e6\u03e3\3\2\2\2\u03e7\u03e8\3\2\2\2\u03e8\u03e6")
+        buf.write("\3\2\2\2\u03e8\u03e9\3\2\2\2\u03e9\u03ea\3\2\2\2\u03ea")
+        buf.write("\u03eb\5\4\3\2\u03eb\u03ed\3\2\2\2\u03ec\u03df\3\2\2\2")
+        buf.write("\u03ec\u03e2\3\2\2\2\u03ed\u00c7\3\2\2\2\u03ee\u03f0\5")
+        buf.write(":\36\2\u03ef\u03f1\5\36\20\2\u03f0\u03ef\3\2\2\2\u03f0")
+        buf.write("\u03f1\3\2\2\2\u03f1\u00c9\3\2\2\2\u03f2\u03f3\7\f\2\2")
+        buf.write("\u03f3\u03f8\5\u00c8e\2\u03f4\u03f5\7\b\2\2\u03f5\u03f7")
+        buf.write("\5\u00c8e\2\u03f6\u03f4\3\2\2\2\u03f7\u03fa\3\2\2\2\u03f8")
+        buf.write("\u03f6\3\2\2\2\u03f8\u03f9\3\2\2\2\u03f9\u0400\3\2\2\2")
+        buf.write("\u03fa\u03f8\3\2\2\2\u03fb\u03fc\5\2\2\2\u03fc\u03fd\7")
+        buf.write("\r\2\2\u03fd\u03fe\5\4\3\2\u03fe\u0401\3\2\2\2\u03ff\u0401")
+        buf.write("\7\r\2\2\u0400\u03fb\3\2\2\2\u0400\u03ff\3\2\2\2\u0401")
+        buf.write("\u0402\3\2\2\2\u0402\u0404\7\27\2\2\u0403\u0405\5\4\3")
+        buf.write("\2\u0404\u0403\3\2\2\2\u0404\u0405\3\2\2\2\u0405\u040b")
+        buf.write("\3\2\2\2\u0406\u0407\5\2\2\2\u0407\u0408\5(\25\2\u0408")
+        buf.write("\u0409\5\4\3\2\u0409\u040c\3\2\2\2\u040a\u040c\5T+\2\u040b")
+        buf.write("\u0406\3\2\2\2\u040b\u040a\3\2\2\2\u040c\u00cb\3\2\2\2")
+        buf.write("\u040d\u040e\7X\2\2\u040e\u040f\7\27\2\2\u040f\u0410\5")
+        buf.write("\"\22\2\u0410\u00cd\3\2\2\2\u0411\u0413\5\u00d0i\2\u0412")
+        buf.write("\u0414\5\u00d8m\2\u0413\u0412\3\2\2\2\u0413\u0414\3\2")
+        buf.write("\2\2\u0414\u00cf\3\2\2\2\u0415\u041a\7X\2\2\u0416\u0417")
+        buf.write("\7\b\2\2\u0417\u0419\7X\2\2\u0418\u0416\3\2\2\2\u0419")
+        buf.write("\u041c\3\2\2\2\u041a\u0418\3\2\2\2\u041a\u041b\3\2\2\2")
+        buf.write("\u041b\u041e\3\2\2\2\u041c\u041a\3\2\2\2\u041d\u041f\7")
+        buf.write("\b\2\2\u041e\u041d\3\2\2\2\u041e\u041f\3\2\2\2\u041f\u0428")
+        buf.write("\3\2\2\2\u0420\u0426\7\25\2\2\u0421\u0422\5\2\2\2\u0422")
+        buf.write("\u0423\5\"\22\2\u0423\u0424\5\4\3\2\u0424\u0427\3\2\2")
+        buf.write("\2\u0425\u0427\5\"\22\2\u0426\u0421\3\2\2\2\u0426\u0425")
+        buf.write("\3\2\2\2\u0427\u0429\3\2\2\2\u0428\u0420\3\2\2\2\u0428")
+        buf.write("\u0429\3\2\2\2\u0429\u0432\3\2\2\2\u042a\u0430\7\27\2")
+        buf.write("\2\u042b\u042c\5\2\2\2\u042c\u042d\5T+\2\u042d\u042e\5")
+        buf.write("\4\3\2\u042e\u0431\3\2\2\2\u042f\u0431\5T+\2\u0430\u042b")
+        buf.write("\3\2\2\2\u0430\u042f\3\2\2\2\u0431\u0433\3\2\2\2\u0432")
+        buf.write("\u042a\3\2\2\2\u0432\u0433\3\2\2\2\u0433\u00d1\3\2\2\2")
+        buf.write("\u0434\u0437\5\u00d4k\2\u0435\u0437\5\u00d6l\2\u0436\u0434")
+        buf.write("\3\2\2\2\u0436\u0435\3\2\2\2\u0437\u00d3\3\2\2\2\u0438")
+        buf.write("\u043f\5L\'\2\u0439\u043f\5N(\2\u043a\u043f\5\u0088E\2")
+        buf.write("\u043b\u043f\5\u008aF\2\u043c\u043f\5\u008cG\2\u043d\u043f")
+        buf.write("\5\u008eH\2\u043e\u0438\3\2\2\2\u043e\u0439\3\2\2\2\u043e")
+        buf.write("\u043a\3\2\2\2\u043e\u043b\3\2\2\2\u043e\u043c\3\2\2\2")
+        buf.write("\u043e\u043d\3\2\2\2\u043f\u00d5\3\2\2\2\u0440\u0455\5")
+        buf.write("z>\2\u0441\u0455\5|?\2\u0442\u0455\5n8\2\u0443\u0455\5")
+        buf.write("\u0086D\2\u0444\u0455\5t;\2\u0445\u0455\5v<\2\u0446\u0447")
+        buf.write("\7A\2\2\u0447\u0455\5\u00aaV\2\u0448\u0449\7+\2\2\u0449")
+        buf.write("\u0455\5\u00a0Q\2\u044a\u044b\7P\2\2\u044b\u0455\5\u00b6")
+        buf.write("\\\2\u044c\u044d\7\24\2\2\u044d\u0455\5\u00c0a\2\u044e")
+        buf.write("\u044f\7)\2\2\u044f\u0455\5\u00c4c\2\u0450\u0451\7\'\2")
+        buf.write("\2\u0451\u0455\5\u00c2b\2\u0452\u0453\7(\2\2\u0453\u0455")
+        buf.write("\5\u00c6d\2\u0454\u0440\3\2\2\2\u0454\u0441\3\2\2\2\u0454")
+        buf.write("\u0442\3\2\2\2\u0454\u0443\3\2\2\2\u0454\u0444\3\2\2\2")
+        buf.write("\u0454\u0445\3\2\2\2\u0454\u0446\3\2\2\2\u0454\u0448\3")
+        buf.write("\2\2\2\u0454\u044a\3\2\2\2\u0454\u044c\3\2\2\2\u0454\u044e")
+        buf.write("\3\2\2\2\u0454\u0450\3\2\2\2\u0454\u0452\3\2\2\2\u0455")
+        buf.write("\u00d7\3\2\2\2\u0456\u0457\7\25\2\2\u0457\u0458\5\u00dc")
+        buf.write("o\2\u0458\u00d9\3\2\2\2\u0459\u045a\5\"\22\2\u045a\u045b")
+        buf.write("\7\27\2\2\u045b\u045c\5T+\2\u045c\u00db\3\2\2\2\u045d")
+        buf.write("\u045e\5\u00d2j\2\u045e\u00dd\3\2\2\2\u045f\u0466\5\u00dc")
+        buf.write("o\2\u0460\u0462\7\t\2\2\u0461\u0460\3\2\2\2\u0461\u0462")
+        buf.write("\3\2\2\2\u0462\u0463\3\2\2\2\u0463\u0465\5\u00dco\2\u0464")
+        buf.write("\u0461\3\2\2\2\u0465\u0468\3\2\2\2\u0466\u0464\3\2\2\2")
+        buf.write("\u0466\u0467\3\2\2\2\u0467\u0469\3\2\2\2\u0468\u0466\3")
+        buf.write("\2\2\2\u0469\u046a\7\2\2\3\u046a\u00df\3\2\2\2\u046b\u046c")
+        buf.write("\5\u00dep\2\u046c\u00e1\3\2\2\2}\u00f0\u00fc\u0111\u011b")
+        buf.write("\u0124\u012d\u0136\u013f\u0148\u0151\u015a\u0163\u016c")
+        buf.write("\u0178\u0182\u0184\u0186\u018b\u0193\u019e\u01a6\u01b1")
+        buf.write("\u01b9\u01bf\u01c7\u01cc\u01d3\u01d9\u01db\u01dd\u01e5")
+        buf.write("\u01f3\u01f8\u01fe\u0202\u0206\u020f\u0214\u021c\u0221")
+        buf.write("\u0227\u022c\u0231\u0235\u023f\u0246\u0250\u0257\u0260")
+        buf.write("\u026a\u0272\u0277\u0279\u0282\u0287\u0290\u0295\u029f")
+        buf.write("\u02ab\u02b0\u02b4\u02bf\u02c4\u02cc\u02d1\u02d7\u02dc")
+        buf.write("\u02e2\u02e6\u02ed\u02f2\u02f9\u02fd\u02ff\u030c\u0311")
+        buf.write("\u0318\u031d\u0326\u032c\u0332\u0339\u033f\u0346\u034a")
+        buf.write("\u034f\u0354\u0356\u035a\u0362\u0373\u037b\u0383\u0387")
+        buf.write("\u039b\u03a2\u03aa\u03ae\u03b8\u03c3\u03ce\u03d2\u03d9")
+        buf.write("\u03dd\u03e8\u03ec\u03f0\u03f8\u0400\u0404\u040b\u0413")
+        buf.write("\u041a\u041e\u0426\u0428\u0430\u0432\u0436\u043e\u0454")
+        buf.write("\u0461\u0466")
         return buf.getvalue()
 
 
@@ -7399,19 +7386,19 @@ class nim_Parser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def variable(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(nim_Parser.VariableContext)
+            else:
+                return self.getTypedRuleContext(nim_Parser.VariableContext,i)
+
+
         def ind(self):
             return self.getTypedRuleContext(nim_Parser.IndContext,0)
 
 
         def ded(self):
             return self.getTypedRuleContext(nim_Parser.DedContext,0)
-
-
-        def variable(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(nim_Parser.VariableContext)
-            else:
-                return self.getTypedRuleContext(nim_Parser.VariableContext,i)
 
 
         def getRuleIndex(self):
@@ -7435,41 +7422,29 @@ class nim_Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 980
+            self.state = 976
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [nim_Parser.IDENTIFIER]:
-                self.state = 968 
-                self._errHandler.sync(self)
-                _alt = 1
-                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                    if _alt == 1:
-                        self.state = 967
-                        self.variable()
-
-                    else:
-                        raise NoViableAltException(self)
-                    self.state = 970 
-                    self._errHandler.sync(self)
-                    _alt = self._interp.adaptivePredict(self._input,100,self._ctx)
-
+                self.state = 967
+                self.variable()
                 pass
             elif token in [nim_Parser.INDENT]:
-                self.state = 972
+                self.state = 968
                 self.ind()
-                self.state = 974 
+                self.state = 970 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while True:
-                    self.state = 973
+                    self.state = 969
                     self.variable()
-                    self.state = 976 
+                    self.state = 972 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if not (_la==nim_Parser.IDENTIFIER):
                         break
 
-                self.state = 978
+                self.state = 974
                 self.ded()
                 pass
             else:
@@ -7490,19 +7465,19 @@ class nim_Parser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def constant(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(nim_Parser.ConstantContext)
+            else:
+                return self.getTypedRuleContext(nim_Parser.ConstantContext,i)
+
+
         def ind(self):
             return self.getTypedRuleContext(nim_Parser.IndContext,0)
 
 
         def ded(self):
             return self.getTypedRuleContext(nim_Parser.DedContext,0)
-
-
-        def constant(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(nim_Parser.ConstantContext)
-            else:
-                return self.getTypedRuleContext(nim_Parser.ConstantContext,i)
 
 
         def getRuleIndex(self):
@@ -7526,41 +7501,29 @@ class nim_Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 995
+            self.state = 987
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [nim_Parser.IDENTIFIER]:
-                self.state = 983 
-                self._errHandler.sync(self)
-                _alt = 1
-                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                    if _alt == 1:
-                        self.state = 982
-                        self.constant()
-
-                    else:
-                        raise NoViableAltException(self)
-                    self.state = 985 
-                    self._errHandler.sync(self)
-                    _alt = self._interp.adaptivePredict(self._input,103,self._ctx)
-
+                self.state = 978
+                self.constant()
                 pass
             elif token in [nim_Parser.INDENT]:
-                self.state = 987
+                self.state = 979
                 self.ind()
-                self.state = 989 
+                self.state = 981 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while True:
-                    self.state = 988
+                    self.state = 980
                     self.constant()
-                    self.state = 991 
+                    self.state = 983 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if not (_la==nim_Parser.IDENTIFIER):
                         break
 
-                self.state = 993
+                self.state = 985
                 self.ded()
                 pass
             else:
@@ -7628,39 +7591,39 @@ class nim_Parser ( Parser ):
         self.enterRule(localctx, 196, self.RULE_letSection)
         self._la = 0 # Token type
         try:
-            self.state = 1010
+            self.state = 1002
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [nim_Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 997
+                self.state = 989
                 self.match(nim_Parser.IDENTIFIER)
-                self.state = 998
+                self.state = 990
                 self.match(nim_Parser.EQUALS)
-                self.state = 999
+                self.state = 991
                 self.simpleExpr()
                 pass
             elif token in [nim_Parser.INDENT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 1000
+                self.state = 992
                 self.ind()
-                self.state = 1004 
+                self.state = 996 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while True:
-                    self.state = 1001
+                    self.state = 993
                     self.match(nim_Parser.IDENTIFIER)
-                    self.state = 1002
+                    self.state = 994
                     self.match(nim_Parser.EQUALS)
-                    self.state = 1003
+                    self.state = 995
                     self.simpleExpr()
-                    self.state = 1006 
+                    self.state = 998 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if not (_la==nim_Parser.IDENTIFIER):
                         break
 
-                self.state = 1008
+                self.state = 1000
                 self.ded()
                 pass
             else:
@@ -7710,13 +7673,13 @@ class nim_Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1012
+            self.state = 1004
             self.symbol()
-            self.state = 1014
+            self.state = 1006
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << nim_Parser.COLON) | (1 << nim_Parser.DOT) | (1 << nim_Parser.EQUALS) | (1 << nim_Parser.IN) | (1 << nim_Parser.OF) | (1 << nim_Parser.NOT) | (1 << nim_Parser.DOLLAR_SIGN) | (1 << nim_Parser.OP0) | (1 << nim_Parser.OP1) | (1 << nim_Parser.OP2) | (1 << nim_Parser.OP3) | (1 << nim_Parser.OP4) | (1 << nim_Parser.OP5) | (1 << nim_Parser.OP6) | (1 << nim_Parser.OP7) | (1 << nim_Parser.OP8) | (1 << nim_Parser.OP9) | (1 << nim_Parser.OP10))) != 0):
-                self.state = 1013
+                self.state = 1005
                 self.operator()
 
 
@@ -7800,63 +7763,63 @@ class nim_Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1016
+            self.state = 1008
             self.match(nim_Parser.OPEN_BRACE)
-            self.state = 1017
+            self.state = 1009
             self.identVis()
-            self.state = 1022
+            self.state = 1014
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==nim_Parser.COMMA:
-                self.state = 1018
+                self.state = 1010
                 self.match(nim_Parser.COMMA)
-                self.state = 1019
+                self.state = 1011
                 self.identVis()
-                self.state = 1024
+                self.state = 1016
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 1030
+            self.state = 1022
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [nim_Parser.INDENT]:
-                self.state = 1025
+                self.state = 1017
                 self.ind()
-                self.state = 1026
+                self.state = 1018
                 self.match(nim_Parser.CLOSE_BRACE)
-                self.state = 1027
+                self.state = 1019
                 self.ded()
                 pass
             elif token in [nim_Parser.CLOSE_BRACE]:
-                self.state = 1029
+                self.state = 1021
                 self.match(nim_Parser.CLOSE_BRACE)
                 pass
             else:
                 raise NoViableAltException(self)
 
-            self.state = 1032
+            self.state = 1024
             self.match(nim_Parser.EQUALS)
-            self.state = 1034
+            self.state = 1026
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==nim_Parser.EOF or _la==nim_Parser.DEDENT:
-                self.state = 1033
+                self.state = 1025
                 self.ded()
 
 
-            self.state = 1041
+            self.state = 1033
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [nim_Parser.INDENT]:
-                self.state = 1036
+                self.state = 1028
                 self.ind()
-                self.state = 1037
+                self.state = 1029
                 self.andExpr()
-                self.state = 1038
+                self.state = 1030
                 self.ded()
                 pass
             elif token in [nim_Parser.OPEN_PAREN, nim_Parser.CLOSE_PAREN, nim_Parser.OPEN_BRACK, nim_Parser.CLOSE_BRACK, nim_Parser.OBJECT, nim_Parser.COLON, nim_Parser.DOT, nim_Parser.EQUALS, nim_Parser.IN, nim_Parser.OF, nim_Parser.NOT, nim_Parser.DOLLAR_SIGN, nim_Parser.OP0, nim_Parser.OP1, nim_Parser.OP2, nim_Parser.OP3, nim_Parser.OP4, nim_Parser.OP5, nim_Parser.OP6, nim_Parser.OP7, nim_Parser.OP8, nim_Parser.OP9, nim_Parser.OP10, nim_Parser.CASE, nim_Parser.IF, nim_Parser.FOR, nim_Parser.WHEN, nim_Parser.REF, nim_Parser.BLOCK, nim_Parser.NIL, nim_Parser.SYM_HEADER, nim_Parser.IDENTIFIER, nim_Parser.INT_LIT, nim_Parser.INT8_LIT, nim_Parser.INT16_LIT, nim_Parser.INT32_LIT, nim_Parser.INT64_LIT, nim_Parser.UINT_LIT, nim_Parser.UINT8_LIT, nim_Parser.UINT16_LIT, nim_Parser.UINT32_LIT, nim_Parser.UINT64_LIT, nim_Parser.FLOAT_LIT, nim_Parser.FLOAT32_LIT, nim_Parser.FLOAT64_LIT, nim_Parser.CHAR_LIT, nim_Parser.STR_LIT, nim_Parser.TRIPLESTR_LIT, nim_Parser.RSTR_LIT, nim_Parser.GENERALIZED_STR_LIT, nim_Parser.GENERALIZED_TRIPLESTR_LIT]:
-                self.state = 1040
+                self.state = 1032
                 self.anyExpr()
                 pass
             else:
@@ -7877,35 +7840,11 @@ class nim_Parser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def IDENTIFIER(self, i:int=None):
-            if i is None:
-                return self.getTokens(nim_Parser.IDENTIFIER)
-            else:
-                return self.getToken(nim_Parser.IDENTIFIER, i)
+        def IDENTIFIER(self):
+            return self.getToken(nim_Parser.IDENTIFIER, 0)
 
         def EQUALS(self):
             return self.getToken(nim_Parser.EQUALS, 0)
-
-        def ind(self):
-            return self.getTypedRuleContext(nim_Parser.IndContext,0)
-
-
-        def anyExpr(self):
-            return self.getTypedRuleContext(nim_Parser.AnyExprContext,0)
-
-
-        def ded(self):
-            return self.getTypedRuleContext(nim_Parser.DedContext,0)
-
-
-        def COMMA(self, i:int=None):
-            if i is None:
-                return self.getTokens(nim_Parser.COMMA)
-            else:
-                return self.getToken(nim_Parser.COMMA, i)
-
-        def COLON(self):
-            return self.getToken(nim_Parser.COLON, 0)
 
         def simpleExpr(self):
             return self.getTypedRuleContext(nim_Parser.SimpleExprContext,0)
@@ -7929,53 +7868,14 @@ class nim_Parser ( Parser ):
 
         localctx = nim_Parser.ConstantContext(self, self._ctx, self.state)
         self.enterRule(localctx, 202, self.RULE_constant)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1043
+            self.state = 1035
             self.match(nim_Parser.IDENTIFIER)
-            self.state = 1048
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==nim_Parser.COMMA:
-                self.state = 1044
-                self.match(nim_Parser.COMMA)
-                self.state = 1045
-                self.match(nim_Parser.IDENTIFIER)
-                self.state = 1050
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-            self.state = 1053
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==nim_Parser.COLON:
-                self.state = 1051
-                self.match(nim_Parser.COLON)
-                self.state = 1052
-                self.simpleExpr()
-
-
-            self.state = 1055
+            self.state = 1036
             self.match(nim_Parser.EQUALS)
-            self.state = 1061
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [nim_Parser.INDENT]:
-                self.state = 1056
-                self.ind()
-                self.state = 1057
-                self.anyExpr()
-                self.state = 1058
-                self.ded()
-                pass
-            elif token in [nim_Parser.OPEN_PAREN, nim_Parser.CLOSE_PAREN, nim_Parser.OPEN_BRACK, nim_Parser.CLOSE_BRACK, nim_Parser.OBJECT, nim_Parser.COLON, nim_Parser.DOT, nim_Parser.EQUALS, nim_Parser.IN, nim_Parser.OF, nim_Parser.NOT, nim_Parser.DOLLAR_SIGN, nim_Parser.OP0, nim_Parser.OP1, nim_Parser.OP2, nim_Parser.OP3, nim_Parser.OP4, nim_Parser.OP5, nim_Parser.OP6, nim_Parser.OP7, nim_Parser.OP8, nim_Parser.OP9, nim_Parser.OP10, nim_Parser.CASE, nim_Parser.IF, nim_Parser.FOR, nim_Parser.WHEN, nim_Parser.REF, nim_Parser.BLOCK, nim_Parser.NIL, nim_Parser.SYM_HEADER, nim_Parser.IDENTIFIER, nim_Parser.INT_LIT, nim_Parser.INT8_LIT, nim_Parser.INT16_LIT, nim_Parser.INT32_LIT, nim_Parser.INT64_LIT, nim_Parser.UINT_LIT, nim_Parser.UINT8_LIT, nim_Parser.UINT16_LIT, nim_Parser.UINT32_LIT, nim_Parser.UINT64_LIT, nim_Parser.FLOAT_LIT, nim_Parser.FLOAT32_LIT, nim_Parser.FLOAT64_LIT, nim_Parser.CHAR_LIT, nim_Parser.STR_LIT, nim_Parser.TRIPLESTR_LIT, nim_Parser.RSTR_LIT, nim_Parser.GENERALIZED_STR_LIT, nim_Parser.GENERALIZED_TRIPLESTR_LIT]:
-                self.state = 1060
-                self.anyExpr()
-                pass
-            else:
-                raise NoViableAltException(self)
-
+            self.state = 1037
+            self.simpleExpr()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -8019,13 +7919,13 @@ class nim_Parser ( Parser ):
         self.enterRule(localctx, 204, self.RULE_variable)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1063
+            self.state = 1039
             self.idColonEq()
-            self.state = 1065
+            self.state = 1041
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,116,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,111,self._ctx)
             if la_ == 1:
-                self.state = 1064
+                self.state = 1040
                 self.colonBody()
 
 
@@ -8104,48 +8004,48 @@ class nim_Parser ( Parser ):
         self.enterRule(localctx, 206, self.RULE_idColonEq)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1067
+            self.state = 1043
             self.match(nim_Parser.IDENTIFIER)
-            self.state = 1072
+            self.state = 1048
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,117,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,112,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 1068
+                    self.state = 1044
                     self.match(nim_Parser.COMMA)
-                    self.state = 1069
+                    self.state = 1045
                     self.match(nim_Parser.IDENTIFIER) 
-                self.state = 1074
+                self.state = 1050
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,117,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,112,self._ctx)
 
-            self.state = 1076
+            self.state = 1052
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,118,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,113,self._ctx)
             if la_ == 1:
-                self.state = 1075
+                self.state = 1051
                 self.match(nim_Parser.COMMA)
 
 
-            self.state = 1086
+            self.state = 1062
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,120,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,115,self._ctx)
             if la_ == 1:
-                self.state = 1078
+                self.state = 1054
                 self.match(nim_Parser.COLON)
-                self.state = 1084
+                self.state = 1060
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [nim_Parser.INDENT]:
-                    self.state = 1079
+                    self.state = 1055
                     self.ind()
-                    self.state = 1080
+                    self.state = 1056
                     self.simpleExpr()
-                    self.state = 1081
+                    self.state = 1057
                     self.ded()
                     pass
                 elif token in [nim_Parser.OPEN_PAREN, nim_Parser.CLOSE_PAREN, nim_Parser.OPEN_BRACK, nim_Parser.CLOSE_BRACK, nim_Parser.OBJECT, nim_Parser.COLON, nim_Parser.DOT, nim_Parser.EQUALS, nim_Parser.IN, nim_Parser.OF, nim_Parser.NOT, nim_Parser.DOLLAR_SIGN, nim_Parser.OP0, nim_Parser.OP1, nim_Parser.OP2, nim_Parser.OP3, nim_Parser.OP4, nim_Parser.OP5, nim_Parser.OP6, nim_Parser.OP7, nim_Parser.OP8, nim_Parser.OP9, nim_Parser.OP10, nim_Parser.REF, nim_Parser.NIL, nim_Parser.SYM_HEADER, nim_Parser.IDENTIFIER, nim_Parser.INT_LIT, nim_Parser.INT8_LIT, nim_Parser.INT16_LIT, nim_Parser.INT32_LIT, nim_Parser.INT64_LIT, nim_Parser.UINT_LIT, nim_Parser.UINT8_LIT, nim_Parser.UINT16_LIT, nim_Parser.UINT32_LIT, nim_Parser.UINT64_LIT, nim_Parser.FLOAT_LIT, nim_Parser.FLOAT32_LIT, nim_Parser.FLOAT64_LIT, nim_Parser.CHAR_LIT, nim_Parser.STR_LIT, nim_Parser.TRIPLESTR_LIT, nim_Parser.RSTR_LIT, nim_Parser.GENERALIZED_STR_LIT, nim_Parser.GENERALIZED_TRIPLESTR_LIT]:
-                    self.state = 1083
+                    self.state = 1059
                     self.simpleExpr()
                     pass
                 else:
@@ -8153,25 +8053,25 @@ class nim_Parser ( Parser ):
 
 
 
-            self.state = 1096
+            self.state = 1072
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,122,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,117,self._ctx)
             if la_ == 1:
-                self.state = 1088
+                self.state = 1064
                 self.match(nim_Parser.EQUALS)
-                self.state = 1094
+                self.state = 1070
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [nim_Parser.INDENT]:
-                    self.state = 1089
+                    self.state = 1065
                     self.ind()
-                    self.state = 1090
+                    self.state = 1066
                     self.anyExpr()
-                    self.state = 1091
+                    self.state = 1067
                     self.ded()
                     pass
                 elif token in [nim_Parser.OPEN_PAREN, nim_Parser.CLOSE_PAREN, nim_Parser.OPEN_BRACK, nim_Parser.CLOSE_BRACK, nim_Parser.OBJECT, nim_Parser.COLON, nim_Parser.DOT, nim_Parser.EQUALS, nim_Parser.IN, nim_Parser.OF, nim_Parser.NOT, nim_Parser.DOLLAR_SIGN, nim_Parser.OP0, nim_Parser.OP1, nim_Parser.OP2, nim_Parser.OP3, nim_Parser.OP4, nim_Parser.OP5, nim_Parser.OP6, nim_Parser.OP7, nim_Parser.OP8, nim_Parser.OP9, nim_Parser.OP10, nim_Parser.CASE, nim_Parser.IF, nim_Parser.FOR, nim_Parser.WHEN, nim_Parser.REF, nim_Parser.BLOCK, nim_Parser.NIL, nim_Parser.SYM_HEADER, nim_Parser.IDENTIFIER, nim_Parser.INT_LIT, nim_Parser.INT8_LIT, nim_Parser.INT16_LIT, nim_Parser.INT32_LIT, nim_Parser.INT64_LIT, nim_Parser.UINT_LIT, nim_Parser.UINT8_LIT, nim_Parser.UINT16_LIT, nim_Parser.UINT32_LIT, nim_Parser.UINT64_LIT, nim_Parser.FLOAT_LIT, nim_Parser.FLOAT32_LIT, nim_Parser.FLOAT64_LIT, nim_Parser.CHAR_LIT, nim_Parser.STR_LIT, nim_Parser.TRIPLESTR_LIT, nim_Parser.RSTR_LIT, nim_Parser.GENERALIZED_STR_LIT, nim_Parser.GENERALIZED_TRIPLESTR_LIT]:
-                    self.state = 1093
+                    self.state = 1069
                     self.anyExpr()
                     pass
                 else:
@@ -8221,17 +8121,17 @@ class nim_Parser ( Parser ):
         localctx = nim_Parser.Simple_complexStmtContext(self, self._ctx, self.state)
         self.enterRule(localctx, 208, self.RULE_simple_complexStmt)
         try:
-            self.state = 1100
+            self.state = 1076
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [nim_Parser.RETURN, nim_Parser.CONTINUE, nim_Parser.BREAK, nim_Parser.IMPORT, nim_Parser.FROM, nim_Parser.DISCARD]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 1098
+                self.state = 1074
                 self.simpleStmt()
                 pass
             elif token in [nim_Parser.TYPE, nim_Parser.VARIABLE, nim_Parser.LET, nim_Parser.CONST, nim_Parser.PROC, nim_Parser.CASE, nim_Parser.IF, nim_Parser.WHILE, nim_Parser.FOR, nim_Parser.TEMPLATE, nim_Parser.WHEN, nim_Parser.BLOCK, nim_Parser.MACRO]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 1099
+                self.state = 1075
                 self.complexStmt()
                 pass
             else:
@@ -8295,37 +8195,37 @@ class nim_Parser ( Parser ):
         localctx = nim_Parser.SimpleStmtContext(self, self._ctx, self.state)
         self.enterRule(localctx, 210, self.RULE_simpleStmt)
         try:
-            self.state = 1108
+            self.state = 1084
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [nim_Parser.IMPORT]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 1102
+                self.state = 1078
                 self.importStmt()
                 pass
             elif token in [nim_Parser.FROM]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 1103
+                self.state = 1079
                 self.fromStmt()
                 pass
             elif token in [nim_Parser.DISCARD]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 1104
+                self.state = 1080
                 self.discardStmt()
                 pass
             elif token in [nim_Parser.RETURN]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 1105
+                self.state = 1081
                 self.returnStmt()
                 pass
             elif token in [nim_Parser.BREAK]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 1106
+                self.state = 1082
                 self.breakStmt()
                 pass
             elif token in [nim_Parser.CONTINUE]:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 1107
+                self.state = 1083
                 self.continueStmt()
                 pass
             else:
@@ -8438,86 +8338,86 @@ class nim_Parser ( Parser ):
         localctx = nim_Parser.ComplexStmtContext(self, self._ctx, self.state)
         self.enterRule(localctx, 212, self.RULE_complexStmt)
         try:
-            self.state = 1130
+            self.state = 1106
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [nim_Parser.FOR]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 1110
+                self.state = 1086
                 self.forStmt()
                 pass
             elif token in [nim_Parser.IF]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 1111
+                self.state = 1087
                 self.ifStmt()
                 pass
             elif token in [nim_Parser.CASE]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 1112
+                self.state = 1088
                 self.caseStmt()
                 pass
             elif token in [nim_Parser.BLOCK]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 1113
+                self.state = 1089
                 self.blockStmt()
                 pass
             elif token in [nim_Parser.WHILE]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 1114
+                self.state = 1090
                 self.whileStmt()
                 pass
             elif token in [nim_Parser.WHEN]:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 1115
+                self.state = 1091
                 self.whenStmt()
                 pass
             elif token in [nim_Parser.TEMPLATE]:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 1116
+                self.state = 1092
                 self.match(nim_Parser.TEMPLATE)
-                self.state = 1117
+                self.state = 1093
                 self.templateRoutine()
                 pass
             elif token in [nim_Parser.PROC]:
                 self.enterOuterAlt(localctx, 8)
-                self.state = 1118
+                self.state = 1094
                 self.match(nim_Parser.PROC)
-                self.state = 1119
+                self.state = 1095
                 self.procRoutine()
                 pass
             elif token in [nim_Parser.MACRO]:
                 self.enterOuterAlt(localctx, 9)
-                self.state = 1120
+                self.state = 1096
                 self.match(nim_Parser.MACRO)
-                self.state = 1121
+                self.state = 1097
                 self.macroRoutine()
                 pass
             elif token in [nim_Parser.TYPE]:
                 self.enterOuterAlt(localctx, 10)
-                self.state = 1122
+                self.state = 1098
                 self.match(nim_Parser.TYPE)
-                self.state = 1123
+                self.state = 1099
                 self.typeSection()
                 pass
             elif token in [nim_Parser.CONST]:
                 self.enterOuterAlt(localctx, 11)
-                self.state = 1124
+                self.state = 1100
                 self.match(nim_Parser.CONST)
-                self.state = 1125
+                self.state = 1101
                 self.constantSection()
                 pass
             elif token in [nim_Parser.VARIABLE]:
                 self.enterOuterAlt(localctx, 12)
-                self.state = 1126
+                self.state = 1102
                 self.match(nim_Parser.VARIABLE)
-                self.state = 1127
+                self.state = 1103
                 self.variableSection()
                 pass
             elif token in [nim_Parser.LET]:
                 self.enterOuterAlt(localctx, 13)
-                self.state = 1128
+                self.state = 1104
                 self.match(nim_Parser.LET)
-                self.state = 1129
+                self.state = 1105
                 self.letSection()
                 pass
             else:
@@ -8565,9 +8465,9 @@ class nim_Parser ( Parser ):
         self.enterRule(localctx, 214, self.RULE_colonBody)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1132
+            self.state = 1108
             self.match(nim_Parser.COLON)
-            self.state = 1133
+            self.state = 1109
             self.stmt()
         except RecognitionException as re:
             localctx.exception = re
@@ -8615,11 +8515,11 @@ class nim_Parser ( Parser ):
         self.enterRule(localctx, 216, self.RULE_exprStmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1135
+            self.state = 1111
             self.simpleExpr()
-            self.state = 1136
+            self.state = 1112
             self.match(nim_Parser.EQUALS)
-            self.state = 1137
+            self.state = 1113
             self.anyExpr()
         except RecognitionException as re:
             localctx.exception = re
@@ -8660,7 +8560,7 @@ class nim_Parser ( Parser ):
         self.enterRule(localctx, 218, self.RULE_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1139
+            self.state = 1115
             self.simple_complexStmt()
         except RecognitionException as re:
             localctx.exception = re
@@ -8714,27 +8614,27 @@ class nim_Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1141
+            self.state = 1117
             self.stmt()
-            self.state = 1148
+            self.state = 1124
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << nim_Parser.SEMI_COLON) | (1 << nim_Parser.TYPE) | (1 << nim_Parser.VARIABLE) | (1 << nim_Parser.LET) | (1 << nim_Parser.CONST) | (1 << nim_Parser.PROC) | (1 << nim_Parser.RETURN) | (1 << nim_Parser.CASE) | (1 << nim_Parser.IF) | (1 << nim_Parser.WHILE) | (1 << nim_Parser.FOR) | (1 << nim_Parser.CONTINUE) | (1 << nim_Parser.BREAK) | (1 << nim_Parser.TEMPLATE))) != 0) or ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & ((1 << (nim_Parser.WHEN - 66)) | (1 << (nim_Parser.IMPORT - 66)) | (1 << (nim_Parser.FROM - 66)) | (1 << (nim_Parser.BLOCK - 66)) | (1 << (nim_Parser.MACRO - 66)) | (1 << (nim_Parser.DISCARD - 66)))) != 0):
-                self.state = 1143
+                self.state = 1119
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==nim_Parser.SEMI_COLON:
-                    self.state = 1142
+                    self.state = 1118
                     self.match(nim_Parser.SEMI_COLON)
 
 
-                self.state = 1145
+                self.state = 1121
                 self.stmt()
-                self.state = 1150
+                self.state = 1126
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 1151
+            self.state = 1127
             self.match(nim_Parser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -8775,7 +8675,7 @@ class nim_Parser ( Parser ):
         self.enterRule(localctx, 222, self.RULE_start)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1153
+            self.state = 1129
             self.module()
         except RecognitionException as re:
             localctx.exception = re
