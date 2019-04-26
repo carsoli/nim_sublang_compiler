@@ -1,0 +1,11 @@
+const
+    x1 = 1
+    y1 = 2
+    z1 = y1 + 5 
+  
+echo ( x1, " : ", y1, " : ", z1)) 
+
+let x2 = "abc" 
+
+echo (x2)
+

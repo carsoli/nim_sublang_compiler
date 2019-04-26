@@ -1,0 +1,76 @@
+var name = ""
+
+if name == "":
+    echo "Poor soul, you lost your name?"
+elif name == "name":
+    echo "Very funny, your name is name."
+else:
+  echo "Hi, ", name, "!"
+  
+name = "potato"  
+  
+case name
+of "":
+    echo "Poor soul, you lost your name?"
+of "name":
+    echo "Very funny, your name is name."
+of "Dave", "Frank":
+    echo "Cool name!"
+else:
+    echo "Hi, ", name, "!"  
+  
+
+var accm = ""
+for letter in 'a'..'z':  # see iterators
+    accm.add(letter)
+
+echo (accm)
+
+var x3 = 1
+while x3 <= 5:
+    echo "Counting : ", x3
+    x3 = x3 + 1  
+
+for i in 1..5:
+    echo "i is ", i
+
+var s = "some string"
+for i in 0..<s.len:
+    echo "char in s is ", s[i]
+
+while true:
+    echo "looping"
+    break
+
+
+const system = "linux"
+when system == "windows":
+    echo "running on Windows!"
+elif system == "linux":
+    echo "running on Linux!"
+elif system == "macosx":
+    echo "running on Mac OS X!"
+else:
+    echo "unknown operating system"
+    
+    
+var x4 = true
+var y4 = true
+if x4: x4 = false
+
+if not x4:
+    if y4:
+        y4 = false
+    else:
+        y4 = true
+        
+echo y4  
+
+if not x4:
+    x4 = true
+    y4 = true    
+    
+echo "x4 is ", x4, " y4 is ", y4
+    
+    
+    

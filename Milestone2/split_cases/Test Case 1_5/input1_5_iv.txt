@@ -1,0 +1,72 @@
+proc yes(question: string): bool =
+    echo question, " (y/n)"
+    var readline = "n"
+    while true:
+        case readline
+        of "y", "Y", "yes", "Yes": return true
+        of "n", "N", "no", "No": return false
+        else: echo "Please be clear: yes or no"
+
+if yes("Should I delete all your important files?"):
+    echo "I'm sorry Dave, I'm afraid I can't do that."
+else:
+    echo "I think you know what the problem is just as well as I do."
+
+
+let
+    x5 = 0     
+    y5 = 0'i8  
+    z5 = 0'i64
+    u5 = 0'u   
+
+echo "x5 is ", x5, " y5 is ", y5, " z5 is ", z5, " u5 is ", u5
+
+block outer:
+    for i in 0..2000:
+        for j in 0..2000:
+            if i+j == 3145:
+                echo i, ", ", j
+                break outer
+
+
+proc fibonacci(n: int): int =
+    if n < 2:
+        result = n
+    else:
+        result = fibonacci(n - 1) + (n - 2).fibonacci
+
+echo fibonacci(10)
+
+
+
+type
+    IntArray = array[0..5, int] 
+    QuickArray = array[6, int]  
+var
+    x6: IntArray
+    y6: QuickArray
+x6 = [1, 2, 3, 4, 5, 6]
+y6 = x6
+for i in 0..5:
+    echo x6[i], y6[i]
+    
+for value in @[3, 4, 5]:
+    echo value
+
+for ii, value in @[3, 4, 5]:
+    echo "index: ", $i, ", value:", $value
+    
+    
+proc echoItem(x: string) = echo x
+
+proc forEach(action: proc (x: string)) =
+    const
+        data = ["hi", "bye", "later", "not today", "leave[]"]
+    for d in items(data):
+        action(d)
+
+forEach(echoItem)    
+    
+    
+    
+    

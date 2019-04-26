@@ -196,7 +196,9 @@ constantSection: ( constant | (ind constant+ ded) );
 letSection: (IDENTIFIER EQUALS simpleExpr) | (ind (IDENTIFIER EQUALS simpleExpr)+ ded); 
 
 constant: IDENTIFIER EQUALS simpleExpr;
-variable: IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr)? ( EQUALS simpleExpr)?; 
+variable: (IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr))
+| (IDENTIFIER (COMMA IDENTIFIER)* (EQUALS simpleExpr))
+| (IDENTIFIER (COMMA IDENTIFIER)* (COLON simpleExpr) ( EQUALS simpleExpr));
 
 simple_complexStmt: simpleStmt | complexStmt;
 simpleStmt: 
