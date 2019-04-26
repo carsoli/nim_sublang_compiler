@@ -323,15 +323,6 @@ class nim_ParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by nim_Parser#primarySuffixSimpleBody.
-    def enterPrimarySuffixSimpleBody(self, ctx:nim_Parser.PrimarySuffixSimpleBodyContext):
-        pass
-
-    # Exit a parse tree produced by nim_Parser#primarySuffixSimpleBody.
-    def exitPrimarySuffixSimpleBody(self, ctx:nim_Parser.PrimarySuffixSimpleBodyContext):
-        pass
-
-
     # Enter a parse tree produced by nim_Parser#primarySuffix.
     def enterPrimarySuffix(self, ctx:nim_Parser.PrimarySuffixContext):
         pass

@@ -69,16 +69,7 @@ identOrLiteral: generalizedLit | symbol | arrayConstr;//| par
 
 addressLiteral: DOLLAR_SIGN identOrLiteral;
 
-primarySuffixSimpleBody: 
-        ( 
-        (IDENTIFIER (arrayConstr | tupleConstr)?) 
-        | literal 
-        | generalizedLit  
-        | addressLiteral 
-        );
-
-primarySuffix:
-        // primarySuffixSimpleBody (COMMA primarySuffixSimpleBody)*
+primarySuffix:  
          OPEN_PAREN exprColonEqExpr (COMMA exprColonEqExpr)* CLOSE_PAREN
         | DOT symbol generalizedLit?
         | OPEN_BRACK exprList CLOSE_BRACK
@@ -92,13 +83,6 @@ primary:
         | ( prefixOperator* ( (identOrLiteral primarySuffix*) | primarySuffix+ ) )
 );
 
-// parBody:( {self._input.LT(1).type in self.parKeyWList}? simple_complexStmt (SEMI_COLON simple_complexStmt)?
-//         | 
-//           expr | ((COLON | EQUALS) expr ) ( ((COMMA exprColonEqExpr)+) | ((SEMI_COLON (simple_complexStmt)+ ) ) )
-//         );
-
-//TODO:
-// par: OPEN_PAREN parBody CLOSE_PAREN;// | parBody;
 
 importStmt: IMPORT IDENTIFIER (COMMA IDENTIFIER)*;
 fromStmt: FROM IDENTIFIER importStmt;
@@ -162,7 +146,7 @@ condStmtBody: ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall )
 
 condStmt: simpleExpr COLON condStmtBody; 
 
-blockStmt: BLOCK IDENTIFIER COLON ((ind anyStmt+ ded) | anyStmt);
+blockStmt: BLOCK IDENTIFIER COLON ((ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall);
 discardStmt: DISCARD; //Empty discard Statement
 returnStmt: (RETURN simpleExpr) | RETURN; 
 breakStmt: (BREAK simpleExpr) | BREAK;
@@ -184,14 +168,14 @@ procRoutineType: (IDENTIFIER arrayConstr?)
         | (PROC procRoutineBodyList) 
         | (VARIABLE procRoutineVariableType) ;
 procRoutineBody: IDENTIFIER ( (COLON procRoutineType) | (EQUALS simpleExpr) );
-procRoutineTail: (COLON procRoutineType)? EQUALS ( anyStmt | (ind anyStmt+ ded) ); 
+procRoutineTail: (COLON procRoutineType)? EQUALS ( anyStmtOrFuncCall | (ind anyStmtOrFuncCall+ ded) ); 
 procRoutineBodyList: OPEN_PAREN procRoutineBody (COMMA procRoutineBody)* CLOSE_PAREN; 
 procRoutine: procRoutineHeader procRoutineBodyList procRoutineTail; 
 
 templateRoutineHeader: IDENTIFIER;
 templateRoutineBodyList: OPEN_PAREN templateRoutineBody (COMMA templateRoutineBody)* CLOSE_PAREN;
 templateRoutineBody: IDENTIFIER;
-templateRoutineTail: pragma? EQUALS ( (anyStmt | expr) | (ind (anyStmt | expr)+ ded) ); 
+templateRoutineTail: pragma? EQUALS ( anyStmt | (ind anyStmt+ ded) ); 
 templateRoutine: templateRoutineHeader templateRoutineBodyList templateRoutineTail; 
 
 macroRoutineHeader: IDENTIFIER;
