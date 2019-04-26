@@ -1,4 +1,5 @@
 rerun proc tests
+rerun template without expr and make sure it doesnt go wrong
 rerun macro tests
 while 
 

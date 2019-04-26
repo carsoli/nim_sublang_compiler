@@ -168,7 +168,7 @@ procRoutineType: (IDENTIFIER arrayConstr?)
         | (PROC procRoutineBodyList) 
         | (VARIABLE procRoutineVariableType) ;
 procRoutineBody: IDENTIFIER ( (COLON procRoutineType) | (EQUALS simpleExpr) );
-procRoutineTail: (COLON procRoutineType)? EQUALS ( anyStmtOrFuncCall | (ind anyStmtOrFuncCall+ ded) ); 
+procRoutineTail: (COLON procRoutineType)? EQUALS ( (anyStmt | anyExpr) | (ind (anyStmt | anyExpr)+ ded) ); 
 procRoutineBodyList: OPEN_PAREN procRoutineBody (COMMA procRoutineBody)* CLOSE_PAREN; 
 procRoutine: procRoutineHeader procRoutineBodyList procRoutineTail; 
 
