@@ -134,9 +134,9 @@ exprList: simpleExpr (COMMA simpleExpr)*;
 caseStmt: CASE simpleExpr ofBranchesStmt; 
 
 ofBranchesStmt: ofBranchStmt+
-        ( ELSE COLON ( (ind anyStmt+ ded) | anyStmt ))?;
+        ( ELSE COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall ))?;
          
-ofBranchStmt: OF exprList COLON ( (ind anyStmt+ ded) | anyStmt);
+ofBranchStmt: OF exprList COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall);
 
 
 whileStmt: WHILE anyExpr COLON 
@@ -145,7 +145,7 @@ whileStmt: WHILE anyExpr COLON
 whenStmt: WHEN condStmt;
 
 idList: (IDENTIFIER (COMMA IDENTIFIER)*);
-forStmt: FOR idList IN simpleExpr COLON  ( (ind (stmt)+ ded) | anyStmt );
+forStmt: FOR idList IN simpleExpr COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall );
 
 ifStmt: IF NOT? condStmt;
 

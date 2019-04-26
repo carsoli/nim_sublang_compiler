@@ -46,8 +46,6 @@ var mmlen = matchLen(inp, mmpatterns[p], matches, mmpos)
         
 var wordFrequencies = initCountTable[string]()
 
-
-
 var  i = 3  # signed int
 var  i8 = 3'i8  # signed int8
 var  i16 = 3'i16  # signed int16

@@ -1,10 +1,6 @@
-ifStmt (revise)
-
 forStmt (revise)
 
 while 
-
-when
 
 const
 
