@@ -123,8 +123,8 @@ ofBranchesStmt: ofBranchStmt+
 ofBranchStmt: OF exprList COLON ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall);
 
 
-whileStmt: WHILE anyExpr COLON 
-        ((ind ( exprStmt+ | stmt ) ded) | ( exprStmt+ | stmt ));
+whileStmt: WHILE simpleExpr COLON 
+        ( (ind anyStmtOrFuncCall+ ded) | anyStmtOrFuncCall );
 
 whenStmt: WHEN condStmt;
 
